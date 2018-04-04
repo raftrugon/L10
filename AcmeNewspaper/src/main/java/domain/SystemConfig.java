@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class SystemConfig extends Actor {
+public class SystemConfig extends DomainEntity {
 
 	//Attributes----------------
 	private Collection<String> tabooWordss;
