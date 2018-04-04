@@ -1,27 +1,24 @@
-
 package converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.CreditCard;
+import security.UserAccount;
+
 
 @Component
 @Transactional
-public class CreditCardToStringConverter implements Converter<CreditCard, String> {
+public class UserAccountToStringConverter implements Converter<UserAccount, String>{
 
 	@Override
-	public String convert(final CreditCard creditCard) {
+	public String convert(UserAccount userAccount) {
 		String result;
-
-		if (creditCard == null) {
+		if (userAccount == null){
 			result = null;
-		} else {
-			result = String.valueOf(creditCard.getId());
+		}else{
+			result = String.valueOf(userAccount.getId());
 		}
-
 		return result;
 	}
-
 }

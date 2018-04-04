@@ -66,7 +66,7 @@ public class Newspaper extends DomainEntity {
 	}
 	
 	@NotNull
-	public Boolean isPrivate() {
+	public Boolean getIsPrivate() {
 		return isPrivate;
 	}
 	

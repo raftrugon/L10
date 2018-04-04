@@ -28,20 +28,7 @@ public class User extends Actor {
 
 	//Attributes----------------
 	
-	
-	//Relationships----------------
-	private User User;
-	
-	@NotNull
-	@Valid
-	@OneToOne(optional = false)
-	public User getUser() {
-		return User;
-	}
-	
-	public void setUser(User User) {
-		this.User = User;
-	}
+
 	
 	
 }

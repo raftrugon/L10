@@ -2,15 +2,16 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-@Entity
+@Embeddable
 @Access(AccessType.PROPERTY)
-public class CreditCard extends DomainEntity {
+public class CreditCard {
 
 	//Attributes----------------
 	private String holderName;
@@ -73,8 +74,6 @@ public class CreditCard extends DomainEntity {
 	public void setCvvCode(Integer cvvCode) {
 		this.cvvCode = cvvCode;
 	}
-	
-	
-	//Relationships----------------
+
 	
 }

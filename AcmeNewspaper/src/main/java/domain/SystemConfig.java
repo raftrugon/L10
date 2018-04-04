@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -16,6 +17,7 @@ public class SystemConfig extends Actor {
 	private Collection<String> tabooWordss;
 	
 	@NotEmpty
+	@ElementCollection
 	public Collection<String> getTabooWordss() {
 		return tabooWordss;
 	}

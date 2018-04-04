@@ -20,8 +20,6 @@
 		<bean class="converters.SystemConfigToStringConverter"/>
 		<bean class="converters.StringToFollowUpConverter"/>
 		<bean class="converters.FollowUpToStringConverter"/>
-		<bean class="converters.StringToCreditCardConverter"/>
-		<bean class="converters.CreditCardToStringConverter"/>
 		<bean class="converters.StringToNewspaperConverter"/>
 		<bean class="converters.NewspaperToStringConverter"/>
 		<bean class="converters.StringToArticleConverter"/>

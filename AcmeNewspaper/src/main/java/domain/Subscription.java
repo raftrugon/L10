@@ -37,10 +37,10 @@ public class Subscription extends DomainEntity {
 		this.creditCard = creditCard;
 	}
 	
-	
 	//Relationships----------------
 	private Newspaper newspaper;
 	private Customer customer;
+	
 	
 	@NotNull
 	@Valid

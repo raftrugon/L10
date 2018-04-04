@@ -12,7 +12,6 @@
 		<value>/views/misc/messages</value>
 		<value>/views/security/messages</value>		
 		<value>/views/welcome/messages</value>
-		<value>/views/actor/messages</value>
 		<value>/views/user/messages</value>
 		<value>/views/systemConfig/messages</value>
 		<value>/views/followUp/messages</value>

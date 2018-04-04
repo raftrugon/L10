@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -53,6 +54,7 @@ public abstract class Actor extends DomainEntity {
 	}
 	
 	@NotNull
+	@ElementCollection
 	public Collection<String> getAddressess() {
 		return addressess;
 	}
@@ -62,6 +64,7 @@ public abstract class Actor extends DomainEntity {
 	}
 	
 	@NotNull
+	@ElementCollection
 	public Collection<String> getPhoness() {
 		return phoness;
 	}
@@ -71,6 +74,7 @@ public abstract class Actor extends DomainEntity {
 	}
 	
 	@NotEmpty
+	@ElementCollection
 	public Collection<String> getEmailss() {
 		return emailss;
 	}
