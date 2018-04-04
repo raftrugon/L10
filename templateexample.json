@@ -1,0 +1,99 @@
+[
+{
+"name":"Actor",
+"spanishName":"Actor",
+"abs":true,
+"attributes":[
+		{"name":"name","type":"String","isCollection":false,"annotations":["NotBlank"]},
+		{"name":"surnames","type":"String","isCollection":false,"annotations":["NotNull"]},
+		{"name":"addresses","type":"String","isCollection":true,"annotations":["NotNull"]},
+		{"name":"phones","type":"String","isCollection":true,"annotations":["NotNull"]},
+		{"name":"emails","type":"String","isCollection":true,"annotations":["NotEmpty"]}
+		],
+"relationships":[
+		{"name":"userAccount","type":"UserAccount","isCollection":false,"annotations":["NotNull","Valid","OneToOne(cascade = CascadeType.ALL, optional = false)"]}
+		],
+"serviceMethods":["findOne","save"]
+},
+
+{
+"name":"User",
+"spanishName":"Usuario",
+"abs":false,
+"ext":"Actor",
+"attributes":[
+		],
+"relationships":[
+				{"name":"User","type":"User","isCollection":false,"annotations":["NotNull","Valid","OneToOne(optional = false)"]}
+		],
+"queries":[
+		{"name":"isRsvpd","inputs":[{"name":"rendezvousId","type":"int"},{"name":"findByPrincipal","type":"User"}],"output":"int","queryString":"select count (r) from Rsvp r where r.rendezvous.id = ?1 and r.user = ?2","comment":"R5.4 Dashboard query"}
+		],
+"serviceMethods":["create","findOne","findAll","save","delete"],
+"list":true,
+"display":true,
+"edit":true,
+"auth":"User"
+},
+
+{
+"name":"SystemConfig",
+"spanishName":"Configuración",
+"abs":false,
+"ext":"Actor",
+"attributes":[
+	{"name":"tabooWords","type":"String","isCollection":true,"annotations":["NotEmty"]}
+		],
+"queries":[
+		],
+"serviceMethods":["create","findOne","findAll","save","delete"],
+"list":true,
+"display":true,
+"edit":true,
+"Auth":"Admin"
+},
+
+
+{
+"name":"FollowUp",
+"spanishName":"Seguimiento",
+"abs":false,
+"attributes":[
+	{"name":"publicationMoment","type":"Date","isCollection":False,"annotations":["Past"]},
+	{"name":"title","type":"String","isCollection":False,"annotations":["NotBlank"]},
+	{"name":"summary","type":"String","isCollection":False,"annotations":[]},
+	{"name":"body","type":"String","isCollection":False,"annotations":["NotBlank"]},
+	{"name":"pictures","type":"String","isCollection":true,"annotations":["URL"]},
+		],
+"queries":[
+		],
+"serviceMethods":["create","findOne","findAll","save","delete"],
+"list":true,
+"display":true,
+"edit":true,
+"Auth":"User"
+},
+
+{
+"name":"CreditCard",
+"spanishName":"TarjetaDeCredito",
+"abs":false,
+"attributes":[
+	{"name":"holderName","type":"String","isCollection":False,"annotations":["NotBlank"]},
+	{"name":"brandName","type":"String","isCollection":False,"annotations":["NotBlank"]},
+	{"name":"number","type":"String","isCollection":False,"annotations":[CreditCardNumber]},
+	{"name":"expirationMonth","type":"Integer","isCollection":False,"annotations":["Range(min=1,max=12)"]},
+	{"name":"expirationYear","type":"Integer","isCollection":False,"annotations":["Range(min=1900,max=9999)"]},
+	{"name":"cvvCode","type":"Integer","isCollection":False,"annotations":["Range(min=100,max=999)"]},
+		],
+"queries":[
+		],
+"serviceMethods":["create","findOne","findAll","save","delete"],
+"list":true,
+"display":true,
+"edit":true,
+"Auth":"Customer"
+}
+
+
+]
