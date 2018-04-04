@@ -1,0 +1,108 @@
+
+package controllers.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import services.ChirpService;
+import services.UserService;
+import controllers.AbstractController;
+import domain.Chirp;
+import domain.User;
+
+@Controller
+@RequestMapping("/chirp")
+public class UserChirpController extends AbstractController {
+
+	@Autowired
+	private ChirpService	chirpService;
+	@Autowired
+	private UserService	userService;
+
+
+	//Constructor
+	public UserChirpController() {
+		super();
+	}
+
+	@RequestMapping("/list")
+	public ModelAndView list() {
+		ModelAndView result;
+		final List<Chirp> chirps = new ArrayList<Chirp>(userService.findByPrincipal().getChirps());
+		result = new ModelAndView("chirp/list");
+		result.addObject("chirps", chirps);
+		result.addObject("requestUri", "user/chirp/list.do");
+		return result;
+	}
+	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		try {
+			Chirp chirp = chirpService.create();
+			result = newEditModelAndView(chirp);
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam(required = true) final int chirpId) {
+		Chirp chirp = chirpService.findOne(chirpId);
+		if (chirp.getUser().equals(userService.findByPrincipal()))
+			return newEditModelAndView(chirp);
+		else
+			return new ModelAndView("redirect:list.do");
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Chirp chirp, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = newEditModelAndView(chirp);
+		else
+			try {
+				chirpService.save(chirp);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = newEditModelAndView(chirp);
+				result.addObject("message", "chirp.commitError");
+			}
+		return result;
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@Valid final Chirp chirp, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = newEditModelAndView(chirp);
+		else
+			try {
+				chirpService.delete(chirp);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = newEditModelAndView(chirp);
+				result.addObject("message", "chirp.commitError");
+			}
+		return result;
+	}
+	protected ModelAndView newEditModelAndView(final Chirp chirp) {
+		ModelAndView result;
+		result = new ModelAndView("chirp/edit");
+		result.addObject("chirp", chirp);
+		result.addObject("actionUri", "user/chirp/save.do");
+		return result;
+	}
+}
