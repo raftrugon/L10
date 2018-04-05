@@ -290,6 +290,17 @@
     </bean>
     
     
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
     <!-- CUSTOMER 5 -->
     
     <bean id="customer1" class="domain.Customer">
@@ -314,9 +325,9 @@
         </property>
                 <property name="subscriptionss">
             <list>
-                <ref bean="subscriptions1" />
-                <ref bean="subscriptions2" />
-                <ref bean="subscriptions3" />
+                <ref bean="subscription1" />
+                <ref bean="subscription2" />
+                <ref bean="subscription3" />
             </list>
         </property>
         </bean>
@@ -344,8 +355,8 @@
         </property>
                 <property name="subscriptionss">
             <list>
-                <ref bean="subscriptions4" />
-                <ref bean="subscriptions5" />
+                <ref bean="subscription4" />
+                <ref bean="subscription5" />
                
             </list>
         </property>
@@ -401,7 +412,8 @@
         </property>
                 <property name="subscriptionss">
             <list>
-                <ref bean="subscriptions7" />
+                <ref bean="subscription6" />
+                <ref bean="subscription8" />
             </list>
         </property>
     
@@ -429,7 +441,7 @@
         </property>
                 <property name="subscriptionss">
             <list>
-                <ref bean="subscriptions8" />
+                <ref bean="subscription7" />
 
             </list>
         </property>
@@ -456,16 +468,12 @@
     </bean>
     
         <bean id="subscription4" class="domain.Subscription">
-        <property name="newspaper" ref="newspaper1"/>
-        <property name="creditCard" ref="creditCard2"/>
-        <property name="customer" ref="customer2"/>
-    </bean>
-    
-        <bean id="subscription4" class="domain.Subscription">
         <property name="newspaper" ref="newspaper4"/>
         <property name="creditCard" ref="creditCard2"/>
         <property name="customer" ref="customer2"/>
     </bean>
+ 
+
     
         <bean id="subscription5" class="domain.Subscription">
         <property name="newspaper" ref="newspaper5"/>
@@ -531,14 +539,14 @@
     
           <bean id="chirp6" class="domain.Chirp">
         <property name="title" value="Se recomienda llevar comida" />
-        <property name="creationMoment" value="06/30/2018 22:22" />
+        <property name="creationMoment" value="01/30/2018 22:22" />
         <property name="description" value="Tu articulo sobre comida fué extraño, ¿quien le echa viagra a la ensalada?" />
         <property name="user" ref="user1" />
     </bean>
     
           <bean id="chirp7" class="domain.Chirp">
         <property name="title" value="Rascacielos" />
-        <property name="creationMoment" value="01/01/2020 22:22" />
+        <property name="creationMoment" value="01/01/2016 22:22" />
         <property name="description" value="Te ha faltado hablar sobre el las torres Kio de Madrid" />
         <property name="user" ref="user1" />
     </bean>
@@ -552,7 +560,7 @@
     
           <bean id="chirp9" class="domain.Chirp">
         <property name="title" value="Los viajes" />
-        <property name="creationMoment" value="10/15/2019 22:22" />
+        <property name="creationMoment" value="10/15/2015 22:22" />
         <property name="description" value="Tremenda la experiencia contada por esos viajeros" />
         <property name="user" ref="user3" />
     </bean>
@@ -704,6 +712,222 @@
             </list>
         </property>
     </bean>
+
+
+
+    <!-- ARTICLE 6 -->
+    
+     <bean id="article1" class="domain.Article">
+        <property name="title" value="Identidades" />
+        <property name="publicationMoment" value="03/11/2017 12:22" />
+        <property name="summary" value="identidades sobre los dueños de los mejores coches" />
+        <property name="body" value="Rafa nada dice que no cambiaria su kia por nada pero en realidad tiene dos ferraris y un yate" />
+        <property name="finalMode" value="true" />
+        <property name="newspaper" ref="newspaper1" />
+                <property name="picturess">
+            <list>
+					<value>https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/3/005/097/225/31df52b.jpg</value>
+					<value>http://chlcapital.cl/images/fotos/team-francisca.jpg</value>
+					<value>https://pbs.twimg.com/profile_images/466141077028622337/8ZXWp0r1.jpeg</value>
+            </list>
+        </property>
+    </bean>
+    
+         <bean id="article2" class="domain.Article">
+        <property name="title" value="Pelea de canguros" />
+        <property name="publicationMoment" value="03/11/2018 12:22" />
+        <property name="summary" value="Polemica en australia" />
+        <property name="body" value="el gobierno australiano acepta una ley donde se permiten las peleas entre canguros y humanos" />
+        <property name="finalMode" value="false" />
+        <property name="newspaper" ref="newspaper1" />
+                <property name="picturess">
+            <list>
+					<value>https://d.otcdn.com/imglib/almacen_fotos/geo_destinos_1920x440/30024_australia/30024_40850_12.jpg</value>
+				
+            </list>
+        </property>
+    </bean>
+    
+         <bean id="article3" class="domain.Article">
+        <property name="title" value="Camino de santiago" />
+        <property name="publicationMoment" value="05/11/2018 12:22" />
+        <property name="summary" value="uno de los mejores planes para este verano" />
+        <property name="body" value="El camino de santiago es la opcion por la que mas se decantan los jovenes debido a su precio" />
+        <property name="finalMode" value="false" />
+        <property name="newspaper" ref="newspaper2" />
+                <property name="picturess">
+            <list>
+					<value>https://cdn.20m.es/img2/recortes/2015/03/07/214137-870-489.jpg</value>
+				
+            </list>
+        </property>
+    </bean>
+    
+         <bean id="article4" class="domain.Article">
+        <property name="title" value="Madrid en vacaciones" />
+        <property name="publicationMoment" value="03/11/2018 12:22" />
+        <property name="summary" value="que hacer en invierno por en la cominidad de madrid" />
+        <property name="body" value="podras pasear por la plaza del sol de madrid o quizas buscar un bus que te lleve hasta el escorial" />
+        <property name="finalMode" value="false" />
+        <property name="newspaper" ref="newspaper2" />
+                <property name="picturess">
+            <list>
+					<value>http://apartamentosmadridplaza.es/blog/wp-content/uploads/Plaza-de-sol-aerea.jpg</value>
+					
+            </list>
+        </property>
+    </bean>
+    
+         <bean id="article5" class="domain.Article">
+        <property name="title" value="Malaga destino" />
+        <property name="publicationMoment" value="01/01/2018 12:22" />
+        <property name="summary" value="alumbrado de navidad" />
+        <property name="body" value="se estima que mas de 25000 personas han pasado ta por la calle larios para observar el espectaulo navideño por xcelencia a nivel andaluz" />
+        <property name="finalMode" value="true" />
+        <property name="newspaper" ref="newspaper2" />
+                <property name="picturess">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+    
+      <bean id="article6" class="domain.Article">
+        <property name="title" value="Estadios de la capital hispalense" />
+        <property name="publicationMoment" value="04/04/2018 12:22" />
+        <property name="summary" value="visitar ambos estadios y ver sus impresionantes estructuras" />
+        <property name="body" value="el villamarin recientemente agrandado se muestra espectacular mientras que el pizjuan estrenó un juego de luces maravilloso" />
+        <property name="finalMode" value="true" />
+        <property name="newspaper" ref="newspaper4" />
+                <property name="picturess">
+            <list>
+					<value>https://thebestfutbol.com/wp-content/uploads/2018/01/Villamarin.jpg</value>
+
+            </list>
+        </property>
+    </bean>
+
+
+
+    <!-- NewsPaper 5 -->
+    
+         <bean id="newspaper5" class="domain.Newspaper">
+        <property name="title" value="Madrid informa" />
+        <property name="publicationDate" value="03/11/2017 12:22" />
+        <property name="description" value="Actualidad sobre la capital española" />
+        <property name="picture" value="http://apartamentosmadridplaza.es/blog/wp-content/uploads/Plaza-de-sol-aerea.jpg" />
+        <property name="isPrivate" value="false" />
+        <property name="user" ref="user5" />
+        <property name="subscriptionss">
+            <list> 
+
+					<ref bean="subscription5" />
+					
+            </list>
+        </property>
+        <property name="articless">
+            <list>
+				
+            </list>
+        </property>
+
+    </bean>
+    
+         <bean id="newspaper1" class="domain.Newspaper">
+        <property name="title" value="MarcaMotor" />
+        <property name="publicationDate" value="11/26/2017 12:22" />
+        <property name="description" value="esta revista trata sobre los mejores coches del mundo" />
+        <property name="picture" value="http://crucerosensevilla.com/wp-content/uploads/2015/09/Sevilla4.jpg" />
+        <property name="isPrivate" value="true" />
+        <property name="user" ref="user1" />
+        <property name="subscriptionss">
+            <list>
+					<ref bean="subscription1" />
+					<ref bean="subscription6" />
+					<ref bean="subscription8" />
+            </list>
+        </property>
+        <property name="articless">
+            <list>
+					<ref bean="article1" />
+					<ref bean="article2" />
+            </list>
+        </property>
+
+    </bean>
+    
+    
+      <bean id="newspaper2" class="domain.Newspaper">
+        <property name="title" value="Viajes" />
+        <property name="publicationDate" value="03/11/2018 12:22" />
+        <property name="description" value="Viajes a lo largo del mundo, ¿Algo mejor que leer?" />
+        <property name="picture" value="http://www.andalucia.org/media/fotos/image_148527_jpeg_800x600_q85.jpg" />
+        <property name="isPrivate" value="false" />
+        <property name="user" ref="user1" />
+        <property name="subscriptionss">
+            <list>
+					<ref bean="subscription2" />
+					<ref bean="subscription7" />
+		
+            </list>
+        </property>
+        <property name="articless">
+            <list>
+					<ref bean="article3" />
+					<ref bean="article4" />
+					<ref bean="article5" />
+            </list>
+        </property>
+
+    </bean>
+    
+     <bean id="newspaper3" class="domain.Newspaper">
+        <property name="title" value="Lugares con encanto" />
+        <property name="publicationDate" value="04/11/2019 12:22" />
+        <property name="description" value="Viajes a lo largo del mundo, ¿Algo mejor que leer?" />
+        <property name="picture" value="http://2.bp.blogspot.com/_ejfsu9g5t-8/S_cojAYoyGI/AAAAAAAAArY/2jSCIzYsO-M/s1600/alameda3.jpg" />
+        <property name="isPrivate" value="true" />
+        <property name="user" ref="user2" />
+        <property name="subscriptionss">
+            <list>
+
+		
+            </list>
+        </property>
+        <property name="articless">
+            <list>
+
+            </list>
+        </property>
+
+    </bean>
+    
+       <bean id="newspaper4" class="domain.Newspaper">
+        <property name="title" value="Fiesta" />
+        <property name="publicationDate" value="03/11/2016 12:22" />
+        <property name="description" value="Nos centramos en las mejores fiestas de españa" />
+        <property name="picture" value="https://www.viajablog.com/wp-content/uploads/2017/04/Feria-de-Abril-de-Sevilla.jpg" />
+        <property name="isPrivate" value="false" />
+        <property name="user" ref="user3" />
+        <property name="subscriptionss">
+            <list>
+
+					<ref bean="subscription3" />
+					<ref bean="subscription4" />
+            </list>
+        </property>
+        <property name="articless">
+            <list>
+					<ref bean="article6" />
+            </list>
+        </property>
+
+    </bean>
+    
+    
+
+
+
 
 
 </beans>
