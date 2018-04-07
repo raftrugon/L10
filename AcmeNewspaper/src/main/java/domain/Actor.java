@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -29,69 +30,74 @@ public abstract class Actor extends DomainEntity {
 	private Collection<String> addressess;
 	private Collection<String> phoness;
 	private Collection<String> emailss;
-	
+
 	@NotBlank
+	@NotNull
 	public String getName() {
-		return name;
+		return this.name;
 	}
-	
-	public void setName(String name) {
+
+	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	@NotNull
+	@NotBlank
 	public String getSurnames() {
-		return surnames;
+		return this.surnames;
 	}
-	
-	public void setSurnames(String surnames) {
+
+	public void setSurnames(final String surnames) {
 		this.surnames = surnames;
 	}
-	
+
 	@NotNull
 	@ElementCollection
+	@NotBlank
 	public Collection<String> getAddressess() {
-		return addressess;
+		return this.addressess;
 	}
-	
-	public void setAddressess(Collection<String> addressess) {
+
+	public void setAddressess(final Collection<String> addressess) {
 		this.addressess = addressess;
 	}
-	
+
 	@NotNull
 	@ElementCollection
+	@Pattern(regexp = "^\\+\\d{1,20}")
 	public Collection<String> getPhoness() {
-		return phoness;
+		return this.phoness;
 	}
-	
-	public void setPhoness(Collection<String> phoness) {
+
+	public void setPhoness(final Collection<String> phoness) {
 		this.phoness = phoness;
 	}
-	
+
 	@NotEmpty
 	@ElementCollection
+	@NotBlank
 	public Collection<String> getEmailss() {
-		return emailss;
+		return this.emailss;
 	}
-	
-	public void setEmailss(Collection<String> emailss) {
+
+	public void setEmailss(final Collection<String> emailss) {
 		this.emailss = emailss;
 	}
-	
-	
+
+
 	//Relationships----------------
 	private UserAccount userAccount;
-	
+
 	@NotNull
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	public UserAccount getUserAccount() {
-		return userAccount;
+		return this.userAccount;
 	}
-	
-	public void setUserAccount(UserAccount userAccount) {
+
+	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
-	
-	
+
+
 }

@@ -22,50 +22,52 @@ public class Chirp extends DomainEntity {
 	private String title;
 	private Date creationMoment;
 	private String description;
-	
+
 	@NotBlank
+	@NotNull
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
-	
-	public void setTitle(String title) {
+
+	public void setTitle(final String title) {
 		this.title = title;
 	}
-	
+
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
 	public Date getCreationMoment() {
-		return creationMoment;
+		return this.creationMoment;
 	}
-	
-	public void setCreationMoment(Date creationMoment) {
+
+	public void setCreationMoment(final Date creationMoment) {
 		this.creationMoment = creationMoment;
 	}
-	
+
 	@NotBlank
+	@NotNull
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
-	
-	public void setDescription(String description) {
+
+	public void setDescription(final String description) {
 		this.description = description;
 	}
-	
-	
+
+
 	//Relationships----------------
 	private User user;
-	
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
 	public User getUser() {
-		return user;
+		return this.user;
 	}
-	
-	public void setUser(User user) {
+
+	public void setUser(final User user) {
 		this.user = user;
 	}
-	
-	
+
+
 }
