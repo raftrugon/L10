@@ -12,12 +12,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import security.UserAccount;
+import cz.jirutka.validator.collection.constraints.EachEmail;
+import cz.jirutka.validator.collection.constraints.EachNotBlank;
+import cz.jirutka.validator.collection.constraints.EachPattern;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -53,7 +55,7 @@ public abstract class Actor extends DomainEntity {
 
 	@NotNull
 	@ElementCollection
-	@NotBlank
+	@EachNotBlank
 	public Collection<String> getAddressess() {
 		return this.addressess;
 	}
@@ -64,7 +66,7 @@ public abstract class Actor extends DomainEntity {
 
 	@NotNull
 	@ElementCollection
-	@Pattern(regexp = "^\\+\\d{1,20}")
+	@EachPattern(regexp = "^\\+\\d{1,20}")
 	public Collection<String> getPhoness() {
 		return this.phoness;
 	}
@@ -75,7 +77,7 @@ public abstract class Actor extends DomainEntity {
 
 	@NotEmpty
 	@ElementCollection
-	@NotBlank
+	@EachEmail
 	public Collection<String> getEmailss() {
 		return this.emailss;
 	}
