@@ -1,4 +1,7 @@
+
 package services;
+
+import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,24 +11,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
-public class SystemConfigServiceTest extends AbstractTest{
-	
+@Transactional
+public class SystemConfigServiceTest extends AbstractTest {
+
 	// System under test ------------------------------------------------------
 	@Autowired
-	private SystemConfigService		systemConfigService;
+	private SystemConfigService	systemConfigService;
+
 
 	//Supporting services -----------------------------------------------------
-
 
 	// Tests ------------------------------------------------------------------
 	@Test
 	public void driverFindOne() {
-		
+
 		System.out.println("===============================================================================================================");
 		System.out.println("=====================================TEST FIND ONE SYSTEM CONFIG==================================================");
 		System.out.println("===============================================================================================================\r");
@@ -58,8 +61,8 @@ public class SystemConfigServiceTest extends AbstractTest{
 		}
 
 		checkExceptions(expected, caught);
-		
-		if(expected == null)
+
+		if (expected == null)
 			System.out.println("---------------------------- POSITIVO ---------------------------");
 		else
 			System.out.println("---------------------------- NEGATIVO ---------------------------");
@@ -69,5 +72,5 @@ public class SystemConfigServiceTest extends AbstractTest{
 		System.out.println("-----------------------------------------------------------------\r");
 
 	}
-	
+
 }

@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CustomerRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Customer;
 
 @Service
@@ -50,6 +52,22 @@ public class CustomerService {
 		Assert.notNull(customer);
 
 		return customerRepository.save(customer);
+	}
+
+	public Customer findByUserAccount(final UserAccount userAccount) {
+		Assert.notNull(userAccount);
+		Customer res;
+		res = customerRepository.findByUserAccount(userAccount.getId());
+		return res;
+	}
+
+	public Customer findByPrincipal() {
+		Customer res;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		res = findByUserAccount(userAccount);
+		return res;
 	}
 
 }
