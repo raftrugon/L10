@@ -1,20 +1,23 @@
+
 package services;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import java.util.Collection;
 
-import domain.Actor;
-import domain.Admin;
 import repositories.AdminRepository;
+import security.LoginService;
+import security.UserAccount;
+import domain.Admin;
 
 @Service
 @Transactional
 public class AdminService {
 
 	@Autowired
-	private AdminRepository		adminRepository;
+	private AdminRepository	adminRepository;
+
 
 	public Admin findOne(int adminId) {
 		Assert.isTrue(adminId != 0);
@@ -23,10 +26,26 @@ public class AdminService {
 		return res;
 	}
 
-	//Supporting Services -------------------
+	public void flush() {
+		adminRepository.flush();
+	}
 
+	//Other Business Methods --------------------------------
 
-	//CRUD Methods -------------------------
+	public Admin findByUserAccount(UserAccount userAccount) {
+		Assert.notNull(userAccount);
+		Admin res;
+		res = adminRepository.findByUserAccount(userAccount.getId());
+		return res;
+	}
 
-	
+	public Admin findByPrincipal() {
+		Admin res;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		res = findByUserAccount(userAccount);
+		return res;
+	}
+
 }
