@@ -41,6 +41,12 @@
 		<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
 	</display:column>
 	
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a href="admin/article/inappropriate.do?articleId=${row2.id}"><spring:message code="admin.markInappropriate"/></a>
+		</display:column>
+	</security:authorize>
+	
 	
 </display:table>
 </div> 
