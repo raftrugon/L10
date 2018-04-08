@@ -1,9 +1,8 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -16,6 +15,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
+import domain.Newspaper;
 import domain.User;
 
 @Service
@@ -29,15 +29,25 @@ public class UserService {
 	//Supporting Services -------------------
 	@Autowired
 	private UserAccountService userAccountService;
-	
+
 	@Autowired
-	private Validator validator;
+	private ActorService actorService;
+
 	//CRUD Methods -------------------------
 
 	public User create() {
 		User res = new User();
 
 		//Collections
+		Collection<String> emailss = new ArrayList<String>();
+		Collection<String> addressess = new ArrayList<String>();
+		Collection<String> phoness = new ArrayList<String>();
+		Collection<Newspaper> newspapers = new ArrayList<Newspaper>();
+
+		res.setEmailss(emailss);
+		res.setAddressess(addressess);
+		res.setPhoness(phoness);
+		res.setNewspapers(newspapers);
 
 		//UserAccount
 		UserAccount userAccount = new UserAccount();
@@ -72,19 +82,21 @@ public class UserService {
 
 	public User save(final User user) {
 		Assert.notNull(user);
+		Assert.isTrue(user.getId() == 0); 				// No puede ser modificado
+		Assert.isTrue(!this.actorService.isLogged());	// No haya usuario logueado
 
-		if (user.getId() == 0) {
-			Md5PasswordEncoder password = new Md5PasswordEncoder();
-			String encodedPassword = password.encodePassword(user.getUserAccount().getPassword(), null);
-			user.getUserAccount().setPassword(encodedPassword);
-			user.setUserAccount(this.userAccountService.save(user.getUserAccount()));
-		}
+		//Password
+		Md5PasswordEncoder password = new Md5PasswordEncoder();
+		String encodedPassword = password.encodePassword(user.getUserAccount().getPassword(), null);
+		user.getUserAccount().setPassword(encodedPassword);
+		user.setUserAccount(this.userAccountService.save(user.getUserAccount()));
+
 		return this.userRepository.save(user);
 	}
 
 	public void delete(final int userId) {
 		Assert.isTrue(userId != 0);
-		userRepository.delete(userId);
+		this.userRepository.delete(userId);
 	}
 
 	//Other Business Methods --------------------------------

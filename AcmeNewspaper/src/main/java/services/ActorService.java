@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.LoginService;
 import security.UserAccountService;
 import domain.Actor;
 
@@ -24,9 +25,9 @@ public class ActorService {
 	private UserAccountService userAccountService;
 	//CRUD Methods -------------------------
 
-	public Actor findOne(int actorId) {
+	public Actor findOne(final int actorId) {
 		Assert.isTrue(actorId != 0);
-		Actor res = actorRepository.findOne(actorId);
+		Actor res = this.actorRepository.findOne(actorId);
 		Assert.notNull(res);
 		return res;
 	}
@@ -42,8 +43,18 @@ public class ActorService {
 		}
 		return this.actorRepository.save(actor);
 	}
-		
+
 
 	//Other Business Methods --------------------------------
+
+	public Boolean isLogged(){
+		Boolean res = true;
+		try{
+			LoginService.getPrincipal();
+		} catch(Throwable oops){
+			res = false;
+		}
+		return res;
+	}
 
 }

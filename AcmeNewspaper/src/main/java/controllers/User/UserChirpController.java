@@ -17,12 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ChirpService;
 import services.UserService;
+import utilities.internal.SchemaPrinter;
 import controllers.AbstractController;
 import domain.Chirp;
 import domain.User;
 
 @Controller
-@RequestMapping("/chirp")
+@RequestMapping("user/chirp")
 public class UserChirpController extends AbstractController {
 
 	@Autowired
@@ -46,17 +47,18 @@ public class UserChirpController extends AbstractController {
 //		return result;
 //	}
 //	
-//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-//	public ModelAndView create() {
-//		ModelAndView result;
-//		try {
-//			Chirp chirp = chirpService.create();
-//			result = newEditModelAndView(chirp);
-//		} catch (Throwable oops) {
-//			result = new ModelAndView("redirect:list.do");
-//		}
-//		return result;
-//	}
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		try {
+			Chirp chirp = chirpService.create();
+			result = newEditModelAndView(chirp);
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+			System.out.println(oops.getMessage());
+		}
+		return result;
+	}
 //
 //	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 //	public ModelAndView edit(@RequestParam(required = true) final int chirpId) {
@@ -67,21 +69,23 @@ public class UserChirpController extends AbstractController {
 //			return new ModelAndView("redirect:list.do");
 //	}
 //
-//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
-//	public ModelAndView save(@Valid final Chirp chirp, final BindingResult binding) {
-//		ModelAndView result;
-//		if (binding.hasErrors())
-//			result = newEditModelAndView(chirp);
-//		else
-//			try {
-//				chirpService.save(chirp);
-//				result = new ModelAndView("redirect:list.do");
-//			} catch (Throwable oops) {
-//				result = newEditModelAndView(chirp);
-//				result.addObject("message", "chirp.commitError");
-//			}
-//		return result;
-//	}
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Chirp chirp, final BindingResult binding) {
+		ModelAndView result;
+		SchemaPrinter.print(chirp);
+		if (binding.hasErrors()){
+			result = newEditModelAndView(chirp);
+		}
+		else
+			try {
+				chirpService.save(chirp);
+				result = new ModelAndView("redirect:../../");
+			} catch (Throwable oops) {
+				result = newEditModelAndView(chirp);
+				result.addObject("message", "chirp.commitError");
+			}
+		return result;
+	}
 //
 //	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
 //	public ModelAndView delete(@Valid final Chirp chirp, final BindingResult binding) {
@@ -98,11 +102,11 @@ public class UserChirpController extends AbstractController {
 //			}
 //		return result;
 //	}
-//	protected ModelAndView newEditModelAndView(final Chirp chirp) {
-//		ModelAndView result;
-//		result = new ModelAndView("chirp/edit");
-//		result.addObject("chirp", chirp);
-//		result.addObject("actionUri", "user/chirp/save.do");
-//		return result;
-//	}
+	protected ModelAndView newEditModelAndView(final Chirp chirp) {
+		ModelAndView result;
+		result = new ModelAndView("chirp/edit");
+		result.addObject("chirp", chirp);
+		result.addObject("actionUri", "user/chirp/save.do");
+		return result;
+	}
 }

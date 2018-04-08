@@ -8,18 +8,14 @@
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib" %>
 
 <div class="well col-md-6 col-md-offset-3">
-	<form:form action="user/newspaper/save.do" modelAttribute="newspaper">
+	<form:form action="user/chirp/save.do" modelAttribute="chirp">
 	
-		<lib:input name="id,version,subscriptionss,user,inappropriate,articless" type="hidden" />
+		<lib:input name="id,version,user,creationMoment" type="hidden" />
 		
-		
-		<jstl:set var='model' value='newspaper' scope='request'/>
+		<jstl:set var='model' value='chirp' scope='request'/>
 		<lib:input type="text" name='title'/>
-		<lib:input type="date" name='publicationDate'/>
 		<lib:input type="text" name='description'/>
-		<lib:input type="text" name='picture'/>
-		<lib:input type="checkBox" name='isPrivate'/>
 		
-		<lib:button model='newspaper' noDelete='true' id='${newspaper.id}' cancelUri='newspaper/list.do'/>
+		<lib:button model='chirp' noDelete='true' id='${chirp.id}' cancelUri='#'/>
 </form:form>
 </div>

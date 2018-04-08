@@ -46,17 +46,17 @@ public class UserNewspaperController extends AbstractController {
 //		return result;
 //	}
 //	
-//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-//	public ModelAndView create() {
-//		ModelAndView result;
-//		try {
-//			Newspaper newspaper = newspaperService.create();
-//			result = newEditModelAndView(newspaper);
-//		} catch (Throwable oops) {
-//			result = new ModelAndView("redirect:list.do");
-//		}
-//		return result;
-//	}
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		try {
+			Newspaper newspaper = newspaperService.create();
+			result = newEditModelAndView(newspaper);
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+		}
+		return result;
+	}
 //
 //	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 //	public ModelAndView edit(@RequestParam(required = true) final int newspaperId) {
@@ -66,22 +66,25 @@ public class UserNewspaperController extends AbstractController {
 //		else
 //			return new ModelAndView("redirect:list.do");
 //	}
-//
-//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
-//	public ModelAndView save(@Valid final Newspaper newspaper, final BindingResult binding) {
-//		ModelAndView result;
-//		if (binding.hasErrors())
-//			result = newEditModelAndView(newspaper);
-//		else
-//			try {
-//				newspaperService.save(newspaper);
-//				result = new ModelAndView("redirect:list.do");
-//			} catch (Throwable oops) {
-//				result = newEditModelAndView(newspaper);
-//				result.addObject("message", "newspaper.commitError");
-//			}
-//		return result;
-//	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Newspaper newspaper, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors()) {
+			result = newEditModelAndView(newspaper);
+			System.out.println(binding.toString());
+		}
+		else
+			try {
+				newspaperService.save(newspaper);
+				result = new ModelAndView("redirect:../../newspaper/list.do");
+			} catch (Throwable oops) {
+				result = newEditModelAndView(newspaper);
+				result.addObject("message", "newspaper.commitError");
+				System.out.println(oops.getMessage());
+			}
+		return result;
+	}
 //
 //	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
 //	public ModelAndView delete(@Valid final Newspaper newspaper, final BindingResult binding) {
@@ -98,11 +101,11 @@ public class UserNewspaperController extends AbstractController {
 //			}
 //		return result;
 //	}
-//	protected ModelAndView newEditModelAndView(final Newspaper newspaper) {
-//		ModelAndView result;
-//		result = new ModelAndView("newspaper/edit");
-//		result.addObject("newspaper", newspaper);
-//		result.addObject("actionUri", "user/newspaper/save.do");
-//		return result;
-//	}
+	protected ModelAndView newEditModelAndView(final Newspaper newspaper) {
+		ModelAndView result;
+		result = new ModelAndView("newspaper/edit");
+		result.addObject("newspaper", newspaper);
+		result.addObject("actionUri", "user/newspaper/save.do");
+		return result;
+	}
 }
