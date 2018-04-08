@@ -29,7 +29,7 @@
 	    <display:setProperty name="paging.banner.all_items_found" value=""/>
 	    <display:setProperty name="paging.banner.one_item_found" value=""/>
 	    <display:setProperty name="paging.banner.no_items_found" value=""/>
-    
+
 	<jstl:set var='model' value='article' scope='request'/>
 	
 	<lib:column name="title"></lib:column>
@@ -40,12 +40,14 @@
 	
 	<spring:message code="article.display" var="display_header"/>
 	<display:column title="${display_header}">
-		<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
+		<jstl:if test="${not row2.newspaper.isPrivate or articlesMap[row2]}">
+			<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
+		</jstl:if>
 	</display:column>
 	
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
-			<jstl:if test="${not row2.inappropriate }">
+			<jstl:if test="${not row2.inappropriate}">
 				<a href="admin/article/inappropriate.do?articleId=${row2.id}"><spring:message code="admin.markInappropriate"/></a>
 			</jstl:if>
 		</display:column>
@@ -53,4 +55,4 @@
 	
 	
 </display:table>
-</div> 
+</div>

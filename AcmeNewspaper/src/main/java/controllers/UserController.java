@@ -2,7 +2,9 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ArticleService;
+import services.CustomerService;
 import services.UserService;
+import domain.Article;
 import domain.User;
 
 @Controller
@@ -22,6 +26,8 @@ public class UserController extends AbstractController {
 	private UserService	userService;
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private CustomerService customerService;
 
 
 	//Constructor
@@ -55,10 +61,29 @@ public class UserController extends AbstractController {
 				user = this.userService.findOne(userId);
 			else
 				user = this.userService.findByPrincipal();
-
+			
+			List<Article> articles = new ArrayList<Article>(this.articleService.findAllPublishedForUser(user));
+			Map<Article,Boolean> articlesMap = new HashMap<Article,Boolean>();
+			try{
+				for (Article a: articles){
+					articlesMap.put(a, customerService.isSubscribed(a.getNewspaper()));
+				}
+			}catch(Throwable oops){
+				//Volvemos a coger los artículos y el usuario ya que al petar el customerService se pierden (BUG de hibernate)
+				if(userId != null)
+					user = this.userService.findOne(userId);
+				else
+					user = this.userService.findByPrincipal();
+				articles = new ArrayList<Article>(this.articleService.findAllPublishedForUser(user));
+				for (Article a: articles){
+					articlesMap.put(a, false);
+				}
+			}
+			
 			result = new ModelAndView("user/display");
 			result.addObject("user", user);
-			result.addObject("articles",this.articleService.findAllPublishedForUser(user));
+			result.addObject("articles",articles);
+			result.addObject("articlesMap",articlesMap);
 			result.addObject("requestUri", "user/display.do");
 		} catch(Throwable oops) {
 			return new ModelAndView("redirect:user-list.do");

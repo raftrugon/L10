@@ -79,4 +79,8 @@ public class ArticleService {
 		return articleRepository.findAllTaboo();
 	}
 	
+	public Boolean isPublished(Article a){
+		return articleRepository.isPublished(a.getId()) > 0 ? true : false;
+	}
+	
 }
