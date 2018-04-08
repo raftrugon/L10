@@ -15,6 +15,8 @@ public class ArticleService {
 
 	@Autowired
 	private ArticleRepository		articleRepository;
+	@Autowired
+	private AdminService adminService;
 
 	//Supporting Services -------------------
 
@@ -55,6 +57,22 @@ public class ArticleService {
 	
 	public Collection<Article> findAllPublishedForNewspaper(Newspaper n) {
 		return articleRepository.findAllPublishedForNewspaper(n.getId());
+	}
+
+	public Collection<Article> findAllPublishedKeyword(String keyword) {
+		return articleRepository.findAllPublishedKeyword(keyword);
+	}
+
+	public void markAsInappropriate(int articleId) {
+		Assert.notNull(adminService.findByPrincipal());
+		Article a = findOne(articleId);
+		a.setInappropriate(true);
+		articleRepository.save(a);		
+	}
+	
+	public void markInappropriateArticlesOfNewspaper(Newspaper n) {
+		Assert.notNull(adminService.findByPrincipal());
+		articleRepository.markInappropriateArticlesOfNewspaper(n);		
 	}
 	
 }

@@ -8,7 +8,18 @@
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib" %>
 <%@taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<div class="col-sm-10">
+<form action="newspaper/list.do">
+  <div class="input-group col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" style="margin-bottom:15px">
+    <input type="text" name="keyword" class="form-control" placeholder="Search" value="${keyword}">
+    <div class="input-group-btn">
+      <button class="btn btn-default" type="submit">
+        <i class="glyphicon glyphicon-search"> </i>
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="col-sm-10 col-sm-offset-1 well">
 	<display:table pagesize="10" class="displaytag" keepStatus="true" name="newspapers" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
@@ -23,5 +34,10 @@
 		<lib:column name='picture'/>
 		<lib:column name='isPrivate'/>
 		<lib:column name='display' link='newspaper/display.do?newspaperId=${row.id}' linkSpringName='display' />
+		<security:authorize access="hasRole('ADMIN')">
+			<display:column>
+				<a href="admin/newspaper/inappropriate.do?newspaperId=${row.id}"><spring:message code="admin.markInappropriate"/></a>
+			</display:column>
+		</security:authorize>
 </display:table>
 </div>
