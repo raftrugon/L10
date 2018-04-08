@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -23,6 +24,8 @@ public class User extends Actor {
 	
 	//Relationships----------------
 	private Collection<Newspaper> newspapers;
+	private Collection<User> follows;
+	private Collection<User> followedBy;
 	
 	@NotNull
 	@Valid
@@ -33,6 +36,28 @@ public class User extends Actor {
 	
 	public void setNewspapers(Collection<Newspaper> newspapers) {
 		this.newspapers = newspapers;
+	}
+	
+	@NotNull
+	@Valid
+	@ManyToMany(mappedBy="followedBy")
+	public Collection<User> getFollows() {
+		return follows;
+	}
+
+	public void setFollows(Collection<User> follows) {
+		this.follows = follows;
+	}
+
+	@NotNull
+	@Valid
+	@ManyToMany()
+	public Collection<User> getFollowedBy() {
+		return followedBy;
+	}
+
+	public void setFollowedBy(Collection<User> followedBy) {
+		this.followedBy = followedBy;
 	}
 	
 	

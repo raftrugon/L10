@@ -198,6 +198,15 @@
 				<ref bean="newspaper2"/>
 			</list>
 		</property>
+		<property name="follows">
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
+		<property name="followedBy">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user2" class="domain.User">
@@ -224,6 +233,15 @@
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper3"/>
+			</list>
+		</property>
+		<property name="follows">
+			<list>
+			</list>
+		</property>
+		<property name="followedBy">
+			<list>
+				<ref bean="user1"/>
 			</list>
 		</property>
 	</bean>
@@ -256,6 +274,14 @@
 				<ref bean="newspaper4"/>
 			</list>
 		</property>
+		<property name="follows">
+			<list>
+			</list>
+		</property>
+		<property name="followedBy">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user4" class="domain.User">
@@ -286,6 +312,14 @@
 			<list>
 			</list>
 		</property>
+		<property name="follows">
+			<list>
+			</list>
+		</property>
+		<property name="followedBy">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user5" class="domain.User">
@@ -312,6 +346,14 @@
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper5"/>
+			</list>
+		</property>
+		<property name="follows">
+			<list>
+			</list>
+		</property>
+		<property name="followedBy">
+			<list>
 			</list>
 		</property>
 	</bean>
