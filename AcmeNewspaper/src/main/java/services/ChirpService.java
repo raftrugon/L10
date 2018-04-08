@@ -52,6 +52,10 @@ public class ChirpService {
 		
 		return chirpRepository.save(chirp);
 	}
+
+	public Collection<Chirp> getTimeline() {
+		return chirpRepository.getTimeline(userService.findByPrincipal().getFollows());
+	}
 	
 	
 }

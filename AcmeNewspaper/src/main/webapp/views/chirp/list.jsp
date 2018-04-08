@@ -8,8 +8,8 @@
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib" %>
 <%@taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<div class="col-sm-10">
-	<display:table pagesize="10" class="displaytag" keepStatus="true" name="list" id="row">
+<div class="col-sm-10 col-sm-offset-1 well">
+	<display:table pagesize="10" class="displaytag" keepStatus="true" name="chirps" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
 	    <display:setProperty name="paging.banner.all_items_found" value=""/>
@@ -20,7 +20,7 @@
 
 	<jstl:set var='model' value='chirp' scope='request'/>
 		<lib:column name='title'/>
-		<lib:column name='creationMoment'/>
+		<lib:column name='creationMoment' format='{0,date,dd/MM/yyyy hh:mm}'/>
 		<lib:column name='description'/>
 </display:table>
 </div>
