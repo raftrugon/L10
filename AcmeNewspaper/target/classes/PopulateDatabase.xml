@@ -765,6 +765,7 @@
 				<ref bean="followUp3" />
 			</list>
 		</property>
+		<property name="inappropriate" value="false"/>
 	</bean>
 
 	<bean id="article2" class="domain.Article">
@@ -787,6 +788,7 @@
 				<ref bean="followUp5" />
 			</list>
 		</property>
+		<property name="inappropriate" value="false"/>
 	</bean>
 
 	<bean id="article3" class="domain.Article">
@@ -809,6 +811,7 @@
 				<ref bean="followUp7" />
 			</list>
 		</property>
+		<property name="inappropriate" value="false"/>
 	</bean>
 
 	<bean id="article4" class="domain.Article">
@@ -831,6 +834,7 @@
 			
 			</list>
 		</property>
+		<property name="inappropriate" value="false"/>
 	</bean>
 
 	<bean id="article5" class="domain.Article">
@@ -851,6 +855,7 @@
 			
 			</list>
 		</property>
+		<property name="inappropriate" value="false"/>
 	</bean>
 
 	<bean id="article6" class="domain.Article">
@@ -873,6 +878,7 @@
 			
 			</list>
 		</property>
+		<property name="inappropriate" value="true"/>
 	</bean>
 
 

@@ -34,6 +34,7 @@ public class Article extends DomainEntity {
 	private String body;
 	private Collection<String> picturess;
 	private Boolean finalMode;
+	private Boolean inappropriate;
 
 	@NotBlank
 	@NotNull
@@ -92,6 +93,15 @@ public class Article extends DomainEntity {
 
 	public void setFinalMode(final Boolean finalMode) {
 		this.finalMode = finalMode;
+	}
+
+
+	public Boolean getInappropriate() {
+		return inappropriate;
+	}
+
+	public void setInappropriate(Boolean inappropriate) {
+		this.inappropriate = inappropriate;
 	}
 
 
