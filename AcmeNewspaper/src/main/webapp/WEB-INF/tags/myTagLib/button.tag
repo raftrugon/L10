@@ -30,5 +30,5 @@
 	</jstl:if>
 </div>
 <jstl:if test="${message ne null }">
-	<p style="error"><spring:message code="${message}"/></p>
+	<p style="text-align:center; padding-top:20px;" class="error"><spring:message code="${message}"/></p>
 </jstl:if>

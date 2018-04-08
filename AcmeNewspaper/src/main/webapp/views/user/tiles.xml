@@ -9,11 +9,12 @@
 		<put-attribute name="title" value="User List" />
 		<put-attribute name="body" value="/views/user/list.jsp" />
 	</definition>
-	<definition name="user/edit" extends="master.page">
-		<put-attribute name="title" value="User Edit" />
+	<definition name="register/user" extends="master.page">
+		<put-attribute name="title" value="Register User" />
 		<put-attribute name="body" value="/views/user/edit.jsp" />
 	</definition>
 	<definition name="user/display" extends="master.page">
 		<put-attribute name="title" value="User Display" />
 		<put-attribute name="body" value="/views/user/display.jsp" />
-	</definition></tiles-definitions>
+	</definition>
+</tiles-definitions>
