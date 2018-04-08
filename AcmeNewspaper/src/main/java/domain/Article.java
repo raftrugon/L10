@@ -10,16 +10,21 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import services.ArticleService;
 
 import cz.jirutka.validator.collection.constraints.EachURL;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Article extends DomainEntity {
+
 
 	//Attributes----------------
 	private String title;
@@ -100,6 +105,7 @@ public class Article extends DomainEntity {
 	public void setNewspaper(Newspaper newspaper) {
 		this.newspaper = newspaper;
 	}
+
 	
 	
 }

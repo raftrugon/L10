@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import java.util.Collection;
 import domain.Article;
+import domain.Newspaper;
+import domain.User;
 import repositories.ArticleRepository;
 
 @Service
@@ -42,6 +44,17 @@ public class ArticleService {
 		
 		return articleRepository.save(article);
 	}
+
+	public Collection<Article> findAllPublished() {
+		return articleRepository.findAllPublished();
+	}
 	
+	public Collection<Article> findAllPublishedForUser(User u) {
+		return articleRepository.findAllPublishedForUser(u.getId());
+	}
+	
+	public Collection<Article> findAllPublishedForNewspaper(Newspaper n) {
+		return articleRepository.findAllPublishedForNewspaper(n.getId());
+	}
 	
 }
