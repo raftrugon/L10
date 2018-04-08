@@ -40,7 +40,7 @@ public class ArticleController extends AbstractController {
 		result = new ModelAndView("article/list");
 		result.addObject("articles", articles);
 		result.addObject("keyword",keyword);
-		result.addObject("requestUri", "user/article/list.do");
+		result.addObject("requestUri", "article/list.do");
 		return result;
 	}
 	

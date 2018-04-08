@@ -71,4 +71,8 @@ public class NewspaperService {
 		newspaperRepository.save(n);
 		articleService.markInappropriateArticlesOfNewspaper(n);
 	}
+
+	public Collection<Newspaper> findAllTaboo() {
+		return newspaperRepository.findAllTaboo();
+	}
 }

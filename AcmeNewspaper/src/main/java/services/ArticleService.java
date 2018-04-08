@@ -74,5 +74,9 @@ public class ArticleService {
 		Assert.notNull(adminService.findByPrincipal());
 		articleRepository.markInappropriateArticlesOfNewspaper(n);		
 	}
+
+	public Collection<Article> findAllTaboo() {
+		return articleRepository.findAllTaboo();
+	}
 	
 }

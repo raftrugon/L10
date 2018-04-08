@@ -29,4 +29,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	@Query("update Article a set a.inappropriate = true where a.newspaper = ?1")
 	void markInappropriateArticlesOfNewspaper(Newspaper n);
 
+	@Query(value="select article.* from article join (select taboowordss as word from systemconfig join systemconfig_taboowordss on systemconfig.id = systemconfig_taboowordss.systemconfig_id) as taboo_words where body like concat('%',word,'%') or title like concat('%',word,'%') or summary like concat('%',word,'%') group by article.id",nativeQuery=true)
+	Collection<Article> findAllTaboo();
+
 }
