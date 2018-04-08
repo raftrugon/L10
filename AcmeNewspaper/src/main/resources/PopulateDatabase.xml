@@ -192,6 +192,12 @@
 				<value>+635879562</value>
 			</list>
 		</property>
+		<property name="newspapers">
+			<list>
+				<ref bean="newspaper1"/>
+				<ref bean="newspaper2"/>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user2" class="domain.User">
@@ -213,6 +219,11 @@
 		<property name="phoness">
 			<list>
 
+			</list>
+		</property>
+		<property name="newspapers">
+			<list>
+				<ref bean="newspaper3"/>
 			</list>
 		</property>
 	</bean>
@@ -238,6 +249,11 @@
 				<value>+965879562</value>
 				<value>+635875682</value>
 				<value>+635877562</value>
+			</list>
+		</property>
+		<property name="newspapers">
+			<list>
+				<ref bean="newspaper4"/>
 			</list>
 		</property>
 	</bean>
@@ -266,6 +282,10 @@
 
 			</list>
 		</property>
+		<property name="newspapers">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user5" class="domain.User">
@@ -287,6 +307,11 @@
 		<property name="phoness">
 			<list>
 
+			</list>
+		</property>
+		<property name="newspapers">
+			<list>
+				<ref bean="newspaper5"/>
 			</list>
 		</property>
 	</bean>
