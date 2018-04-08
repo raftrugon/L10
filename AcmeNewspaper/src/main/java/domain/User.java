@@ -60,6 +60,7 @@ public class User extends Actor {
 
 	public void setFollowedBy(Collection<User> followedBy) {
 		this.followedBy = followedBy;
+	}
 		
 	@OneToMany(mappedBy="user")
 	public Collection<Chirp> getChirps() {
