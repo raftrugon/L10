@@ -76,4 +76,8 @@ public class NewspaperService {
 		Assert.notNull(this.userService.findByPrincipal());
 		return this.newspaperRepository.findMyNonPublished(this.userService.findByPrincipal());
 	}
+
+	public Collection<Newspaper> findAllTaboo() {
+		return newspaperRepository.findAllTaboo();
+	}
 }

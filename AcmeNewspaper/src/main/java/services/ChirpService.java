@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import domain.Chirp;
+import domain.Newspaper;
 import repositories.ChirpRepository;
 import utilities.internal.SchemaPrinter;
 
@@ -18,6 +19,8 @@ public class ChirpService {
 	private ChirpRepository		chirpRepository;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private AdminService adminService;
 	
 	
 	//Supporting Services -------------------
@@ -55,6 +58,17 @@ public class ChirpService {
 
 	public Collection<Chirp> getTimeline() {
 		return chirpRepository.getTimeline(userService.findByPrincipal().getFollows());
+	}
+
+	public Collection<Chirp> findAllTaboo() {
+		return chirpRepository.findAllTaboo();
+	}
+
+	public void markAsInappropriate(int chirpId) {
+		Assert.notNull(adminService.findByPrincipal());
+		Chirp c = findOne(chirpId);
+		c.setInappropriate(true);
+		chirpRepository.save(c);		
 	}
 	
 	

@@ -22,5 +22,13 @@
 		<lib:column name='title'/>
 		<lib:column name='creationMoment' format='{0,date,dd/MM/yyyy hh:mm}'/>
 		<lib:column name='description'/>
+		
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<jstl:if test="${not row.inappropriate }">
+				<a href="admin/chirp/inappropriate.do?chirpId=${row.id}"><spring:message code="admin.markInappropriate"/></a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 </display:table>
 </div>

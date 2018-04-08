@@ -118,4 +118,10 @@ public class ArticleService {
 		return res;
 	}
 
+
+	public Collection<Article> findAllTaboo() {
+		return articleRepository.findAllTaboo();
+	}
+	
+
 }

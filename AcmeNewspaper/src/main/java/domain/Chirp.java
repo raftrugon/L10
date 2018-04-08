@@ -23,6 +23,7 @@ public class Chirp extends DomainEntity {
 	private String title;
 	private Date creationMoment;
 	private String description;
+	private Boolean inappropriate;
 
 	@NotBlank
 	@NotNull
@@ -54,6 +55,15 @@ public class Chirp extends DomainEntity {
 
 	public void setDescription(final String description) {
 		this.description = description;
+	}
+
+	@NotNull
+	public Boolean getInappropriate() {
+		return inappropriate;
+	}
+
+	public void setInappropriate(Boolean inappropriate) {
+		this.inappropriate = inappropriate;
 	}
 
 
