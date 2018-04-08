@@ -198,6 +198,12 @@
 				<ref bean="newspaper2"/>
 			</list>
 		</property>
+		<property name="chirps">
+			<list>
+				<ref bean="chirp1"/>
+				<ref bean="chirp2"/>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user2" class="domain.User">
@@ -224,6 +230,12 @@
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper3"/>
+			</list>
+		</property>
+		<property name="chirps">
+			<list>
+				<ref bean="chirp3"/>
+				<ref bean="chirp4"/>
 			</list>
 		</property>
 	</bean>
@@ -256,6 +268,12 @@
 				<ref bean="newspaper4"/>
 			</list>
 		</property>
+		<property name="chirps">
+			<list>
+				<ref bean="chirp5"/>
+				<ref bean="chirp6"/>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user4" class="domain.User">
@@ -286,6 +304,12 @@
 			<list>
 			</list>
 		</property>
+		<property name="chirps">
+			<list>
+				<ref bean="chirp7"/>
+				<ref bean="chirp8"/>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user5" class="domain.User">
@@ -312,6 +336,12 @@
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper5"/>
+			</list>
+		</property>
+		<property name="chirps">
+			<list>
+				<ref bean="chirp9"/>
+				<ref bean="chirp10"/>
 			</list>
 		</property>
 	</bean>

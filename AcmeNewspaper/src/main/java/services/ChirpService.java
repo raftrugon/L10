@@ -4,8 +4,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import java.util.Collection;
+import java.util.Date;
+
 import domain.Chirp;
 import repositories.ChirpRepository;
+import utilities.internal.SchemaPrinter;
 
 @Service
 @Transactional
@@ -13,7 +16,10 @@ public class ChirpService {
 
 	@Autowired
 	private ChirpRepository		chirpRepository;
-
+	@Autowired
+	private UserService userService;
+	
+	
 	//Supporting Services -------------------
 
 
@@ -22,6 +28,8 @@ public class ChirpService {
 	public Chirp create() {
 		Chirp res = new Chirp();
 		
+		res.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
+		res.setUser(userService.findByPrincipal());
 		return res;
 	}
 	
@@ -38,7 +46,9 @@ public class ChirpService {
 	
 	public Chirp save(final Chirp chirp) {
 		Assert.notNull(chirp);
-		
+		Assert.notNull(userService.findByPrincipal());
+		Assert.isTrue(chirp.getId()==0);
+		chirp.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
 		
 		return chirpRepository.save(chirp);
 	}

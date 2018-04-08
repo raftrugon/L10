@@ -1,6 +1,7 @@
 package services;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,8 +56,8 @@ public class NewspaperService {
 	
 	public Newspaper save(final Newspaper newspaper) {
 		Assert.notNull(newspaper);
-		
-		
+		Assert.notNull(userService.findByPrincipal());
+		Assert.isTrue(newspaper.getPublicationDate().after(new Date()));
 		return newspaperRepository.save(newspaper);
 	}
 	
