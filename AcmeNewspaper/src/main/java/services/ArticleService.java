@@ -56,5 +56,9 @@ public class ArticleService {
 	public Collection<Article> findAllPublishedForNewspaper(Newspaper n) {
 		return articleRepository.findAllPublishedForNewspaper(n.getId());
 	}
+
+	public Collection<Article> findAllPublishedKeyword(String keyword) {
+		return articleRepository.findAllPublishedKeyword(keyword);
+	}
 	
 }
