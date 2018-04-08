@@ -1,9 +1,6 @@
 
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ArticleService;
 import services.UserService;
-import domain.Article;
-import domain.Newspaper;
 import domain.User;
 
 @Controller
@@ -31,6 +26,22 @@ public class UserController extends AbstractController {
 		super();
 	}
 
+<<<<<<< HEAD
+	//	@RequestMapping("/user-list")
+	//	public ModelAndView list() {
+	//		ModelAndView result = null;
+	//		try{
+	//			final List<User> users = new ArrayList<User>(this.userService.findAll());
+	//			result = new ModelAndView("user/list");
+	//			result.addObject("users", users);
+	//			result.addObject("requestUri", "user/list.do");
+	//		} catch(Throwable oops) {
+	//			result = new ModelAndView("welcome/index");
+	//		}
+	//		return result;
+	//	}
+
+=======
 	@RequestMapping("/user-list")
 	public ModelAndView list() {
 		ModelAndView result;
@@ -41,9 +52,26 @@ public class UserController extends AbstractController {
 		return result;
 	}
 	
+>>>>>>> 248572dcdf7be01f44ac5009f6ca6661bc893374
 	@RequestMapping("/user-display")
-	public ModelAndView display(@RequestParam(required=true) final int userId) {
+	public ModelAndView display(@RequestParam(required=false) final Integer userId) {
 		ModelAndView result;
+<<<<<<< HEAD
+		try{
+			User user;
+			if(userId != null)
+				user = this.userService.findOne(userId);
+			else
+				user = this.userService.findByPrincipal();
+
+			result = new ModelAndView("user/display");
+			result.addObject("user", user);
+			result.addObject("articles",this.articleService.findAllPublishedForUser(user));
+			result.addObject("requestUri", "user/display.do");
+		} catch(Throwable oops) {
+			result = new ModelAndView("welcome/index");
+		}
+=======
 		Boolean follows = false;
 		User user;
 		try{
@@ -62,62 +90,7 @@ public class UserController extends AbstractController {
 		result.addObject("articles",articleService.findAllPublishedForUser(user));
 		result.addObject("follows",follows);
 		result.addObject("requestUri", "user-display.do");
+>>>>>>> 248572dcdf7be01f44ac5009f6ca6661bc893374
 		return result;
 	}
-//	
-//		@RequestMapping(value = "/create", method = RequestMethod.GET)
-//	public ModelAndView create() {
-//		ModelAndView result;
-//		try {
-//			User user = userService.create();
-//			result = newEditModelAndView(user);
-//		} catch (Throwable oops) {
-//			result = new ModelAndView("redirect:list.do");
-//		}
-//		return result;
-//	}
-//
-//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-//	public ModelAndView edit(@RequestParam(required = true) final int userId) {
-//		return newEditModelAndView(user);
-//	}
-//
-//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
-//	public ModelAndView save(@Valid final User user, final BindingResult binding) {
-//		ModelAndView result;
-//		if (binding.hasErrors())
-//			result = newEditModelAndView(user);
-//		else
-//			try {
-//				userService.save(user);
-//				result = new ModelAndView("redirect:list.do");
-//			} catch (Throwable oops) {
-//				result = newEditModelAndView(user);
-//				result.addObject("message", "user.commitError");
-//			}
-//		return result;
-//	}
-//
-//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
-//	public ModelAndView delete(@Valid final User user, final BindingResult binding) {
-//		ModelAndView result;
-//		if (binding.hasErrors())
-//			result = newEditModelAndView(user);
-//		else
-//			try {
-//				userService.delete(user);
-//				result = new ModelAndView("redirect:list.do");
-//			} catch (Throwable oops) {
-//				result = newEditModelAndView(user);
-//				result.addObject("message", "user.commitError");
-//			}
-//		return result;
-//	}
-//	protected ModelAndView newEditModelAndView(final User user) {
-//		ModelAndView result;
-//		result = new ModelAndView("user/edit");
-//		result.addObject("user", user);
-//		result.addObject("actionUri", "user/save.do");
-//		return result;
-//	}
 }
