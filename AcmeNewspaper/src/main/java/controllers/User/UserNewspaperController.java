@@ -22,7 +22,7 @@ import domain.Newspaper;
 import domain.User;
 
 @Controller
-@RequestMapping("/newspaper")
+@RequestMapping("user/newspaper")
 public class UserNewspaperController extends AbstractController {
 
 	@Autowired

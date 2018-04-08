@@ -9,20 +9,19 @@
 <%@taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="col-sm-10">
-	<display:table pagesize="10" class="displaytag" keepStatus="true" name="list" id="row">
+	<display:table pagesize="10" class="displaytag" keepStatus="true" name="newspapers" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
 	    <display:setProperty name="paging.banner.all_items_found" value=""/>
 	    <display:setProperty name="paging.banner.one_item_found" value=""/>
 	    <display:setProperty name="paging.banner.no_items_found" value=""/>
-    
-
 
 	<jstl:set var='model' value='newspaper' scope='request'/>
 		<lib:column name='title'/>
 		<lib:column name='publicationDate'/>
 		<lib:column name='description'/>
 		<lib:column name='picture'/>
-		<lib:column name='private'/>
+		<lib:column name='isPrivate'/>
+		<lib:column name='display' link='newspaper/display.do?newspaperId=${row.id}' linkSpringName='display' />
 </display:table>
 </div>
