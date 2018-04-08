@@ -1,6 +1,9 @@
 
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,39 +29,28 @@ public class UserController extends AbstractController {
 		super();
 	}
 
-<<<<<<< HEAD
-	//	@RequestMapping("/user-list")
-	//	public ModelAndView list() {
-	//		ModelAndView result = null;
-	//		try{
-	//			final List<User> users = new ArrayList<User>(this.userService.findAll());
-	//			result = new ModelAndView("user/list");
-	//			result.addObject("users", users);
-	//			result.addObject("requestUri", "user/list.do");
-	//		} catch(Throwable oops) {
-	//			result = new ModelAndView("welcome/index");
-	//		}
-	//		return result;
-	//	}
-
-=======
 	@RequestMapping("/user-list")
 	public ModelAndView list() {
-		ModelAndView result;
-		final List<User> users = new ArrayList<User>(userService.findAll());
-		result = new ModelAndView("user/list");
-		result.addObject("users", users);
-		result.addObject("requestUri", "user-list.do");
+		ModelAndView result = null;
+		try{
+			final List<User> users = new ArrayList<User>(this.userService.findAll());
+			result = new ModelAndView("user/list");
+			result.addObject("users", users);
+			result.addObject("requestUri", "user/list.do");
+		} catch(Throwable oops) {
+			result = new ModelAndView("welcome/index");
+		}
 		return result;
 	}
-	
->>>>>>> 248572dcdf7be01f44ac5009f6ca6661bc893374
+
+
+
 	@RequestMapping("/user-display")
 	public ModelAndView display(@RequestParam(required=false) final Integer userId) {
 		ModelAndView result;
-<<<<<<< HEAD
+		Boolean follows = false;
+		User user;
 		try{
-			User user;
 			if(userId != null)
 				user = this.userService.findOne(userId);
 			else
@@ -69,28 +61,16 @@ public class UserController extends AbstractController {
 			result.addObject("articles",this.articleService.findAllPublishedForUser(user));
 			result.addObject("requestUri", "user/display.do");
 		} catch(Throwable oops) {
-			result = new ModelAndView("welcome/index");
-		}
-=======
-		Boolean follows = false;
-		User user;
-		try{
-			user = userService.findOne(userId);
-		}catch(Throwable oops){
 			return new ModelAndView("redirect:user-list.do");
 		}
-		try{			
-			User principal = userService.findByPrincipal();
+
+		try{
+			User principal = this.userService.findByPrincipal();
 			follows = user.getFollowedBy().contains(principal) ;
-		}catch(Throwable oops){
-			user = userService.findOne(userId);
-		}
-		result = new ModelAndView("user/display");
-		result.addObject("user", user);
-		result.addObject("articles",articleService.findAllPublishedForUser(user));
-		result.addObject("follows",follows);
-		result.addObject("requestUri", "user-display.do");
->>>>>>> 248572dcdf7be01f44ac5009f6ca6661bc893374
+			result.addObject("logged", principal);
+			result.addObject("follows",follows);
+		}catch(Throwable oops){}
+
 		return result;
 	}
 }
