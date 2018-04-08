@@ -13,42 +13,43 @@ public class Subscription extends DomainEntity {
 
 	//Attributes----------------
 	private CreditCard creditCard;
-	
+
 	@Valid
+	@NotNull
 	public CreditCard getCreditCard() {
-		return creditCard;
+		return this.creditCard;
 	}
-	
-	public void setCreditCard(CreditCard creditCard) {
+
+	public void setCreditCard(final CreditCard creditCard) {
 		this.creditCard = creditCard;
 	}
-	
+
 	//Relationships----------------
 	private Newspaper newspaper;
 	private Customer customer;
-	
-	
+
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
 	public Newspaper getNewspaper() {
-		return newspaper;
+		return this.newspaper;
 	}
-	
-	public void setNewspaper(Newspaper newspaper) {
+
+	public void setNewspaper(final Newspaper newspaper) {
 		this.newspaper = newspaper;
 	}
-	
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
 	public Customer getCustomer() {
-		return customer;
+		return this.customer;
 	}
-	
-	public void setCustomer(Customer customer) {
+
+	public void setCustomer(final Customer customer) {
 		this.customer = customer;
 	}
-	
-	
+
+
 }

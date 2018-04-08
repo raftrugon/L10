@@ -3,14 +3,19 @@ package services;
 
 import java.util.Collection;
 
+import javax.validation.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.UserRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
 import domain.User;
 
 @Service
@@ -22,11 +27,28 @@ public class UserService {
 
 
 	//Supporting Services -------------------
-
+	@Autowired
+	private UserAccountService userAccountService;
+	
+	@Autowired
+	private Validator validator;
 	//CRUD Methods -------------------------
 
 	public User create() {
 		User res = new User();
+
+		//Collections
+
+		//UserAccount
+		UserAccount userAccount = new UserAccount();
+		Collection<Authority> authorities = userAccount.getAuthorities();
+		Authority authority = new Authority();
+
+		authority.setAuthority(Authority.USER);
+		authorities.add(authority);
+		userAccount.setAuthorities(authorities);
+
+		res.setUserAccount(userAccount);
 
 		return res;
 	}
@@ -51,7 +73,13 @@ public class UserService {
 	public User save(final User user) {
 		Assert.notNull(user);
 
-		return userRepository.save(user);
+		if (user.getId() == 0) {
+			Md5PasswordEncoder password = new Md5PasswordEncoder();
+			String encodedPassword = password.encodePassword(user.getUserAccount().getPassword(), null);
+			user.getUserAccount().setPassword(encodedPassword);
+			user.setUserAccount(this.userAccountService.save(user.getUserAccount()));
+		}
+		return this.userRepository.save(user);
 	}
 
 	public void delete(final int userId) {

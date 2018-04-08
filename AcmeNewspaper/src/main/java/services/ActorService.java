@@ -2,11 +2,13 @@
 package services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.UserAccountService;
 import domain.Actor;
 
 @Service
@@ -18,7 +20,8 @@ public class ActorService {
 
 
 	//Supporting Services -------------------
-
+	@Autowired
+	private UserAccountService userAccountService;
 	//CRUD Methods -------------------------
 
 	public Actor findOne(int actorId) {
@@ -31,8 +34,15 @@ public class ActorService {
 	public Actor save(final Actor actor) {
 		Assert.notNull(actor);
 
-		return actorRepository.save(actor);
+		if (actor.getId() == 0) {
+			Md5PasswordEncoder password = new Md5PasswordEncoder();
+			String encodedPassword = password.encodePassword(actor.getUserAccount().getPassword(), null);
+			actor.getUserAccount().setPassword(encodedPassword);
+			actor.setUserAccount(this.userAccountService.save(actor.getUserAccount()));
+		}
+		return this.actorRepository.save(actor);
 	}
+		
 
 	//Other Business Methods --------------------------------
 

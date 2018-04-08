@@ -27,91 +27,93 @@ public class Newspaper extends DomainEntity {
 	private String description;
 	private String picture;
 	private Boolean isPrivate;
-	
+
 	@NotBlank
+	@NotNull
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
-	
-	public void setTitle(String title) {
+
+	public void setTitle(final String title) {
 		this.title = title;
 	}
-	
+
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	public Date getPublicationDate() {
-		return publicationDate;
+		return this.publicationDate;
 	}
-	
-	public void setPublicationDate(Date publicationDate) {
+
+	public void setPublicationDate(final Date publicationDate) {
 		this.publicationDate = publicationDate;
 	}
-	
+
 	@NotBlank
+	@NotNull
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
-	
-	public void setDescription(String description) {
+
+	public void setDescription(final String description) {
 		this.description = description;
 	}
-	
+
 	@URL
 	public String getPicture() {
-		return picture;
+		return this.picture;
 	}
-	
-	public void setPicture(String picture) {
+
+	public void setPicture(final String picture) {
 		this.picture = picture;
 	}
-	
+
 	@NotNull
 	public Boolean getIsPrivate() {
-		return isPrivate;
+		return this.isPrivate;
 	}
-	
-	public void setIsPrivate(Boolean isPrivate) {
+
+	public void setIsPrivate(final Boolean isPrivate) {
 		this.isPrivate = isPrivate;
 	}
-	
-	
+
+
 	//Relationships----------------
 	private Collection<Subscription> subscriptionss;
 	private Collection<Article> articless;
 	private User user;
-	
+
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "newspaper")
 	public Collection<Subscription> getSubscriptionss() {
-		return subscriptionss;
+		return this.subscriptionss;
 	}
-	
-	public void setSubscriptionss(Collection<Subscription> subscriptionss) {
+
+	public void setSubscriptionss(final Collection<Subscription> subscriptionss) {
 		this.subscriptionss = subscriptionss;
 	}
-	
+
 	@NotNull
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "newspaper")
 	public Collection<Article> getArticless() {
-		return articless;
+		return this.articless;
 	}
-	
-	public void setArticless(Collection<Article> articless) {
+
+	public void setArticless(final Collection<Article> articless) {
 		this.articless = articless;
 	}
-	
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
 	public User getUser() {
-		return user;
+		return this.user;
 	}
-	
-	public void setUser(User user) {
+
+	public void setUser(final User user) {
 		this.user = user;
 	}
-	
-	
+
+
 }

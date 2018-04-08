@@ -7,6 +7,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -24,54 +26,75 @@ public class FollowUp extends DomainEntity {
 	private String summary;
 	private String body;
 	private Collection<String> picturess;
-	
+
 	@Past
 	public Date getPublicationMoment() {
-		return publicationMoment;
+		return this.publicationMoment;
 	}
-	
-	public void setPublicationMoment(Date publicationMoment) {
+
+	public void setPublicationMoment(final Date publicationMoment) {
 		this.publicationMoment = publicationMoment;
 	}
-	
+
 	@NotBlank
+	@NotNull
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
-	
-	public void setTitle(String title) {
+
+	public void setTitle(final String title) {
 		this.title = title;
 	}
-	
+
+	@NotBlank
+	@NotNull
 	public String getSummary() {
-		return summary;
+		return this.summary;
 	}
-	
-	public void setSummary(String summary) {
+
+	public void setSummary(final String summary) {
 		this.summary = summary;
 	}
-	
+
 	@NotBlank
+	@NotNull
 	public String getBody() {
-		return body;
+		return this.body;
 	}
-	
-	public void setBody(String body) {
+
+	public void setBody(final String body) {
 		this.body = body;
 	}
-	
+
 	@EachURL
 	@ElementCollection
 	@NotNull
 	public Collection<String> getPicturess() {
-		return picturess;
+		return this.picturess;
 	}
-	
-	public void setPicturess(Collection<String> picturess) {
+
+	public void setPicturess(final Collection<String> picturess) {
 		this.picturess = picturess;
 	}
-	
-	
+
+
 	//Relationships----------------
-	
+
+	private Article article;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Article getArticle() {
+		return this.article;
+	}
+
+
+	public void setArticle(final Article article) {
+		this.article = article;
+	}
+
+
+
 }

@@ -1,8 +1,8 @@
 /*
  * Authority.java
- * 
+ *
  * Copyright (C) 2017 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -47,8 +47,7 @@ public class Authority implements GrantedAuthority {
 
 
 	@NotBlank
-	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.USER + "|" + 
-				Authority.CUSTOMER + "$")
+	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.USER + "|" + Authority.CUSTOMER + "$")
 	@Override
 	public String getAuthority() {
 		return authority;
