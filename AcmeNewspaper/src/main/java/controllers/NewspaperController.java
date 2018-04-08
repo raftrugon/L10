@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ArticleService;
+import services.CustomerService;
 import services.NewspaperService;
 import domain.Newspaper;
 
@@ -22,6 +23,8 @@ public class NewspaperController extends AbstractController {
 	private NewspaperService	newspaperService;
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private CustomerService customerService;
 
 
 	//Constructor
@@ -42,9 +45,16 @@ public class NewspaperController extends AbstractController {
 	
 	@RequestMapping("/display")
 	public ModelAndView display(@RequestParam(required=true) int newspaperId){
-		ModelAndView res;
-		Newspaper newspaper = newspaperService.findOne(newspaperId);
-		res = new ModelAndView("newspaper/display");
+		ModelAndView res = new ModelAndView("newspaper/display");
+		Newspaper newspaper = null;
+		try{
+			newspaper = newspaperService.findOne(newspaperId);
+		}catch(Throwable oops){
+			return new ModelAndView("redirect:list.do");
+		}
+		try{
+			res.addObject("isSubscribed",customerService.isSubscribed(newspaper));
+		}catch(Throwable oops){}		
 		res.addObject("newspaper",newspaper);
 		res.addObject("articles", articleService.findAllPublishedForNewspaper(newspaper));
 		res.addObject("requestUri", "newspaper/display.do");

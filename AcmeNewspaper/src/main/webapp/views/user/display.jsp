@@ -12,6 +12,18 @@
 
 
 <div style="margin-right: 10px" class="col-sm-5 col-sm-offset-1 well">
+	<security:authorize access="hasRole('USER')">
+		<jstl:if test="${user ne logged}">
+			<jstl:choose>
+				<jstl:when test="${follows}">
+					<a class="btn btn-primary btn-block" href="user/un-follow.do?userId=${user.id}"><spring:message code="user.unfollow"/></a>	
+				</jstl:when>
+				<jstl:otherwise>	
+					<a class="btn btn-primary btn-block" href="user/follow.do?userId=${user.id}"><spring:message code="user.follow"/></a>
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:if>
+	</security:authorize>
 
 	<!-- PERSONAL DATA -->
 	<h1><spring:message code="heading.personalData" /></h1>
@@ -74,7 +86,9 @@
 
 		<spring:message code="article.display" var="display_header" />
 		<display:column title="${display_header}">
-			<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
+			<jstl:if test="${not row2.newspaper.isPrivate or articlesMap[row2] }">
+				<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
+			</jstl:if>
 		</display:column>
 
 
@@ -132,15 +146,3 @@
 	</display:table>
 </div>
 
-<security:authorize access="hasRole('USER')">
-	<jstl:if test="${user ne logged}">
-		<jstl:choose>
-			<jstl:when test="${follows}">
-				<a href="user/un-follow.do?userId=${user.id}"><spring:message code="user.unfollow"/></a>	
-			</jstl:when>
-			<jstl:otherwise>	
-				<a href="user/follow.do?userId=${user.id}"><spring:message code="user.follow"/></a>
-			</jstl:otherwise>
-		</jstl:choose>
-	</jstl:if>
-</security:authorize>

@@ -16,6 +16,7 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Customer;
+import domain.Newspaper;
 import domain.Subscription;
 import domain.User;
 
@@ -95,6 +96,10 @@ public class CustomerService {
 		Assert.notNull(userAccount);
 		res = findByUserAccount(userAccount);
 		return res;
+	}
+
+	public boolean isSubscribed(Newspaper newspaper) {
+		return customerRepository.isSubscribed(newspaper,findByPrincipal()) > 0 ? true : false;
 	}
 
 }

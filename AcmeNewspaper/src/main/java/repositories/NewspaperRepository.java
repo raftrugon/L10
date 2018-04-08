@@ -8,17 +8,25 @@ import org.springframework.stereotype.Repository;
 
 import domain.Article;
 import domain.Newspaper;
+import domain.User;
 
 @Repository
 public interface NewspaperRepository extends JpaRepository<Newspaper, Integer> {
 
 	@Query("select n from Newspaper n where (n.title like %?1% or n.description like %?1%) and  n.inappropriate = false")
 	Collection<Newspaper> findByKeyword(String keyword);
+
+
+	@Query("select n from Newspaper n where n.user = ?1 AND (n.publicationDate > CURRENT_TIMESTAMP)")
+	Collection<Newspaper> findMyNonPublished(User user);
+
+
+
 	
 	@Query(value="select newspaper.* from newspaper join (select taboowordss as word from systemconfig join systemconfig_taboowordss on systemconfig.id = systemconfig_taboowordss.systemconfig_id) as taboo_words where description like concat('%',word,'%') or title like concat('%',word,'%') group by newspaper.id",nativeQuery=true)
 	Collection<Newspaper> findAllTaboo();
 
 	
-	
+
 
 }

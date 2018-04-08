@@ -33,43 +33,48 @@ public class NewspaperService {
 
 	public Newspaper create() {
 		Newspaper res = new Newspaper();
-		
+
 		res.setArticless(new ArrayList<Article>());
 		res.setSubscriptionss(new ArrayList<Subscription>());
-		
+
 		res.setInappropriate(false);
-		
-		res.setUser(userService.findByPrincipal());
+
+		res.setUser(this.userService.findByPrincipal());
 		return res;
 	}
-	
-	public Newspaper findOne(int newspaperId) {
+
+	public Newspaper findOne(final int newspaperId) {
 		Assert.isTrue(newspaperId != 0);
-		Newspaper res = newspaperRepository.findOne(newspaperId);
+		Newspaper res = this.newspaperRepository.findOne(newspaperId);
 		Assert.notNull(res);
 		return res;
 	}
-	
+
 	public Collection<Newspaper> findAll() {
-		return newspaperRepository.findAll();
+		return this.newspaperRepository.findAll();
 	}
-	
+
 	public Newspaper save(final Newspaper newspaper) {
 		Assert.notNull(newspaper);
-		Assert.notNull(userService.findByPrincipal());
+		Assert.notNull(this.userService.findByPrincipal());
 		Assert.isTrue(newspaper.getPublicationDate().after(new Date()));
-		return newspaperRepository.save(newspaper);
+		return this.newspaperRepository.save(newspaper);
 	}
-	
-	public Collection<Newspaper> findByKeyword(String keyword){
-		return newspaperRepository.findByKeyword(keyword);
+
+	public Collection<Newspaper> findByKeyword(final String keyword){
+		return this.newspaperRepository.findByKeyword(keyword);
 	}
-	public void markAsInappropriate(int newspaperId) {
-		Assert.notNull(adminService.findByPrincipal());
-		Newspaper n = findOne(newspaperId);
+	public void markAsInappropriate(final int newspaperId) {
+		Assert.notNull(this.adminService.findByPrincipal());
+		Newspaper n = this.findOne(newspaperId);
 		n.setInappropriate(true);
-		newspaperRepository.save(n);
-		articleService.markInappropriateArticlesOfNewspaper(n);
+		this.newspaperRepository.save(n);
+		this.articleService.markInappropriateArticlesOfNewspaper(n);
+	}
+
+	public Collection<Newspaper> findMyNonPublished() {
+		Assert.notNull(this.userService.findByPrincipal());
+		return this.newspaperRepository.findMyNonPublished(this.userService.findByPrincipal());
 	}
 
 	public Collection<Newspaper> findAllTaboo() {

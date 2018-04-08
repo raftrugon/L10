@@ -42,7 +42,9 @@
 	
 	<spring:message code="article.display" var="display_header"/>
 	<display:column title="${display_header}">
-		<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
+		<jstl:if test="${not row2.newspaper.isPrivate or isSubscribed}">
+			<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
+		</jstl:if>
 	</display:column>
 	
 	
