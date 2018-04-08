@@ -13,6 +13,7 @@
 <%@ attribute name="format"  rtexprvalue="true"  required="false" type="java.lang.String"  description="Column jstl format" %>
 <%@ attribute name="link"  rtexprvalue="true"  required="false" type="java.lang.String"  description="URL" %>
 <%@ attribute name="linkName"  rtexprvalue="true"  required="false" type="java.lang.String"  description="URL display name" %>
+<%@ attribute name="linkSpringName"  rtexprvalue="true"  required="false" type="java.lang.String"  description="URL display name for message code" %>
 <%@ attribute name="photoUrl"  rtexprvalue="true"  required="false" type="java.lang.String"  description="URL to display photo" %>
 <%@ attribute name="value"  rtexprvalue="true"  required="false" type="java.lang.String"  description="value to display" %>
 <%@ attribute name="map"  rtexprvalue="true"  required="false" type="java.lang.String"  description="True if attribute is a map" %>
@@ -48,7 +49,14 @@
 <jstl:when test="${link ne null}">
 	<spring:message code="${model}.${name}" var="Header" />
 	<display:column title="${Header}" sortable="${sortable}" style="${style}" format="${format}">
-		<a href="${link}">${linkName}</a>
+		<a href="${link}">
+			<jstl:if test="${linkSpringName ne null }">
+				<spring:message code="${model}.${linkSpringName}"/>
+			</jstl:if>
+			<jstl:if test="${linkSpringName eq null }">
+				${linkName}
+			</jstl:if>
+		</a>
 	</display:column>
 </jstl:when>
 <jstl:otherwise>

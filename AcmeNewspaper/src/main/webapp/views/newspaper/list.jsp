@@ -8,7 +8,7 @@
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib" %>
 <%@taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<div class="col-sm-10">
+<div class="col-sm-10 col-sm-offset-1 well">
 	<display:table pagesize="10" class="displaytag" keepStatus="true" name="newspapers" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
