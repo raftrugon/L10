@@ -116,4 +116,22 @@ public class UserService {
 		res = this.findByUserAccount(userAccount);
 		return res;
 	}
+
+	public void follow(int userId) {
+		User u = findOne(userId);
+		User principal = findByPrincipal();
+		u.getFollowedBy().add(principal);
+		principal.getFollows().add(u);
+		userRepository.save(u);	
+		userRepository.save(principal);
+	}
+	
+	public void unFollow(int userId) {
+		User u = findOne(userId);
+		User principal = findByPrincipal();
+		u.getFollowedBy().remove(principal);
+		principal.getFollows().remove(u);
+		userRepository.save(u);		
+		userRepository.save(principal);
+	}
 }

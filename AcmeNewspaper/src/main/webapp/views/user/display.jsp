@@ -40,6 +40,16 @@
 	</display:column>	
 	
 </display:table>
+<security:authorize access="hasRole('USER')">
+	<jstl:choose>
+		<jstl:when test="${follows}">
+			<a href="user/un-follow.do?userId=${user.id}"><spring:message code="user.unfollow"/></a>	
+		</jstl:when>
+		<jstl:otherwise>	
+			<a href="user/follow.do?userId=${user.id}"><spring:message code="user.follow"/></a>
+		</jstl:otherwise>
+	</jstl:choose>
+</security:authorize>
 </div>
  
 <div class="col-sm-10 col-sm-offset-1 well">

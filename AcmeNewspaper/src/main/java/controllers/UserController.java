@@ -37,18 +37,31 @@ public class UserController extends AbstractController {
 		final List<User> users = new ArrayList<User>(userService.findAll());
 		result = new ModelAndView("user/list");
 		result.addObject("users", users);
-		result.addObject("requestUri", "user/list.do");
+		result.addObject("requestUri", "user-list.do");
 		return result;
 	}
 	
 	@RequestMapping("/user-display")
 	public ModelAndView display(@RequestParam(required=true) final int userId) {
 		ModelAndView result;
-		final User user = userService.findOne(userId);
+		Boolean follows = false;
+		User user;
+		try{
+			user = userService.findOne(userId);
+		}catch(Throwable oops){
+			return new ModelAndView("redirect:user-list.do");
+		}
+		try{			
+			User principal = userService.findByPrincipal();
+			follows = user.getFollowedBy().contains(principal) ;
+		}catch(Throwable oops){
+			user = userService.findOne(userId);
+		}
 		result = new ModelAndView("user/display");
 		result.addObject("user", user);
 		result.addObject("articles",articleService.findAllPublishedForUser(user));
-		result.addObject("requestUri", "user/display.do");
+		result.addObject("follows",follows);
+		result.addObject("requestUri", "user-display.do");
 		return result;
 	}
 //	
