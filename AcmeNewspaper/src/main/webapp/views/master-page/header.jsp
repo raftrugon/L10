@@ -72,7 +72,7 @@
 			</li>
 		
 			<security:authorize access="isAuthenticated()">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
+				<li><a href="user-display.do"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
 				<li><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"> </span><spring:message code="master.page.logout" /> &nbsp; </a></li>
 			</security:authorize>
 			
