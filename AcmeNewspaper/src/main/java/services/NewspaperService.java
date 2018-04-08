@@ -22,6 +22,8 @@ public class NewspaperService {
 	private AdminService adminService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ArticleService articleService;
 
 	//Supporting Services -------------------
 
@@ -66,5 +68,6 @@ public class NewspaperService {
 		Newspaper n = findOne(newspaperId);
 		n.setInappropriate(true);
 		newspaperRepository.save(n);
+		articleService.markInappropriateArticlesOfNewspaper(n);
 	}
 }
