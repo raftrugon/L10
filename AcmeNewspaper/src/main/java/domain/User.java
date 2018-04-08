@@ -23,7 +23,7 @@ public class User extends Actor {
 	
 	//Relationships----------------
 	private Collection<Newspaper> newspapers;
-	
+	private Collection<Chirp> chirps;
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy="user")
@@ -33,6 +33,17 @@ public class User extends Actor {
 	
 	public void setNewspapers(Collection<Newspaper> newspapers) {
 		this.newspapers = newspapers;
+	}
+	
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy="user")
+	public Collection<Chirp> getChirps() {
+		return chirps;
+	}
+	
+	public void setChirps(Collection<Chirp> chirps) {
+		this.chirps = chirps;
 	}
 	
 	
