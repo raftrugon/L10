@@ -53,7 +53,7 @@ public class UserController extends AbstractController {
 
 	@RequestMapping("/user-display")
 	public ModelAndView display(@RequestParam(required=false) final Integer userId) {
-		ModelAndView result;
+		ModelAndView result= new ModelAndView("user/display");
 		Boolean follows = false;
 		User user;
 		try{
@@ -62,9 +62,22 @@ public class UserController extends AbstractController {
 			else
 				user = this.userService.findByPrincipal();
 			
+			try{
+				User principal = this.userService.findByPrincipal();
+				follows = user.getFollowedBy().contains(principal) ;
+				result.addObject("logged", principal);
+				result.addObject("follows",follows);
+			}catch(Throwable oops){
+				if(userId != null)
+					user = this.userService.findOne(userId);
+				else
+					user = this.userService.findByPrincipal();
+			}
+			
 			List<Article> articles = new ArrayList<Article>(this.articleService.findAllPublishedForUser(user));
 			Map<Article,Boolean> articlesMap = new HashMap<Article,Boolean>();
 			try{
+				
 				for (Article a: articles){
 					articlesMap.put(a, customerService.isSubscribed(a.getNewspaper()));
 				}
@@ -80,7 +93,7 @@ public class UserController extends AbstractController {
 				}
 			}
 			
-			result = new ModelAndView("user/display");
+			
 			result.addObject("user", user);
 			result.addObject("articles",articles);
 			result.addObject("articlesMap",articlesMap);
@@ -89,12 +102,7 @@ public class UserController extends AbstractController {
 			return new ModelAndView("redirect:user-list.do");
 		}
 
-		try{
-			User principal = this.userService.findByPrincipal();
-			follows = user.getFollowedBy().contains(principal) ;
-			result.addObject("logged", principal);
-			result.addObject("follows",follows);
-		}catch(Throwable oops){}
+		
 
 		return result;
 	}
