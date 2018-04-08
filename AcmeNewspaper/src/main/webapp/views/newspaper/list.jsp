@@ -34,5 +34,10 @@
 		<lib:column name='picture'/>
 		<lib:column name='isPrivate'/>
 		<lib:column name='display' link='newspaper/display.do?newspaperId=${row.id}' linkSpringName='display' />
+		<security:authorize access="hasRole('ADMIN')">
+			<display:column>
+				<a href="admin/newspaper/inappropriate.do?newspaperId=${row.id}"><spring:message code="admin.markInappropriate"/></a>
+			</display:column>
+		</security:authorize>
 </display:table>
 </div>

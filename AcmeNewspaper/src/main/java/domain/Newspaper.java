@@ -27,6 +27,8 @@ public class Newspaper extends DomainEntity {
 	private String description;
 	private String picture;
 	private Boolean isPrivate;
+	private Boolean inappropriate;
+	
 
 	@NotBlank
 	@NotNull
@@ -74,6 +76,14 @@ public class Newspaper extends DomainEntity {
 
 	public void setIsPrivate(final Boolean isPrivate) {
 		this.isPrivate = isPrivate;
+	}
+	@NotNull
+	public Boolean getInappropriate() {
+		return this.inappropriate;
+	}
+
+	public void setInappropriate(Boolean inappropriate) {
+		this.inappropriate = inappropriate;
 	}
 
 

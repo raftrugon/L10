@@ -1,11 +1,16 @@
 package services;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import java.util.Collection;
-import domain.Newspaper;
+
 import repositories.NewspaperRepository;
+import domain.Article;
+import domain.Newspaper;
+import domain.Subscription;
 
 @Service
 @Transactional
@@ -13,6 +18,10 @@ public class NewspaperService {
 
 	@Autowired
 	private NewspaperRepository		newspaperRepository;
+	@Autowired
+	private AdminService adminService;
+	@Autowired
+	private UserService userService;
 
 	//Supporting Services -------------------
 
@@ -22,6 +31,12 @@ public class NewspaperService {
 	public Newspaper create() {
 		Newspaper res = new Newspaper();
 		
+		res.setArticless(new ArrayList<Article>());
+		res.setSubscriptionss(new ArrayList<Subscription>());
+		
+		res.setInappropriate(false);
+		
+		res.setUser(userService.findByPrincipal());
 		return res;
 	}
 	
@@ -46,5 +61,10 @@ public class NewspaperService {
 	public Collection<Newspaper> findByKeyword(String keyword){
 		return newspaperRepository.findByKeyword(keyword);
 	}
-	
+	public void markAsInappropriate(int newspaperId) {
+		Assert.notNull(adminService.findByPrincipal());
+		Newspaper n = findOne(newspaperId);
+		n.setInappropriate(true);
+		newspaperRepository.save(n);
+	}
 }
