@@ -43,5 +43,8 @@ public class NewspaperService {
 		return newspaperRepository.save(newspaper);
 	}
 	
+	public Collection<Newspaper> findByKeyword(String keyword){
+		return newspaperRepository.findByKeyword(keyword);
+	}
 	
 }

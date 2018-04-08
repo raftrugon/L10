@@ -30,12 +30,13 @@ public class NewspaperController extends AbstractController {
 	}
 
 	@RequestMapping("/list")
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required = false, defaultValue="") String keyword ) {
 		ModelAndView result;
-		final List<Newspaper> newspapers = new ArrayList<Newspaper>(newspaperService.findAll());
-		result = new ModelAndView("newspaper/list");
+		final List<Newspaper> newspapers = new ArrayList<Newspaper>(newspaperService.findByKeyword(keyword));
+		result = new ModelAndView("newspaper/list");		
 		result.addObject("newspapers", newspapers);
 		result.addObject("requestUri", "newspaper/list.do");
+		result.addObject("keyword", keyword);
 		return result;
 	}
 	
