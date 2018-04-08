@@ -37,16 +37,16 @@ public class UserChirpController extends AbstractController {
 		super();
 	}
 
-//	@RequestMapping("/list")
-//	public ModelAndView list() {
-//		ModelAndView result;
-//		final List<Chirp> chirps = new ArrayList<Chirp>(userService.findByPrincipal().getChirps());
-//		result = new ModelAndView("chirp/list");
-//		result.addObject("chirps", chirps);
-//		result.addObject("requestUri", "user/chirp/list.do");
-//		return result;
-//	}
-//	
+	@RequestMapping("/timeline")
+	public ModelAndView timeline() {
+		ModelAndView result;
+		final List<Chirp> chirps = new ArrayList<Chirp>(chirpService.getTimeline());
+		result = new ModelAndView("chirp/list");
+		result.addObject("chirps", chirps);
+		result.addObject("requestUri", "user/chirp/timeline.do");
+		return result;
+	}
+	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
