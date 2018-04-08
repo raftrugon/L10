@@ -893,6 +893,7 @@
 		<property name="picture"
 			value="http://crucerosensevilla.com/wp-content/uploads/2015/09/Sevilla4.jpg" />
 		<property name="isPrivate" value="true" />
+		<property name="inappropriate" value="true" />
 		<property name="user" ref="user1" />
 		<property name="subscriptionss">
 			<list>
@@ -919,6 +920,7 @@
 		<property name="picture"
 			value="http://www.andalucia.org/media/fotos/image_148527_jpeg_800x600_q85.jpg" />
 		<property name="isPrivate" value="false" />
+		<property name="inappropriate" value="false" />
 		<property name="user" ref="user1" />
 		<property name="subscriptionss">
 			<list>
@@ -944,6 +946,7 @@
 		<property name="picture"
 			value="http://2.bp.blogspot.com/_ejfsu9g5t-8/S_cojAYoyGI/AAAAAAAAArY/2jSCIzYsO-M/s1600/alameda3.jpg" />
 		<property name="isPrivate" value="true" />
+		<property name="inappropriate" value="false" />
 		<property name="user" ref="user2" />
 		<property name="subscriptionss">
 			<list>
@@ -966,6 +969,7 @@
 		<property name="picture"
 			value="https://www.viajablog.com/wp-content/uploads/2017/04/Feria-de-Abril-de-Sevilla.jpg" />
 		<property name="isPrivate" value="false" />
+		<property name="inappropriate" value="false" />
 		<property name="user" ref="user3" />
 		<property name="subscriptionss">
 			<list>
@@ -988,6 +992,7 @@
 		<property name="picture"
 			value="http://apartamentosmadridplaza.es/blog/wp-content/uploads/Plaza-de-sol-aerea.jpg" />
 		<property name="isPrivate" value="false" />
+		<property name="inappropriate" value="false" />
 		<property name="user" ref="user5" />
 		<property name="subscriptionss">
 			<list>

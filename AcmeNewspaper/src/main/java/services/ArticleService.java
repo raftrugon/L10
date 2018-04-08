@@ -70,4 +70,9 @@ public class ArticleService {
 		articleRepository.save(a);		
 	}
 	
+	public void markInappropriateArticlesOfNewspaper(Newspaper n) {
+		Assert.notNull(adminService.findByPrincipal());
+		articleRepository.markInappropriateArticlesOfNewspaper(n);		
+	}
+	
 }
