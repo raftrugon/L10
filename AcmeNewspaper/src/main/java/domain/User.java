@@ -26,9 +26,8 @@ public class User extends Actor {
 	private Collection<Newspaper> newspapers;
 	private Collection<User> follows;
 	private Collection<User> followedBy;
-	
-
 	private Collection<Chirp> chirps;
+
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy="user")
@@ -61,7 +60,9 @@ public class User extends Actor {
 	public void setFollowedBy(Collection<User> followedBy) {
 		this.followedBy = followedBy;
 	}
-		
+	
+	@NotNull
+	@Valid
 	@OneToMany(mappedBy="user")
 	public Collection<Chirp> getChirps() {
 		return chirps;
