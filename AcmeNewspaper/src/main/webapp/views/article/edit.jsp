@@ -8,13 +8,32 @@
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib" %>
 
 <div class="well col-md-6 col-md-offset-3">
-	<form:form action="article/edit.do" modelAttribute="article">
+	<form:form action="user/article/save.do" modelAttribute="article">
 	<jstl:set var='model' value='article' scope='request'/>
-		<lib:input type="text" name='title'/>
-		<lib:input type="text" name='publicationMoment'/>
+	
+		<!-- Hidden Attributes -->
+		<lib:input name="publicationMoment" type="hidden" />
+		<lib:input name="inappropriate" type="hidden" />
+		<lib:input name="followUps" type="hidden" />
+		
+		
+		<!-- Hidden Attributes -->
+		<lib:input type="text" name='title'/>		
 		<lib:input type="text" name='summary'/>
 		<lib:input type="text" name='body'/>
-		<lib:input type="text" name='pictures'/>
-		<lib:input type="text" name='finalMode'/>
+		<spring:message code="article.pictures.placeholder" var="picturesPlaceholder" />
+		<lib:input type="text" placeholder="${picturesPlaceholder}" name='picturess'/>
+		
+		
+		<form:select id="article" path="newspaper" multiple="false">
+			<form:option value="0" label="----" />
+			<form:options items="${nonPublishedNewspapers}" itemValue="id" itemLabel="title" />
+		</form:select>
+		<form:errors cssClass="error" path="newspaper" />
+		
+		
+		<lib:input type="checkBox" name='finalMode'/>
+		
+		<lib:button model="article" id="${id}" cancelUri="/AcmeNewspaper" noDelete="false" />
 </form:form>
 </div>

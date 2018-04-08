@@ -11,14 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import services.ArticleService;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import cz.jirutka.validator.collection.constraints.EachURL;
 
@@ -29,12 +26,12 @@ public class Article extends DomainEntity {
 
 	//Attributes----------------
 	private String title;
-	private Date publicationMoment;
 	private String summary;
 	private String body;
 	private Collection<String> picturess;
 	private Boolean finalMode;
 	private Boolean inappropriate;
+	private Date publicationMoment;
 
 	@NotBlank
 	@NotNull
@@ -47,7 +44,8 @@ public class Article extends DomainEntity {
 	}
 
 	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getPublicationMoment() {
 		return this.publicationMoment;
 	}
@@ -97,10 +95,10 @@ public class Article extends DomainEntity {
 
 
 	public Boolean getInappropriate() {
-		return inappropriate;
+		return this.inappropriate;
 	}
 
-	public void setInappropriate(Boolean inappropriate) {
+	public void setInappropriate(final Boolean inappropriate) {
 		this.inappropriate = inappropriate;
 	}
 

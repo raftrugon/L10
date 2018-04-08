@@ -57,9 +57,12 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 		
 		<!-- Left-side main content -->
-		<ul class="nav navbar-nav">			
-		
-		 
+		<ul class="nav navbar-nav">					
+			<li><a href="newspaper/list.do"><spring:message code="master.page.newspaper.list" /></a></li>
+			<li><a href="article/list.do"><spring:message code="master.page.article.list" /></a></li>
+			<li><a href="chirp/list.do"><spring:message code="master.page.chirp.list" /></a></li>
+			<li><a href="suscription/list.do"><spring:message code="master.page.suscription.list" /></a></li>
+			<li><a href="user-list.do"><spring:message code="master.page.actor.list" /></a></li>
 		</ul>
 			
 		<!-- Right-side content -->	

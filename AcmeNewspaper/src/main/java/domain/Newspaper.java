@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -28,7 +29,7 @@ public class Newspaper extends DomainEntity {
 	private String picture;
 	private Boolean isPrivate;
 	private Boolean inappropriate;
-	
+
 
 	@NotBlank
 	@NotNull
@@ -42,6 +43,7 @@ public class Newspaper extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getPublicationDate() {
 		return this.publicationDate;
 	}
@@ -82,7 +84,7 @@ public class Newspaper extends DomainEntity {
 		return this.inappropriate;
 	}
 
-	public void setInappropriate(Boolean inappropriate) {
+	public void setInappropriate(final Boolean inappropriate) {
 		this.inappropriate = inappropriate;
 	}
 
