@@ -12,9 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ChirpRepository;
-import repositories.NewspaperRepository;
 import domain.Chirp;
-import domain.Newspaper;
 
 @Service
 @Transactional
