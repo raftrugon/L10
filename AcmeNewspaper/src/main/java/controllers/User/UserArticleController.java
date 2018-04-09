@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,15 +38,15 @@ public class UserArticleController extends AbstractController {
 		super();
 	}
 
-	@RequestMapping("/list")
-	public ModelAndView list() {
-		ModelAndView result;
-		//final List<Article> articles = new ArrayList<Article>(this.userService.findByPrincipal().getArticles());
-		result = new ModelAndView("user/article/list");
-		//result.addObject("articles", articles);
-		result.addObject("requestUri", "user/article/list.do");
-		return result;
-	}
+	//	@RequestMapping("/list")
+	//	public ModelAndView list() {
+	//		ModelAndView result;
+	//		//final List<Article> articles = new ArrayList<Article>(this.userService.findByPrincipal().getArticles());
+	//		result = new ModelAndView("article/list");
+	//		//result.addObject("articles", articles);
+	//		result.addObject("requestUri", "user/article/list.do");
+	//		return result;
+	//	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
@@ -54,7 +55,8 @@ public class UserArticleController extends AbstractController {
 			Article article = this.articleService.create();
 			result = this.newEditModelAndView(article);
 		} catch (Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
+			oops.printStackTrace();
+			result = new ModelAndView("article/list");
 		}
 		return result;
 	}
@@ -65,12 +67,13 @@ public class UserArticleController extends AbstractController {
 
 		try{
 			Article article = this.articleService.findOne(articleId);
-			//Assert.isTrue(article.getNewspaper().getUser().equals(this.userService.findByPrincipal()));
+			Assert.isTrue(article.getNewspaper().getUser().equals(this.userService.findByPrincipal()));
 			article.setNewspaper(null);
 			result = this.newEditModelAndView(article);
 
 		} catch(Throwable oops){
-			result = new ModelAndView("redirect:list.do");
+			oops.printStackTrace();
+			result = new ModelAndView("article/list");
 		}
 
 		return result;
@@ -80,19 +83,16 @@ public class UserArticleController extends AbstractController {
 	public ModelAndView save(@Valid final Article article, final BindingResult binding) {
 		ModelAndView result;
 		System.out.println(binding);
-		if (binding.hasErrors()){
-			article.setNewspaper(null);
+		if (binding.hasErrors())
+			//article.setNewspaper(null);
 			result = this.newEditModelAndView(article);
-		}
 		else
 			try {
-				System.out.println("1");
 				this.articleService.save(article);
-				System.out.println("2");
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("article/list");
 			} catch (Throwable oops) {
 				oops.printStackTrace();
-				article.setNewspaper(null);
+				//article.setNewspaper(null);
 				result = this.newEditModelAndView(article, "article.commitError");
 			}
 		return result;
@@ -126,7 +126,7 @@ public class UserArticleController extends AbstractController {
 		ModelAndView result;
 		Collection<Newspaper> nonPublishedNewspapers = this.newspaperService.findMyNonPublished();
 
-		result = new ModelAndView("user/article/edit");
+		result = new ModelAndView("article/edit");
 		result.addObject("nonPublishedNewspapers", nonPublishedNewspapers);
 		System.out.println("2");
 		result.addObject("article", article);
