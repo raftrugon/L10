@@ -974,6 +974,7 @@
 			value="esta revista trata sobre los mejores coches del mundo" />
 		<property name="picture"
 			value="http://crucerosensevilla.com/wp-content/uploads/2015/09/Sevilla4.jpg" />
+		<property name="price" value="1.0" />
 		<property name="isPrivate" value="true" />
 		<property name="inappropriate" value="true" />
 		<property name="user" ref="user1" />
@@ -1001,6 +1002,7 @@
 			value="Viajes a lo largo del mundo, ¿Algo mejor que leer?" />
 		<property name="picture"
 			value="http://www.andalucia.org/media/fotos/image_148527_jpeg_800x600_q85.jpg" />
+		<property name="price" value="1.5" />
 		<property name="isPrivate" value="false" />
 		<property name="inappropriate" value="false" />
 		<property name="user" ref="user1" />
@@ -1027,6 +1029,7 @@
 			value="Viajes a lo largo del mundo, ¿Algo mejor que leer?" />
 		<property name="picture"
 			value="http://2.bp.blogspot.com/_ejfsu9g5t-8/S_cojAYoyGI/AAAAAAAAArY/2jSCIzYsO-M/s1600/alameda3.jpg" />
+		<property name="price" value="2.0" />
 		<property name="isPrivate" value="true" />
 		<property name="inappropriate" value="false" />
 		<property name="user" ref="user2" />
@@ -1050,6 +1053,7 @@
 			value="Nos centramos en las mejores fiestas de españa" />
 		<property name="picture"
 			value="https://www.viajablog.com/wp-content/uploads/2017/04/Feria-de-Abril-de-Sevilla.jpg" />
+		<property name="price" value="1.0" />
 		<property name="isPrivate" value="false" />
 		<property name="inappropriate" value="false" />
 		<property name="user" ref="user3" />
@@ -1073,6 +1077,7 @@
 		<property name="description" value="Actualidad sobre la capital española" />
 		<property name="picture"
 			value="http://apartamentosmadridplaza.es/blog/wp-content/uploads/Plaza-de-sol-aerea.jpg" />
+		<property name="price" value="2.0" />
 		<property name="isPrivate" value="false" />
 		<property name="inappropriate" value="false" />
 		<property name="user" ref="user5" />

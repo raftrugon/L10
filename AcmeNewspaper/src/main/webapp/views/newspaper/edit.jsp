@@ -18,6 +18,7 @@
 		<lib:input type="date" name='publicationDate'/>
 		<lib:input type="text" name='description'/>
 		<lib:input type="text" name='picture'/>
+		<lib:input type="number" name='price'/>
 		<lib:input type="checkBox" name='isPrivate'/>
 		
 		<lib:button model='newspaper' noDelete='true' id='${newspaper.id}' cancelUri='newspaper/list.do'/>

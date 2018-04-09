@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -27,6 +28,7 @@ public class Newspaper extends DomainEntity {
 	private Date publicationDate;
 	private String description;
 	private String picture;
+	private Double price;
 	private Boolean isPrivate;
 	private Boolean inappropriate;
 
@@ -69,6 +71,15 @@ public class Newspaper extends DomainEntity {
 
 	public void setPicture(final String picture) {
 		this.picture = picture;
+	}
+
+	@Min(0)
+	public Double getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(final Double price) {
+		this.price = price;
 	}
 
 	@NotNull
