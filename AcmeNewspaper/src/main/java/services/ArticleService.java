@@ -45,7 +45,7 @@ public class ArticleService {
 
 		res.setPublicationMoment(new Date(System.currentTimeMillis()+9999999));
 		res.setInappropriate(false);
-
+		Assert.isTrue(userService.findByPrincipal() instanceof domain.User);
 		return res;
 	}
 
