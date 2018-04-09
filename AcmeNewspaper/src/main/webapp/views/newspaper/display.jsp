@@ -34,17 +34,22 @@
 	    <display:setProperty name="paging.banner.no_items_found" value=""/>
     
 	<jstl:set var='model' value='article' scope='request'/>
+	<jstl:choose>
+		<jstl:when test="${not row2.newspaper.isPrivate or isSubscribed}">
+			<lib:column name="title" link="article/display.do?articleId=${row2.id}" linkName="${row2.title}"></lib:column>
+		</jstl:when>
+		<jstl:otherwise>
+			<lib:column name="title"></lib:column>
+		</jstl:otherwise>
+	</jstl:choose>
 	
-	<lib:column name="title"></lib:column>
 	<lib:column name="publicationMoment" format="{0,date,dd/MM/yyyy}"></lib:column>
 	<lib:column name="summary" value="${fn:substring(row2.summary,0,30)}..."/>
 	
-	
-	<spring:message code="article.display" var="display_header"/>
-	<display:column title="${display_header}">
-		<jstl:if test="${not row2.newspaper.isPrivate or isSubscribed}">
-			<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
-		</jstl:if>
+	<spring:message code="article.writer" var="writer_header"/>
+	<display:column title="${writer_header}">
+		<a href="/user-display.do?userId=${row2.newspaper.user.id}">
+		<jstl:out value="${row2.newspaper.user.surnames}, ${row2.newspaper.user.name}"/></a>
 	</display:column>
 	
 	
