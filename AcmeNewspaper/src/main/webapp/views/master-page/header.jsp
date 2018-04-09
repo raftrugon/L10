@@ -61,7 +61,7 @@
 			<li><a href="newspaper/list.do"><spring:message code="master.page.newspaper.list" /></a></li>
 			<li><a href="article/list.do"><spring:message code="master.page.article.list" /></a></li>
 			<li><a href="chirp/list.do"><spring:message code="master.page.chirp.list" /></a></li>
-			<li><a href="suscription/list.do"><spring:message code="master.page.suscription.list" /></a></li>
+			<li><a href="subscription/list.do"><spring:message code="master.page.subscription.list" /></a></li>
 			<li><a href="user-list.do"><spring:message code="master.page.actor.list" /></a></li>
 		</ul>
 			
