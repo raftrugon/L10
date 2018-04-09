@@ -9,6 +9,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="col-sm-10 col-sm-offset-1 well">
+	<security:authorize access="hasRole('CUSTOMER')">
+		<jstl:if test="${not isSubscribed}">
+			<a class="btn-primary btn btn-block" href="customer/subscription/create.do?newspaperId=${newspaper.id}"><spring:message code="newspaper.subscribe"/></a>
+		</jstl:if>
+	</security:authorize>
 	<display:table pagesize="1" class="displaytag" keepStatus="true" name="newspaper" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>

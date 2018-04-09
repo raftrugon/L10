@@ -6,15 +6,15 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import services.SuscriptionService;
+import services.SubscriptionService;
 import domain.Subscription;
 
 @Component
 @Transactional
-public class StringToSuscriptionConverter implements Converter<String, Subscription> {
+public class StringToSubscriptionConverter implements Converter<String, Subscription> {
 
 	@Autowired
-	SuscriptionService	suscriptionService;
+	SubscriptionService	subscriptionService;
 
 
 	@Override
@@ -26,7 +26,7 @@ public class StringToSuscriptionConverter implements Converter<String, Subscript
 		} else {
 			try {
 				id = Integer.valueOf(text);
-				result = suscriptionService.findOne(id);
+				result = subscriptionService.findOne(id);
 			} catch (final Throwable oops) {
 				throw new IllegalArgumentException(oops);
 			}

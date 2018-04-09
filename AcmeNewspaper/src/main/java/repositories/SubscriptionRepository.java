@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import domain.Subscription;
 
 @Repository
-public interface SuscriptionRepository extends JpaRepository<Subscription, Integer> {
+public interface SubscriptionRepository extends JpaRepository<Subscription, Integer> {
 
 
 
