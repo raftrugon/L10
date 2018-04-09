@@ -10,7 +10,7 @@
 <div class="well col-md-6 col-md-offset-3">
 	<form:form action="user/chirp/save.do" modelAttribute="chirp">
 	
-		<lib:input name="id,version,user,creationMoment" type="hidden" />
+		<lib:input name="id,version,user,creationMoment,inappropriate" type="hidden" />
 		
 		<jstl:set var='model' value='chirp' scope='request'/>
 		<lib:input type="text" name='title'/>
