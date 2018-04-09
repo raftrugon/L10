@@ -35,4 +35,12 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	@Query(value="select count(*) from article as a where exists (select n_id,a_date from (select sum(finalMode)-count(id) as published, publicationMoment as a_date, newspaper_id as n_id from article group by n_id,a_date) as temporal1 where published = 0 and n_id = a.newspaper_id and a_date = a.publicationMoment) and a.inappropriate = false and a.publicationMoment < CURRENT_TIMESTAMP and a.id = ?1", nativeQuery=true)
 	int isPublished(int articleId);
 
+	//The average number of follow-ups per article.
+	@Query("select avg(a.followUps.size) from Article a")
+	Double getFollowUpsPerArticleAvg();
+	
+	//The average number of follow-ups per article up to one week after the corresponding newspaper's been published.
+	@Query("")
+	Double getFollowUpsPerArticleAvgAfterOneWeek();
+	
 }
