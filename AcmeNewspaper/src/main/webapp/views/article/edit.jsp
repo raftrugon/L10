@@ -24,13 +24,15 @@
 		<spring:message code="article.pictures.placeholder" var="picturesPlaceholder" />
 		<lib:input type="text" placeholder="${picturesPlaceholder}" name='picturess'/>
 		
-		
-		<form:select id="article" path="newspaper" multiple="false">
-			<form:option value="0" label="----" />
-			<form:options items="${nonPublishedNewspapers}" itemValue="id" itemLabel="title" />
-		</form:select>
-		<form:errors cssClass="error" path="newspaper" />
-		
+		<div class="form-group row">
+			<select id="newspaper" name="newspaper" class="selectpicker col-xs-12">
+				<option>----</option>
+				<jstl:forEach items="${nonPublishedNewspapers}" var="news">
+					<option value="${news.id}" <jstl:if test="${article.newspaper.id eq news.id}">selected="selected"</jstl:if> >${news.title}</option>
+				</jstl:forEach>
+			</select>
+			<form:errors cssClass="error" path="newspaper" />
+		</div>
 		
 		<lib:input type="checkBox" name='finalMode'/>
 		
