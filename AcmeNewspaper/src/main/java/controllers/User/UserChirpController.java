@@ -72,13 +72,13 @@ public class UserChirpController extends AbstractController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Chirp chirp, final BindingResult binding) {
 		ModelAndView result;
-		SchemaPrinter.print(chirp);
+		Chirp validated = chirpService.reconstruct(chirp, binding);
 		if (binding.hasErrors()){
 			result = newEditModelAndView(chirp);
 		}
 		else
 			try {
-				chirpService.save(chirp);
+				chirpService.save(validated);
 				result = new ModelAndView("redirect:../../");
 			} catch (Throwable oops) {
 				result = newEditModelAndView(chirp);
