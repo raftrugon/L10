@@ -34,7 +34,6 @@
 		<lib:column name='publicationDate'/>
 		<lib:column name='description'/>
 		<lib:column name='picture'/>
-		<lib:column name='price'/>
 		<lib:column name='isPrivate'/>
 		<lib:column name='display' link='newspaper/display.do?newspaperId=${row.id}' linkSpringName='display' />
 		

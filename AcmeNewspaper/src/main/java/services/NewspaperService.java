@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
 import repositories.NewspaperRepository;
 import domain.Article;
@@ -27,8 +25,6 @@ public class NewspaperService {
 	private UserService userService;
 	@Autowired
 	private ArticleService articleService;
-	@Autowired
-	private Validator validator;
 
 	//Supporting Services -------------------
 
@@ -88,12 +84,5 @@ public class NewspaperService {
 	
 	public void flush(){
 		newspaperRepository.flush();
-	}
-	
-	public Newspaper reconstruct(Newspaper newspaper, BindingResult binding) {
-		newspaper.setId(0);
-		newspaper.setUser(userService.findByPrincipal());
-		validator.validate(newspaper, binding);
-		return newspaper;
 	}
 }

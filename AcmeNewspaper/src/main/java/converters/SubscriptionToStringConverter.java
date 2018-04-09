@@ -9,7 +9,7 @@ import domain.Subscription;
 
 @Component
 @Transactional
-public class SuscriptionToStringConverter implements Converter<Subscription, String> {
+public class SubscriptionToStringConverter implements Converter<Subscription, String> {
 
 	@Override
 	public String convert(final Subscription subscription) {

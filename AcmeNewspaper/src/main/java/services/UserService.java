@@ -15,6 +15,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
+import domain.Chirp;
 import domain.Newspaper;
 import domain.User;
 
@@ -43,11 +44,17 @@ public class UserService {
 		Collection<String> addressess = new ArrayList<String>();
 		Collection<String> phoness = new ArrayList<String>();
 		Collection<Newspaper> newspapers = new ArrayList<Newspaper>();
+		Collection<User> follows = new ArrayList<User>();
+		Collection<User> followedBy = new ArrayList<User>();
+		Collection<Chirp> chirps = new ArrayList<Chirp>();
 
 		res.setEmailss(emailss);
 		res.setAddressess(addressess);
 		res.setPhoness(phoness);
 		res.setNewspapers(newspapers);
+		res.setFollows(follows);
+		res.setFollowedBy(followedBy);
+		res.setChirps(chirps);
 
 		//UserAccount
 		UserAccount userAccount = new UserAccount();
@@ -117,21 +124,21 @@ public class UserService {
 		return res;
 	}
 
-	public void follow(int userId) {
-		User u = findOne(userId);
-		User principal = findByPrincipal();
+	public void follow(final int userId) {
+		User u = this.findOne(userId);
+		User principal = this.findByPrincipal();
 		u.getFollowedBy().add(principal);
 		principal.getFollows().add(u);
-		userRepository.save(u);	
-		userRepository.save(principal);
+		this.userRepository.save(u);
+		this.userRepository.save(principal);
 	}
-	
-	public void unFollow(int userId) {
-		User u = findOne(userId);
-		User principal = findByPrincipal();
+
+	public void unFollow(final int userId) {
+		User u = this.findOne(userId);
+		User principal = this.findByPrincipal();
 		u.getFollowedBy().remove(principal);
 		principal.getFollows().remove(u);
-		userRepository.save(u);		
-		userRepository.save(principal);
+		this.userRepository.save(u);
+		this.userRepository.save(principal);
 	}
 }

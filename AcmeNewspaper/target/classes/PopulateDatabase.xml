@@ -590,7 +590,7 @@
 		<property name="creationMoment" value="12/26/2017 22:22" />
 		<property name="description" value="A quien se le ocurre hoy en dia cialis a sus hijos para fomentar la velocidad mental" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user2" />
+		<property name="user" ref="user1" />
 	</bean>
 
 	<bean id="chirp2" class="domain.Chirp">
@@ -606,7 +606,7 @@
 		<property name="creationMoment" value="12/26/2016 22:22" />
 		<property name="description" value="He estado leyendo sobre los superdotados, por su naturaleza ller libros es como el sexo" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user1" />
+		<property name="user" ref="user2" />
 	</bean>
 
 	<bean id="chirp4" class="domain.Chirp">
@@ -614,7 +614,7 @@
 		<property name="creationMoment" value="03/26/2018 22:22" />
 		<property name="description" value="Tu analisis para conseguir caer una milesima mas rapido y matar al campero que se esconde en el arbol es una maravilla" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user3" />
+		<property name="user" ref="user2" />
 	</bean>
 
 	<bean id="chirp5" class="domain.Chirp">
@@ -622,7 +622,7 @@
 		<property name="creationMoment" value="12/30/2016 22:22" />
 		<property name="description" value="El mejor coctel para el verano es el sex on the beach" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user2" />
+		<property name="user" ref="user3" />
 	</bean>
 
 	<bean id="chirp6" class="domain.Chirp">
@@ -630,7 +630,7 @@
 		<property name="creationMoment" value="01/30/2018 22:22" />
 		<property name="description" value="Tu articulo sobre comida fué extraño, ¿quien le echa viagra a la ensalada?" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user1" />
+		<property name="user" ref="user3" />
 	</bean>
 
 	<bean id="chirp7" class="domain.Chirp">
@@ -638,7 +638,7 @@
 		<property name="creationMoment" value="01/01/2016 22:22" />
 		<property name="description" value="Te ha faltado hablar sobre el las torres Kio de Madrid" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user1" />
+		<property name="user" ref="user4" />
 	</bean>
 
 	<bean id="chirp8" class="domain.Chirp">
@@ -646,7 +646,7 @@
 		<property name="creationMoment" value="12/26/2017 22:22" />
 		<property name="description" value="Los articulos escritos por ti dejan mucho que desear" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user2" />
+		<property name="user" ref="user4" />
 	</bean>
 
 	<bean id="chirp9" class="domain.Chirp">
@@ -655,7 +655,7 @@
 		<property name="description"
 			value="Tremenda la experiencia contada por esos viajeros" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user3" />
+		<property name="user" ref="user5" />
 	</bean>
 
 	<bean id="chirp10" class="domain.Chirp">
@@ -663,7 +663,7 @@
 		<property name="creationMoment" value="12/26/2017 22:22" />
 		<property name="description" value="El año pasado lei un articulo religioso que hablaban sobre el sexo" />
 		<property name="inappropriate" value="true"/>
-		<property name="user" ref="user1" />
+		<property name="user" ref="user5" />
 	</bean>
 
 	<!-- CREDIT CARDS 4 -->
