@@ -143,6 +143,9 @@
 				<br />
 			</jstl:forEach>
 		</display:column>
+		<display:column title="${Header}">
+			<a href="user-display.do?userId=${row4.id}"><spring:message code="user.display" /></a>
+		</display:column>
 	</display:table>
 </div>
 

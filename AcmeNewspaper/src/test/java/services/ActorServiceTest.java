@@ -40,7 +40,7 @@ public class ActorServiceTest extends AbstractTest {
 				getEntityId("admin"), null, "Búsqueda del find One correcto"
 			},
 
-			//Find one Actor using another role id
+			//Find one newspaper using another role id
 			{
 				getEntityId("newspaper1"), IllegalArgumentException.class, "Intentando buscar un newspaper"
 			},

@@ -28,8 +28,8 @@
 		<bean class="converters.CustomerToStringConverter"/>
 		<bean class="converters.StringToChirpConverter"/>
 		<bean class="converters.ChirpToStringConverter"/>
-		<bean class="converters.StringToSubscriptionConverter"/>
-		<bean class="converters.SubscriptionToStringConverter"/>
+		<bean class="converters.StringToSuscriptionConverter"/>
+		<bean class="converters.SuscriptionToStringConverter"/>
 		<bean class="converters.StringToAdminConverter"/>
 		<bean class="converters.AdminToStringConverter"/>
 	</util:list>
