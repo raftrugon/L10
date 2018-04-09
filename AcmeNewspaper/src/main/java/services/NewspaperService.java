@@ -38,7 +38,7 @@ public class NewspaperService {
 		res.setSubscriptionss(new ArrayList<Subscription>());
 
 		res.setInappropriate(false);
-
+		Assert.isTrue(userService.findByPrincipal() instanceof domain.User);
 		res.setUser(this.userService.findByPrincipal());
 		return res;
 	}
@@ -56,6 +56,7 @@ public class NewspaperService {
 
 	public Newspaper save(final Newspaper newspaper) {
 		Assert.notNull(newspaper);
+		Assert.isTrue(newspaper.getUser().equals(userService.findByPrincipal()));
 		Assert.notNull(this.userService.findByPrincipal());
 		Assert.isTrue(newspaper.getPublicationDate().after(new Date()));
 		return this.newspaperRepository.save(newspaper);
@@ -79,5 +80,9 @@ public class NewspaperService {
 
 	public Collection<Newspaper> findAllTaboo() {
 		return newspaperRepository.findAllTaboo();
+	}
+	
+	public void flush(){
+		newspaperRepository.flush();
 	}
 }
