@@ -13,16 +13,13 @@
 
 	<div class="well col-md-6 col-md-offset-3">
 
-		<form:form action="register/user.do" modelAttribute="user">
+		<form:form action="register/customer.do" modelAttribute="customer">
 		
 			<!-- Shared Variables -->
-			<jstl:set var="model" value="user" scope="request" />
+			<jstl:set var="model" value="customer" scope="request" />
 
 			<!-- Hidden attributes -->
-			<lib:input name="newspapers" type="hidden" />			
-			<lib:input name="follows" type="hidden" />	
-			<lib:input name="followedBy" type="hidden" />	
-			<lib:input name="chirps" type="hidden" />	
+			<lib:input name="subscriptionss" type="hidden" />			
 			
 			<!-- Attributes -->
 			<!-- ------------- ACCOUNT DATA -----------------  -->
@@ -35,7 +32,7 @@
 
 			<div class="form-group">
 				<form:label class="control-label" path="userAccount.password">
-					<spring:message code="user.userAccount.password" />:
+					<spring:message code="customer.userAccount.password" />:
 				</form:label>
 				<form:input type="password" class="form-control userAccountPassword" path="userAccount.password" id="userAccountPassword" />
 				<form:errors cssClass="error" path="userAccount.password" />
@@ -43,11 +40,11 @@
 
 			<div class="form-group">
 				<label class="control-label">
-					<spring:message code="user.repeatpassword" />:
+					<spring:message code="customer.repeatpassword" />:
 				</label> 
-				<input id="userConfirmPassword" type="password" class="form-control" />
+				<input id="customerConfirmPassword" type="password" class="form-control" />
 				<p id="nomatch" style="display: none; color: red; font-weight: bold">
-					<spring:message code="user.repeatpassword.nomatch" />
+					<spring:message code="customer.repeatpassword.nomatch" />
 				</p>
 			</div>
 
@@ -57,11 +54,11 @@
 			</h1>
 			<lib:input name="name" type="text" />
 			<lib:input name="surnames" type="text" />
-			<spring:message code="user.addressess.placeholder" var="addressessPlaceholder" />
+			<spring:message code="customer.addressess.placeholder" var="addressessPlaceholder" />
 			<lib:input name="addressess" placeholder="${addressessPlaceholder}" type="text" />
-			<spring:message code="user.phoness.placeholder" var="phonessPlaceholder" />
+			<spring:message code="customer.phoness.placeholder" var="phonessPlaceholder" />
 			<lib:input name="phoness" placeholder="${phonessPlaceholder}" type="text" />
-			<spring:message code="user.emailss.placeholder" var="emailssPlaceholder" />
+			<spring:message code="customer.emailss.placeholder" var="emailssPlaceholder" />
 			<lib:input name="emailss" placeholder="${emailssPlaceholder}" type="text" />
 			<div class="form-group">
 				<input type="checkbox" id="tyc" name="tyc" value="" required="true" />&emsp;
@@ -71,7 +68,7 @@
 			</div>
 
 
-			<lib:button model="user" id="${id}" cancelUri="/AcmeNewspaper" noDelete="true" />
+			<lib:button model="customer" id="${id}" cancelUri="/AcmeNewspaper" noDelete="true" />
 		</form:form>
 
 
@@ -79,8 +76,8 @@
 	
 	<script>
 	$(function(){
-		$('#user').submit(function(e){
-			if($('.userAccountPassword').val() !== $('#userConfirmPassword').val()){
+		$('#customer').submit(function(e){
+			if($('.userAccountPassword').val() !== $('#customerConfirmPassword').val()){
 				$('#nomatch').show();
 				return false;
 			}else{

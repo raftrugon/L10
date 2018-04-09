@@ -8,13 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
 import repositories.ChirpRepository;
-import repositories.NewspaperRepository;
 import domain.Chirp;
-import domain.Newspaper;
 
 @Service
 @Transactional
@@ -26,8 +22,6 @@ public class ChirpService {
 	private UserService		userService;
 	@Autowired
 	private AdminService	adminService;
-	@Autowired
-	private Validator validator;
 
 
 	//Supporting Services -------------------
@@ -62,8 +56,6 @@ public class ChirpService {
 		Assert.isTrue(chirp.getId() == 0);
 		chirp.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
 
-		
-		
 		return chirpRepository.save(chirp);
 	}
 
@@ -85,16 +77,6 @@ public class ChirpService {
 	}
 	public void flush() {
 		chirpRepository.flush();
-	}
-	
-	public Chirp reconstruct(Chirp chirp, BindingResult binding) {
-		chirp.setCreationMoment(new Date(System.currentTimeMillis()-1000));
-		chirp.setUser(userService.findByPrincipal());
-		chirp.setId(0);
-		
-		validator.validate(chirp, binding);
-		
-		return chirp;
 	}
 
 }

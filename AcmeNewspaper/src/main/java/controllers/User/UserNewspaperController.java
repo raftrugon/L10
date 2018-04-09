@@ -70,14 +70,13 @@ public class UserNewspaperController extends AbstractController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Newspaper newspaper, final BindingResult binding) {
 		ModelAndView result;
-		Newspaper validated = newspaperService.reconstruct(newspaper, binding);
 		if (binding.hasErrors()) {
 			result = newEditModelAndView(newspaper);
 			System.out.println(binding.toString());
 		}
 		else
 			try {
-				newspaperService.save(validated);
+				newspaperService.save(newspaper);
 				result = new ModelAndView("redirect:../../newspaper/list.do");
 			} catch (Throwable oops) {
 				result = newEditModelAndView(newspaper);
