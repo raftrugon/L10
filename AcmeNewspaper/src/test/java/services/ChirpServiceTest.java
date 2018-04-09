@@ -41,7 +41,7 @@ public class ChirpServiceTest extends AbstractTest {
 
 			//Find one newspaper using another role id
 			{
-				getEntityId("newspaper1"), IllegalArgumentException.class, "Intentando buscar un newspaper"
+				getEntityId("newspaper1"), IllegalArgumentException.class, "Intentando buscar un chirp"
 			},
 		};
 
@@ -71,6 +71,52 @@ public class ChirpServiceTest extends AbstractTest {
 		System.out.println("\r¿Correcto? " + (expected == caught));
 		System.out.println("-----------------------------------------------------------------\r");
 
+	}
+	
+	@Test
+	public void driverCreate(){
+		
+		System.out.println("===============================================================================================================");
+		System.out.println("=====================================TEST CREATE CHIRP=======================================================");
+		System.out.println("===============================================================================================================\r");
+		Object testingData[][] = {
+				//Test positivo
+				{
+					"user1", null, "Creación correcta de un chirp"
+				},
+				//Intento de crear con un rol que no debe
+				{
+					"customer1", IllegalArgumentException.class, "Se ha intentado crear un newspaper con un customer1"
+				},
+				//Create sin logearse
+				{
+					null, IllegalArgumentException.class, "Intento de crear un chirp sin estar logeado"
+				}
+		};
+		
+		for(int i =0; i<testingData.length;i++)
+			templateCreate((String) testingData[i][0], (Class<?>)testingData[i][1], (String) testingData[i][2]);
+	}
+	protected void templateCreate(String rol, Class<?> expected, String explanation){
+		Class<?> caught = null;
+		
+		try{
+			super.authenticate(rol);
+			chirpService.create();
+			super.unauthenticate();
+		}catch (Throwable oops){
+			caught = oops.getClass();
+		}
+		
+		checkExceptions(expected, caught);
+		
+		if(expected==null)
+			System.out.println("-----------------POSITIVO------------");
+		else
+			System.out.println("-----------------NEGATIVO------------");
+		System.out.println("Explicacion: " + explanation);
+		System.out.println("Rol: " + rol);
+		System.out.println("\r¿Correcto? " +(expected==caught));
 	}
 
 }

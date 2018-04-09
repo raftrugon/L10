@@ -85,7 +85,7 @@ public class ArticleServiceTest extends AbstractTest {
 		Object testingData[][] = {
 				//Test positivo
 				{
-					"user1", null, "Creación correcta de un newspaper"
+					"user1", null, "Creación correcta de un article"
 				},
 				//Intento de crear con un rol que no debe
 				{

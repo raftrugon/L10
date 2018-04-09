@@ -32,6 +32,7 @@ public class ChirpService {
 		Chirp res = new Chirp();
 		
 		res.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
+		Assert.isTrue(userService.findByPrincipal() instanceof domain.User);
 		res.setUser(userService.findByPrincipal());
 		return res;
 	}
