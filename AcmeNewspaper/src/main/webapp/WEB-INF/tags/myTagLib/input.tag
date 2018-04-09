@@ -20,13 +20,12 @@
 <%@ attribute name="addon"  rtexprvalue="true"  required="false" type="java.lang.String"  description="Input text addon" %> 
 <%@ attribute name="rows"  rtexprvalue="true"  required="false" type="java.lang.String"  description="Rows for textarea" %> 
 <%@ attribute name="noLabel"  rtexprvalue="true"  required="false" type="java.lang.String"  description="Disable label" %> 
-<%@ attribute name="col"  rtexprvalue="true"  required="false" type="java.lang.String"  description="Column width" %> 
 
 
 
 <jstl:choose>
 <jstl:when test="${(type eq 'text' or type eq 'password') and addon ne null}">
-	<div class="form-group <jstl:if test="${not empty col}">col-sm-${col}</jstl:if>">
+	<div class="form-group">
 		<div class="input-group">
 			<span class="input-group-addon">${addon}</span>
 			<form:input type="${type}" class="form-control" placeholder="${placeholder}" path="${name}" readonly="${readonly}" required="${required}"/>
@@ -35,7 +34,7 @@
 	</div>
 </jstl:when>
 <jstl:when test="${(type eq 'text' or type eq 'password') and addon eq null }">
-	<div class="form-group <jstl:if test="${not empty col}">col-sm-${col}</jstl:if>">
+	<div class="form-group">
 	<jstl:if test="${noLabel eq null}">
 		<form:label class="control-label" path="${name}">
 			<spring:message code="${model}.${name}" />:
@@ -46,7 +45,7 @@
 	</div>
 </jstl:when>
 <jstl:when test="${type eq 'number' }">
-	<div class="form-group <jstl:if test="${not empty col}">col-sm-${col}</jstl:if>">
+	<div class="form-group">
 	<form:label class="control-label" path="${name}">
 		<spring:message code="${model}.${name}" />:
 	</form:label>

@@ -19,7 +19,7 @@
 		<value>/views/article/messages</value>
 		<value>/views/customer/messages</value>
 		<value>/views/chirp/messages</value>
-		<value>/views/subscription/messages</value>
+		<value>/views/suscription/messages</value>
 		<value>/views/admin/messages</value>
 	</util:list>
 </beans>
