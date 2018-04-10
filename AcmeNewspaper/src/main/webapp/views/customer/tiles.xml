@@ -5,15 +5,8 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
        
 <tiles-definitions>
-	<definition name="" extends="master.page">
-		<put-attribute name="title" value="Customer List" />
-		<put-attribute name="body" value="/views/customer/list.jsp" />
+	<definition name="register/customer" extends="master.page">
+		<put-attribute name="title" value="Create customer" />
+		<put-attribute name="body" value="/views/customer/edit.jsp" />
 	</definition>
-	<definition name="" extends="master.page">
-		<put-attribute name="title" value="Customer Edit" />
-		<put-attribute name="body" value="/views/customer/list.jsp" />
-	</definition>
-	<definition name="" extends="master.page">
-		<put-attribute name="title" value="Customer Display" />
-		<put-attribute name="body" value="/views/customer/list.jsp" />
-	</definition></tiles-definitions>
+</tiles-definitions>

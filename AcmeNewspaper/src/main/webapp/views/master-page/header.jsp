@@ -75,12 +75,18 @@
 			</li>
 		
 			<security:authorize access="isAuthenticated()">
-				<li><a href="user-display.do"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
+				<security:authorize access="hasRole('USER')">
+					<li><a href="user-display.do"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
+				</security:authorize>
+				<security:authorize access="!hasRole('USER')">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
+				</security:authorize>
 				<li><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"> </span><spring:message code="master.page.logout" /> &nbsp; </a></li>
 			</security:authorize>
 			
 			<security:authorize access="isAnonymous()">
-				<li><a href="register/user.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.register" /> &nbsp;</a></li>
+				<li><a href="register/user.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.registerUser" /> &nbsp;</a></li>
+				<li><a href="register/customer.do"><span class="glyphicon glyphicon-user"></span> <spring:message code="master.page.registerCustomer" /> &nbsp;</a></li>
 				<li><a  href="security/login.do"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="master.page.login" /> &nbsp; </a></li>
 			</security:authorize>
 		</ul>
