@@ -48,7 +48,6 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 <script type="text/javascript">
-
 	function askSubmission(msg, form) {
 		if (confirm(msg))
 			form.submit();

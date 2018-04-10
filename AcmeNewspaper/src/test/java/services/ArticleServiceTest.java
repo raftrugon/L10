@@ -21,9 +21,6 @@ public class ArticleServiceTest extends AbstractTest {
 	// System under test ------------------------------------------------------
 	@Autowired
 	private ArticleService	articleService;
-	
-	@Autowired
-	private NewspaperService	newspaperService;
 
 
 	//Supporting services -----------------------------------------------------

@@ -79,7 +79,7 @@ public class RegisterController extends AbstractController {
 			result = this.newEditModelAndViewCustomer(customer);
 		else
 			try {
-				Customer saved = this.customerService.save(customer);
+				this.customerService.save(customer);
 				result = new ModelAndView("welcome/index");
 			} catch (Throwable oops) {
 				oops.printStackTrace();

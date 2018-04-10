@@ -20,9 +20,6 @@
 
 			<!-- Hidden attributes -->
 			<lib:input name="newspapers" type="hidden" />			
-			<lib:input name="follows" type="hidden" />	
-			<lib:input name="followedBy" type="hidden" />	
-			<lib:input name="chirps" type="hidden" />	
 			
 			<!-- Attributes -->
 			<!-- ------------- ACCOUNT DATA -----------------  -->

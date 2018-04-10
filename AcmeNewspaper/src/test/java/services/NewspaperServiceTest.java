@@ -5,18 +5,16 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import javax.transaction.Transactional;
-
 import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import domain.Newspaper;
-import domain.User;
-
 import utilities.AbstractTest;
+import domain.Newspaper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {

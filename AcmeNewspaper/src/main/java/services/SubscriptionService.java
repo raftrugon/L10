@@ -1,4 +1,6 @@
 package services;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -6,12 +8,8 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import java.util.Collection;
-
-import javax.validation.Validation;
-
-import domain.Subscription;
 import repositories.SubscriptionRepository;
+import domain.Subscription;
 
 @Service
 @Transactional

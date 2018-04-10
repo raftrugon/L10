@@ -18,7 +18,6 @@ import security.UserAccountService;
 import domain.Customer;
 import domain.Newspaper;
 import domain.Subscription;
-import domain.User;
 
 @Service
 @Transactional
