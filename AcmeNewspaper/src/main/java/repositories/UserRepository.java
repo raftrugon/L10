@@ -18,8 +18,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	Double[] getStatsOfNewspapersPerUser();
 
 	//The average and the standard deviation of articles written by writer.
-	//@Query("")
-	//Double[] getStatsOfArticlesPerUser();
+	@Query(value="select avg(count),stddev(count) from (select count(article.id) as count from newspaper as n join article on article.newspaper_id = n.id group by n.user_id) acmenewspaper", nativeQuery=true)
+	Double[] getStatsOfArticlesPerUser();
 
 	//The ratio of users who have ever created a newspaper.
 	@Query("select coalesce((count(u)*1.0)/(select count(x) from User x),0) from User u where u.newspapers is not empty")
