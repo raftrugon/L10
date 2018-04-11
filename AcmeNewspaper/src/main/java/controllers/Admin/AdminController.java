@@ -1,6 +1,9 @@
 
 package controllers.Admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +14,9 @@ import services.AdminService;
 import services.ArticleService;
 import services.ChirpService;
 import services.NewspaperService;
+import services.UserService;
 import controllers.AbstractController;
+import domain.Newspaper;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,7 +30,8 @@ public class AdminController extends AbstractController {
 	private NewspaperService newspaperService;
 	@Autowired
 	private ChirpService chirpService;
-
+	@Autowired
+	private UserService userService;
 
 	//Constructor
 	public AdminController() {
@@ -70,5 +76,44 @@ public class AdminController extends AbstractController {
 		ModelAndView res = new ModelAndView("chirp/list");
 		res.addObject("chirps",chirpService.findAllTaboo());
 		return res;
+	}
+	
+	@RequestMapping("/dashboard")
+	public ModelAndView dashboard() {
+		ModelAndView result;
+		result = new ModelAndView("admin/dashboard");
+		
+		List<Double> avgs = new ArrayList<Double>();
+		avgs.add(userService.getStatsOfNewspapersPerUser()[0]);
+		avgs.add(userService.getStatsOfArticlesPerUser()[0]);
+		avgs.add(newspaperService.getStatsOfArticlesPerNewspaper()[0]);
+		avgs.add(articleService.getFollowUpsPerArticleAvg());
+		avgs.add(articleService.getFollowUpsPerArticleAvgAfterOneWeek());
+		avgs.add(articleService.getFollowUpsPerArticleAvgAfterTwoWeeks());
+		avgs.add(userService.getStatsOfChirpsPerUser()[0]);
+		avgs.add(newspaperService.getArticleAvgForPrivateNewspapers());
+		avgs.add(newspaperService.getArticleAvgForPublicNewspapers());
+		result.addObject("avgs",avgs);
+		
+		List<Double> stddevs = new ArrayList<Double>();
+		stddevs.add(userService.getStatsOfNewspapersPerUser()[1]);
+		stddevs.add(userService.getStatsOfArticlesPerUser()[1]);
+		stddevs.add(newspaperService.getStatsOfArticlesPerNewspaper()[1]);
+		stddevs.add(userService.getStatsOfChirpsPerUser()[1]);
+		result.addObject("stddevs",stddevs);
+		
+		List<Double> ratios = new ArrayList<Double>();
+		ratios.add(userService.getRatioOfUsersWhoHaveCreatedNewspapers());
+		ratios.add(userService.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg());
+		ratios.add(newspaperService.getRatioOfPublicOverPrivateNewspapers());
+		ratios.add(newspaperService.getRatioOfSubscribersVersusCustomersTotal());
+		//Añadir metodo que falta
+		
+		List<Newspaper> newspapersOverAvg = new ArrayList<Newspaper>(newspaperService.getNewspapersOverAvg());
+		result.addObject("newspapersOverAvg",newspapersOverAvg);
+		List<Newspaper> newspapersUnderAvg = new ArrayList<Newspaper>(newspaperService.getNewspapersUnderAvg());
+		result.addObject("newspapersUnderAvg",newspapersUnderAvg);
+		
+		return result;
 	}
 }
