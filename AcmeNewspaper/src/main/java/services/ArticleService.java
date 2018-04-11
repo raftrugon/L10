@@ -86,6 +86,10 @@ public class ArticleService {
 	public Collection<Article> findAllPublished() {
 		return this.articleRepository.findAllPublished();
 	}
+	
+	public void flush(){
+		articleRepository.flush();
+	}
 
 	public Collection<Article> findAllPublishedForUser(final User u) {
 		return this.articleRepository.findAllPublishedForUser(u.getId());
