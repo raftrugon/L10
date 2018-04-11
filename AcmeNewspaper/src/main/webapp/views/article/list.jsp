@@ -23,7 +23,7 @@
 </jstl:if>
 
 <div class="col-sm-10 col-sm-offset-1 well">
-	<display:table pagesize="10" class="displaytag" keepStatus="true" name="articles" id="row2">
+	<display:table pagesize="5" class="displaytag" keepStatus="true" name="articles" requestURI="${requestUri}" id="row2">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
 	    <display:setProperty name="paging.banner.all_items_found" value=""/>

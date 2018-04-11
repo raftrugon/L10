@@ -70,9 +70,9 @@
 			</security:authorize>
 			<security:authorize access="hasRole('ADMIN')">
 				<li><a href="admin/chirp/list.do"><spring:message code="master.page.chirp.list" /></a></li>
-				<li><a href="admin/article/taboo-list.do"><spring:message code="master.page.newspaper.list.taboo" /></a></li>
+				<li><a href="admin/article/taboo-list.do"><spring:message code="master.page.article.list.taboo" /></a></li>
 				<li><a href="admin/newspaper/taboo-list.do"><spring:message code="master.page.newspaper.list.taboo" /></a></li>
-				<li><a href="admin/chirp/taboo-list.do"><spring:message code="master.page.newspaper.list.taboo" /></a></li>
+				<li><a href="admin/chirp/taboo-list.do"><spring:message code="master.page.chirp.list.taboo" /></a></li>
 			</security:authorize>
 		</ul>
 	
