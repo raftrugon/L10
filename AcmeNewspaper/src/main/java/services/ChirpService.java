@@ -12,9 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ChirpRepository;
-import repositories.NewspaperRepository;
 import domain.Chirp;
-import domain.Newspaper;
 import domain.User;
 
 @Service
@@ -63,14 +61,22 @@ public class ChirpService {
 		Assert.isTrue(chirp.getId() == 0);
 		chirp.setCreationMoment(new Date(System.currentTimeMillis() - 1000));
 
-		
-		
+
+
 		return chirpRepository.save(chirp);
 	}
 
 	public Collection<Chirp> getTimeline() {
 		Assert.isTrue(userService.findByPrincipal() instanceof domain.User);
-		return chirpRepository.getTimeline(userService.findByPrincipal().getFollows());
+
+		User logged = userService.findByPrincipal();
+		Collection<Chirp> res;
+
+		if(logged.getFollows().isEmpty())
+			res = null;
+		else
+			res = chirpRepository.getTimeline(userService.findByPrincipal().getFollows());
+		return res;
 	}
 
 	public Collection<Chirp> findAllTaboo() {
@@ -87,14 +93,14 @@ public class ChirpService {
 	public void flush() {
 		chirpRepository.flush();
 	}
-	
+
 	public Chirp reconstruct(Chirp chirp, BindingResult binding) {
 		chirp.setCreationMoment(new Date(System.currentTimeMillis()-1000));
 		chirp.setUser(userService.findByPrincipal());
 		chirp.setId(0);
-		
+
 		validator.validate(chirp, binding);
-		
+
 		return chirp;
 	}
 
