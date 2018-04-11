@@ -19,9 +19,9 @@
 		<lib:input type="text" name='creditCard.holderName'/>		
 		<lib:input type="text" name='creditCard.brandName'/>
 		<lib:input type="text" name='creditCard.number'/>
-		<lib:input type="number" name="creditCard.expirationMonth" col="4"/>
-		<lib:input type="number" name="creditCard.expirationYear" col="4"/>
-		<lib:input type="text" name="creditCard.cvvCode" col="4"/>
+		<lib:input type="number" name="creditCard.expirationMonth" />
+		<lib:input type="number" name="creditCard.expirationYear" />
+		<lib:input type="number" name="creditCard.cvvCode" />
 		
 		<lib:button model="subscription" id="${subscription.id}" cancelUri="/AcmeNewspaper" noDelete="true" />
 </form:form>

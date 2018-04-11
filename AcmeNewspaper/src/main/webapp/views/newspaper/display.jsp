@@ -16,7 +16,7 @@
 		</jstl:if>
 	</security:authorize>
 	<security:authorize access="hasRole('CUSTOMER')">
-		<jstl:if test="${!isSuscribed && newspaper.isPrivate}">
+		<jstl:if test="${not isSubscribed and newspaper.isPrivate}">
 			<a class="btn btn-primary btn-block" href="customer/subscription/create.do?newspaperId=${newspaper.id}"><spring:message code="newspaper.suscribe"/></a>
 		</jstl:if>
 	</security:authorize>
