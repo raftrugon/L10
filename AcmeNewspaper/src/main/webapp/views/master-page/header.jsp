@@ -57,14 +57,18 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 		
 		<!-- Left-side main content -->
-		<ul class="nav navbar-nav">					
+		
+		<ul class="nav navbar-nav">	
+					
 			<li><a href="newspaper/list.do"><spring:message code="master.page.newspaper.list" /></a></li>
 			<li><a href="article/list.do"><spring:message code="master.page.article.list" /></a></li>
-			<li><a href="chirp/list.do"><spring:message code="master.page.chirp.list" /></a></li>
-			<li><a href="subscription/list.do"><spring:message code="master.page.subscription.list" /></a></li>
 			<li><a href="user-list.do"><spring:message code="master.page.actor.list" /></a></li>
+			<security:authorize access="hasRole('USER')">
+								<li><a href="user/chirp/timeline.do"><spring:message code="master.page.chirp.list" /></a></li>
+					
+				</security:authorize>
 		</ul>
-			
+	
 		<!-- Right-side content -->	
 		<ul class="nav navbar-nav navbar-right">
 		
@@ -73,14 +77,28 @@
 				<button onClick="javascript:window.location.href = '?language=en'" class="btn navbar-btn btn-info" >en</button>
 				<button onClick="javascript:window.location.href = '?language=es'" class="btn navbar-btn btn-info" >es</button>
 			</li>
+			
+			
 		
-			<security:authorize access="isAuthenticated()">
+			
 				<security:authorize access="hasRole('USER')">
 					<li><a href="user-display.do"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
+					
 				</security:authorize>
-				<security:authorize access="!hasRole('USER')">
+				
+				<security:authorize access="hasRole('CUSTOMER')">
 					<li><a href="#"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
 				</security:authorize>
+								<security:authorize access="hasRole('ADMIN')">
+					<li><a href="user-display.do"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
+					<li><a href="user/chirp/timeline.do"><spring:message code="master.page.chirp.list" /></a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
+				</security:authorize>
+				
+					
+				
+				
+			<security:authorize access="isAuthenticated()">
 				<li><a href="j_spring_security_logout"><span class="glyphicon glyphicon-log-out"> </span><spring:message code="master.page.logout" /> &nbsp; </a></li>
 			</security:authorize>
 			
