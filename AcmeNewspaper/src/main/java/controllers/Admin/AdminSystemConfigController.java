@@ -58,30 +58,33 @@ public class AdminSystemConfigController extends AbstractController {
 //		return result;
 //	}
 //
-//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-//	public ModelAndView edit(@RequestParam(required = true) final int systemConfigId) {
-//		SystemConfig systemConfig = systemConfigService.findOne(systemConfigId);
-//		if (systemConfig.getAdmin().equals(adminService.findByPrincipal()))
-//			return newEditModelAndView(systemConfig);
-//		else
-//			return new ModelAndView("redirect:list.do");
-//	}
-//
-//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
-//	public ModelAndView save(@Valid final SystemConfig systemConfig, final BindingResult binding) {
-//		ModelAndView result;
-//		if (binding.hasErrors())
-//			result = newEditModelAndView(systemConfig);
-//		else
-//			try {
-//				systemConfigService.save(systemConfig);
-//				result = new ModelAndView("redirect:list.do");
-//			} catch (Throwable oops) {
-//				result = newEditModelAndView(systemConfig);
-//				result.addObject("message", "systemConfig.commitError");
-//			}
-//		return result;
-//	}
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
+		SystemConfig systemConfig = systemConfigService.get();
+		try{
+			Admin a = adminService.findByPrincipal();
+			return newEditModelAndView(systemConfig);
+		} catch(Throwable oops) {
+			return new ModelAndView("redirect:");
+		}
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final SystemConfig systemConfig, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = newEditModelAndView(systemConfig);
+		else
+			try {
+				systemConfigService.save(systemConfig);
+				result = new ModelAndView("redirect:");
+			} catch (Throwable oops) {
+				result = newEditModelAndView(systemConfig);
+				result.addObject("message", "systemConfig.commitError");
+				oops.printStackTrace();
+			}
+		return result;
+	}
 //
 //	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
 //	public ModelAndView delete(@Valid final SystemConfig systemConfig, final BindingResult binding) {
@@ -98,11 +101,11 @@ public class AdminSystemConfigController extends AbstractController {
 //			}
 //		return result;
 //	}
-//	protected ModelAndView newEditModelAndView(final SystemConfig systemConfig) {
-//		ModelAndView result;
-//		result = new ModelAndView("systemConfig/edit");
-//		result.addObject("systemConfig", systemConfig);
-//		result.addObject("actionUri", "admin/systemConfig/save.do");
-//		return result;
-//	}
+	protected ModelAndView newEditModelAndView(final SystemConfig systemConfig) {
+		ModelAndView result;
+		result = new ModelAndView("systemConfig/edit");
+		result.addObject("systemConfig", systemConfig);
+		result.addObject("actionUri", "admin/systemConfig/save.do");
+		return result;
+	}
 }
