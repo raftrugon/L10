@@ -8,8 +8,11 @@
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib" %>
 
 <div class="well col-md-6 col-md-offset-3">
-	<form:form action="systemConfig/edit.do" modelAttribute="systemConfig">
+	<form:form action="systemConfig/save.do" modelAttribute="systemConfig">
 	<jstl:set var='model' value='systemConfig' scope='request'/>
-		<lib:input type="text" name='tabooWords'/>
+		<lib:input type="text" name='tabooWordss'/>
+		
+		<lib:button model='newspaper' noDelete='true' id='${systemConfig.id}' cancelUri='#'/>
+		
 </form:form>
 </div>

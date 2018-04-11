@@ -38,8 +38,9 @@ public class SystemConfigService {
 	public SystemConfig save(final SystemConfig systemConfig) {
 		Assert.notNull(systemConfig);
 		Assert.notNull(adminService.findByPrincipal());
-		Assert.isTrue(systemConfig.getId() == get().getId());
-		return systemConfigRepository.save(systemConfig);
+		SystemConfig x =get();
+		x.setTabooWordss(systemConfig.getTabooWordss());
+		return systemConfigRepository.save(x);
 	}
 
 }
