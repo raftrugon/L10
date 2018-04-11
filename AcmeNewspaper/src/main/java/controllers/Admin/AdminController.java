@@ -117,29 +117,30 @@ public class AdminController extends AbstractController {
 		result = new ModelAndView("admin/dashboard");
 
 		List<Double> avgs = new ArrayList<Double>();
-		avgs.add(this.userService.getStatsOfNewspapersPerUser()[0]);
-		avgs.add(this.userService.getStatsOfArticlesPerUser()[0]);
-		avgs.add(this.newspaperService.getStatsOfArticlesPerNewspaper()[0]);
-		avgs.add(this.articleService.getFollowUpsPerArticleAvg());
-		avgs.add(this.articleService.getFollowUpsPerArticleAvgAfterOneWeek());
-		avgs.add(this.articleService.getFollowUpsPerArticleAvgAfterTwoWeeks());
-		avgs.add(this.userService.getStatsOfChirpsPerUser()[0]);
-		avgs.add(this.newspaperService.getArticleAvgForPrivateNewspapers());
-		avgs.add(this.newspaperService.getArticleAvgForPublicNewspapers());
+		avgs.add(userService.getStatsOfNewspapersPerUser()[0]);
+		avgs.add(userService.getStatsOfArticlesPerUser()[0]);
+		avgs.add(newspaperService.getStatsOfArticlesPerNewspaper()[0]);
+		avgs.add(articleService.getFollowUpsPerArticleAvg());
+		avgs.add(articleService.getFollowUpsPerArticleAvgAfterOneWeek());
+		avgs.add(articleService.getFollowUpsPerArticleAvgAfterTwoWeeks());
+		avgs.add(userService.getStatsOfChirpsPerUser()[0]);
+		avgs.add(newspaperService.getArticleAvgForPrivateNewspapers());
+		avgs.add(newspaperService.getArticleAvgForPublicNewspapers());
 		result.addObject("avgs",avgs);
 
 		List<Double> stddevs = new ArrayList<Double>();
-		stddevs.add(this.userService.getStatsOfNewspapersPerUser()[1]);
-		stddevs.add(this.userService.getStatsOfArticlesPerUser()[1]);
-		stddevs.add(this.newspaperService.getStatsOfArticlesPerNewspaper()[1]);
-		stddevs.add(this.userService.getStatsOfChirpsPerUser()[1]);
+		stddevs.add(userService.getStatsOfNewspapersPerUser()[1]);
+		stddevs.add(userService.getStatsOfArticlesPerUser()[1]);
+		stddevs.add(newspaperService.getStatsOfArticlesPerNewspaper()[1]);
+		stddevs.add(userService.getStatsOfChirpsPerUser()[1]);
 		result.addObject("stddevs",stddevs);
 
 		List<Double> ratios = new ArrayList<Double>();
-		ratios.add(this.userService.getRatioOfUsersWhoHaveCreatedNewspapers());
-		ratios.add(this.userService.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg());
-		ratios.add(this.newspaperService.getRatioOfPublicOverPrivateNewspapers());
-		ratios.add(this.newspaperService.getRatioOfSubscribersVersusCustomersTotal());
+		ratios.add(userService.getRatioOfUsersWhoHaveCreatedNewspapers());
+		ratios.add(userService.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg());
+		ratios.add(newspaperService.getRatioOfPublicOverPrivateNewspapers());
+		ratios.add(newspaperService.getRatioOfSubscribersVersusCustomersTotal());
+		result.addObject("ratios",ratios);
 		//Añadir metodo que falta
 
 		List<Newspaper> newspapersOverAvg = new ArrayList<Newspaper>(this.newspaperService.getNewspapersOverAvg());

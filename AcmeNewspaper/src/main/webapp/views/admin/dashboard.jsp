@@ -45,10 +45,8 @@
 			<spring:message code="admin.query14"/>
 		</jstl:when>
 	</jstl:choose>	
-	<jstl:forEach items="${row}" var="x" varStatus="count">
-		<display:column>${x}</display:column>
-	</jstl:forEach>
 </display:column>
+	<display:column><jstl:out value="${row}"/></display:column>
 </display:table>
 </div>
 
@@ -60,23 +58,21 @@
 	 </display:caption>
 	<display:column>
 	<jstl:choose>
-		<jstl:when test="${row_rowNum == 1}">
+		<jstl:when test="${row2_rowNum == 1}">
 			<spring:message code="admin.query1"/>
 		</jstl:when>
-		<jstl:when test="${row_rowNum == 2}">
+		<jstl:when test="${row2_rowNum == 2}">
 			<spring:message code="admin.query2"/>
 		</jstl:when>
-		<jstl:when test="${row_rowNum == 3}">
+		<jstl:when test="${row2_rowNum == 3}">
 			<spring:message code="admin.query3"/>
 		</jstl:when>
-		<jstl:when test="${row_rowNum == 4}">
+		<jstl:when test="${row2_rowNum == 4}">
 			<spring:message code="admin.query10"/>
 		</jstl:when>
 	</jstl:choose>	
-	<jstl:forEach items="${row2}" var="y">
-		<display:column>${y}</display:column>
-	</jstl:forEach>
 </display:column>
+	<display:column><jstl:out value="${row2}"/></display:column>
 </display:table>
 </div>
 
@@ -88,26 +84,24 @@
 	 </display:caption>
 	<display:column>
 	<jstl:choose>
-		<jstl:when test="${row_rowNum == 1}">
+		<jstl:when test="${row3_rowNum == 1}">
 			<spring:message code="admin.query6"/>
 		</jstl:when>
-		<jstl:when test="${row_rowNum == 2}">
+		<jstl:when test="${row3_rowNum == 2}">
 			<spring:message code="admin.query11"/>
 		</jstl:when>
-		<jstl:when test="${row_rowNum == 3}">
+		<jstl:when test="${row3_rowNum == 3}">
 			<spring:message code="admin.query12"/>
 		</jstl:when>
-		<jstl:when test="${row_rowNum == 4}">
+		<jstl:when test="${ro3_rowNum == 4}">
 			<spring:message code="admin.query15"/>
 		</jstl:when>
-		<jstl:when test="${row_rowNum == 4}">
+		<jstl:when test="${row3_rowNum == 5}">
 			<spring:message code="admin.query16"/>
 		</jstl:when>
-	</jstl:choose>	
-	<jstl:forEach items="${row3}" var="z">
-		<display:column>${z}</display:column>
-	</jstl:forEach>
+	</jstl:choose>
 </display:column>
+	<display:column><jstl:out value="${row3}"/></display:column>
 </display:table>
 </div>
 
