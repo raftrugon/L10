@@ -162,7 +162,7 @@ public class UserService {
 		return userRepository.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg();
 	}
 
-//	public Double getAvgRatioOfNewspapersPerPublisher(){
-//		return userRepository.getAvgRatioOfNewspapersPerPublisher();
-//	}
+	public Double getAvgRatioOfNewspapersPerPublisher(){
+		return userRepository.getAvgRatioOfNewspapersPerPublisher();
+	}
 }
