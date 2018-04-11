@@ -114,6 +114,7 @@ public class AdminController extends AbstractController {
 		ratios.add(userService.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg());
 		ratios.add(newspaperService.getRatioOfPublicOverPrivateNewspapers());
 		ratios.add(newspaperService.getRatioOfSubscribersVersusCustomersTotal());
+		result.addObject("ratios",ratios);
 		//Añadir metodo que falta
 		
 		List<Newspaper> newspapersOverAvg = new ArrayList<Newspaper>(newspaperService.getNewspapersOverAvg());
