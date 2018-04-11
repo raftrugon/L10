@@ -33,22 +33,27 @@ public class ArticleController extends AbstractController {
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(required=false,defaultValue="")String keyword) {
 		ModelAndView result;
-		List<Article> articles = new ArrayList<Article>(articleService.findAllPublishedKeyword(keyword));
-		Map<Article,Boolean> articlesMap = new HashMap<Article,Boolean>();
 		try{
-			for (Article a: articles)
-				articlesMap.put(a, customerService.isSubscribed(a.getNewspaper()));
-		}catch(Throwable oops){
-			//Volvemos a coger los artículos ya que al petar el customerService se pierden (BUG de hibernate)
-			articles = new ArrayList<Article>(articleService.findAllPublishedKeyword(keyword));
-			for (Article a: articles)
-				articlesMap.put(a, false);
+			List<Article> articles = new ArrayList<Article>(articleService.findAllPublishedKeyword(keyword));
+			Map<Article,Boolean> articlesMap = new HashMap<Article,Boolean>();
+			try{
+				for (Article a: articles)
+					articlesMap.put(a, customerService.isSubscribed(a.getNewspaper()));
+			}catch(Throwable oops){
+				//Volvemos a coger los artículos ya que al petar el customerService se pierden (BUG de hibernate)
+
+				articles = new ArrayList<Article>(articleService.findAllPublishedKeyword(keyword));
+				for (Article a: articles)
+					articlesMap.put(a, false);
+			}
+			result = new ModelAndView("article/list");
+			result.addObject("articlesMap", articlesMap);
+			result.addObject("articles",articles);
+			result.addObject("keyword",keyword);
+			result.addObject("requestUri", "article/list.do");
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:/");
 		}
-		result = new ModelAndView("article/list");
-		result.addObject("articlesMap", articlesMap);
-		result.addObject("articles",articles);
-		result.addObject("keyword",keyword);
-		result.addObject("requestUri", "article/list.do");
 		return result;
 	}
 
