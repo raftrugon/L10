@@ -1,7 +1,11 @@
 
 package controllers.User;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -37,6 +41,15 @@ public class UserArticleController extends AbstractController {
 	public UserArticleController() {
 		super();
 	}
+	
+	@RequestMapping(value="/list",method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		result = new ModelAndView("article/list");
+		result.addObject("articles",articleService.findMyArticles());
+		result.addObject("requestUri", "user/article/list.do");
+		return result;
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
@@ -45,7 +58,7 @@ public class UserArticleController extends AbstractController {
 			Article article = this.articleService.create();
 			result = this.newEditModelAndView(article);
 		} catch (Throwable oops) {
-			result = new ModelAndView("redirect:/article/list.do");
+			result = new ModelAndView("redirect:list.do");
 		}
 		return result;
 	}
@@ -61,7 +74,7 @@ public class UserArticleController extends AbstractController {
 			result = this.newEditModelAndView(article);
 
 		} catch (Throwable oops) {
-			result = new ModelAndView("redirect:/article/list.do");
+			result = new ModelAndView("redirect:list.do");
 		}
 
 		return result;
@@ -75,9 +88,10 @@ public class UserArticleController extends AbstractController {
 		else
 			try {
 				this.articleService.save(article);
-				result = new ModelAndView("redirect:/article/list.do");
+				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				result = this.newEditModelAndView(article, "article.commitError");
+				oops.printStackTrace();
 			}
 		return result;
 	}
