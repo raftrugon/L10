@@ -8,7 +8,7 @@
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib" %>
 
 <div class="well col-md-6 col-md-offset-3">
-	<form:form action="followUp/save.do" modelAttribute="followUp">
+	<form:form action="user/followUp/save.do" modelAttribute="followUp">
 	<jstl:set var='model' value='followUp' scope='request'/>
 	
 		<lib:input name="id,version,article,publicationMoment" type="hidden" />

@@ -20,7 +20,7 @@ import domain.Article;
 import domain.FollowUp;
 
 @Controller
-@RequestMapping("/followUp")
+@RequestMapping("user/followUp")
 public class UserFollowUpController extends AbstractController {
 
 	@Autowired
@@ -78,7 +78,7 @@ public class UserFollowUpController extends AbstractController {
 		else
 			try {
 				followUpService.save(followUp);
-				result = new ModelAndView("redirect:../newspaper/display.do?newspaperId="+followUp.getArticle().getNewspaper().getId());
+				result = new ModelAndView("redirect:../../newspaper/display.do?newspaperId="+followUp.getArticle().getNewspaper().getId());
 			} catch (Throwable oops) {
 				result = newEditModelAndView(followUp);
 				result.addObject("message", "followUp.commitError");

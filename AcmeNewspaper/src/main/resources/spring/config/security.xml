@@ -37,7 +37,6 @@
 		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/systemConfig/**" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/user/**" access="hasRole('USER')"/>
-		<security:intercept-url pattern="/followUp/**" access="hasRole('USER')"/>
 		<security:intercept-url pattern="/customer/**" access="hasRole('CUSTOMER')"/>
 
 		<security:intercept-url pattern="/register/**" access="isAnonymous()" requires-channel="https"/>
