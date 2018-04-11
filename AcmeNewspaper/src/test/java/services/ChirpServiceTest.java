@@ -45,7 +45,7 @@ public class ChirpServiceTest extends AbstractTest {
 
 			//Find one newspaper using another role id
 			{
-				getEntityId("newspaper1"), IllegalArgumentException.class, "Intentando buscar un chirp"
+				getEntityId("newspaper1"), IllegalArgumentException.class, "Intentando buscar un newspaper"
 			},
 		};
 
@@ -90,7 +90,7 @@ public class ChirpServiceTest extends AbstractTest {
 			},
 			//Intento de crear con un rol que no debe
 			{
-				"customer1", IllegalArgumentException.class, "Se ha intentado crear un newspaper con un customer1"
+				"customer1", IllegalArgumentException.class, "Se ha intentado crear un chirp con un customer1"
 			},
 			//Create sin logearse
 			{
@@ -175,7 +175,7 @@ public class ChirpServiceTest extends AbstractTest {
 			}, {
 				"user1", getEntityId("chirp1"), null, null, null, false, IllegalArgumentException.class, "Guardar un  chirp con id distinta de 0"
 			}, {
-				null, 0, "titulo", new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(10)), "descripcion", false, IllegalArgumentException.class, "No hya nadie logueado"
+				null, 0, "titulo", new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(10)), "descripcion", false, IllegalArgumentException.class, "No hay nadie logueado"
 			}
 		};
 

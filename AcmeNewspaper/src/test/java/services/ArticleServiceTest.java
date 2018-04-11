@@ -16,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import domain.Article;
-import domain.Newspaper;
 
 import utilities.AbstractTest;
 
@@ -31,8 +30,6 @@ public class ArticleServiceTest extends AbstractTest {
 	@Autowired
 	private ArticleService	articleService;
 	
-	@Autowired
-	private NewspaperService	newspaperService;
 
 
 	//Supporting services -----------------------------------------------------
@@ -98,7 +95,7 @@ public class ArticleServiceTest extends AbstractTest {
 				},
 				//Intento de crear con un rol que no debe
 				{
-					"customer1", IllegalArgumentException.class, "Se ha intentado crear un newspaper con un customer1"
+					"customer1", IllegalArgumentException.class, "Se ha intentado crear un article con un customer1"
 				},
 				//Create sin logearse
 				{
@@ -194,7 +191,7 @@ public class ArticleServiceTest extends AbstractTest {
 	}
 
 
-	private void templateSave(String rol, Integer articleId, String title, String summary, String body, Collection<String> pictures, Boolean finalMode,
+	protected void templateSave(String rol, Integer articleId, String title, String summary, String body, Collection<String> pictures, Boolean finalMode,
 			Boolean inappropriate, Date publicationMoment, Class<?> expected, String explanation) {
 		Class<?> caught = null;
 		try {
@@ -223,7 +220,7 @@ public class ArticleServiceTest extends AbstractTest {
 		else
 			System.out.println("---------------------------- NEGATIVO ---------------------------");
 		System.out.println("Explicación: " + explanation);
-		System.out.println("Newspaper: " + articleId);
+		System.out.println("Article: " + articleId);
 		System.out.println("Title: " + title);
 		System.out.println("Rol: " + rol);
 		System.out.println("\r¿Correcto? " + (expected == caught));
