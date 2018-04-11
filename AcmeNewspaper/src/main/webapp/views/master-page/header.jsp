@@ -91,8 +91,6 @@
 				</security:authorize>
 								<security:authorize access="hasRole('ADMIN')">
 					<li><a href="user-display.do"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
-					<li><a href="user/chirp/timeline.do"><spring:message code="master.page.chirp.list" /></a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
 				</security:authorize>
 				
 					

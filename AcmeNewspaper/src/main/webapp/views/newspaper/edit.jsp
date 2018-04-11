@@ -24,3 +24,11 @@
 		<lib:button model='newspaper' noDelete='true' id='${newspaper.id}' cancelUri='newspaper/list.do'/>
 </form:form>
 </div>
+
+<script>
+	$(function(){
+		var tomorrow = new Date();
+		tomorrow.setDate(tomorrow.getDate() + 1);
+		$('.dtPicker').data("DateTimePicker").minDate(tomorrow);
+	});
+</script>

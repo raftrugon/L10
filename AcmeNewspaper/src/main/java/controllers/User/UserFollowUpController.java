@@ -22,7 +22,7 @@ import domain.FollowUp;
 import domain.User;
 
 @Controller
-@RequestMapping("/followUp")
+@RequestMapping("/followup")
 public class UserFollowUpController extends AbstractController {
 
 	@Autowired

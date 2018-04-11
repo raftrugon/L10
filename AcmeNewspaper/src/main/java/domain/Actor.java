@@ -66,7 +66,7 @@ public abstract class Actor extends DomainEntity {
 
 	@NotNull
 	@ElementCollection
-	@EachPattern(regexp = "^\\+\\d{1,20}")
+	@EachPattern(regexp = "^\\+?\\d{1,20}")
 	public Collection<String> getPhoness() {
 		return this.phoness;
 	}
