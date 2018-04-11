@@ -52,7 +52,13 @@
 			</jstl:if>
 		</display:column>
 	</security:authorize>
-	
+	<security:authorize access="hasRole('USER')">
+		<display:column>
+			<jstl:if test="${pageContext.request.userPrincipal.name eq row2.newspaper.user.userAccount.username and not row2.finalMode}">
+				<a href="user/article/edit.do?articleId=${row2.id}"><spring:message code="article.edit"/></a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 	
 </display:table>
 </div>

@@ -9,6 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 
@@ -54,3 +55,56 @@
 	</div>
 </div>
 
+<div class="col-sm-10 col-sm-offset-1 well">
+	<display:table pagesize="6" class="displaytag" keepStatus="true" name="followUps" requestURI="${requestUri}" id="row">
+		<display:setProperty name="paging.banner.onepage" value=""/>
+	    <display:setProperty name="paging.banner.placement" value="bottom"/>
+	    <display:setProperty name="paging.banner.all_items_found" value=""/>
+	    <display:setProperty name="paging.banner.one_item_found" value=""/>
+	    <display:setProperty name="paging.banner.no_items_found" value=""/>
+
+		<jstl:set var='model' value='followUp' scope='request'/>
+		<lib:column name='title'/>
+		<lib:column name='publicationMoment'/>
+		<lib:column name='summary'/>
+		<lib:column name='body'/>
+		
+		<div id="myCarousel" class="carousel slide col-sm-12" data-ride="carousel">
+	<h1 style="text-align:center;"><spring:message code="followUp.picturess" /></h1>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+			<jstl:forEach items="${row.picturess}" var="picture"
+				varStatus="index">
+				<jstl:choose>
+					<jstl:when test="${index.index == 0}">
+						<div class="item active">
+							<img style="width:100%;" src="${picture}" />
+						</div>
+					</jstl:when>
+					<jstl:otherwise>
+						<div class="item">
+							<img style="width:100%;" src="${picture}" />
+						</div>
+					</jstl:otherwise>
+				</jstl:choose>
+			</jstl:forEach>
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#myCarousel"
+				data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+		
+</display:table>
+</br>
+<jstl:if test="${pageContext.request.userPrincipal.name eq article.newspaper.user.userAccount.username }">
+	<a href="user/followUp/create.do?articleId=${article.id}">
+		<spring:message code="followUp.new"/>
+	</a>
+</jstl:if>
+</div>

@@ -1,34 +1,34 @@
 
 package controllers.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ArticleService;
 import services.FollowUpService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Article;
 import domain.FollowUp;
-import domain.User;
 
 @Controller
-@RequestMapping("/followup")
+@RequestMapping("user/followUp")
 public class UserFollowUpController extends AbstractController {
 
 	@Autowired
 	private FollowUpService	followUpService;
 	@Autowired
 	private UserService	userService;
+	@Autowired
+	private ArticleService articleService;
 
 
 	//Constructor
@@ -46,17 +46,20 @@ public class UserFollowUpController extends AbstractController {
 //		return result;
 //	}
 //	
-//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-//	public ModelAndView create() {
-//		ModelAndView result;
-//		try {
-//			FollowUp followUp = followUpService.create();
-//			result = newEditModelAndView(followUp);
-//		} catch (Throwable oops) {
-//			result = new ModelAndView("redirect:list.do");
-//		}
-//		return result;
-//	}
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam(required = true)int articleId) {
+		ModelAndView result;
+		try {
+			Article a = articleService.findOne(articleId);
+			Assert.isTrue(articleService.isPublished(a));
+			Assert.isTrue(a.getNewspaper().getUser()==userService.findByPrincipal());
+			FollowUp followUp = followUpService.create(articleId);
+			result = newEditModelAndView(followUp);
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+		}
+		return result;
+	}
 //
 //	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 //	public ModelAndView edit(@RequestParam(required = true) final int followUpId) {
@@ -67,21 +70,21 @@ public class UserFollowUpController extends AbstractController {
 //			return new ModelAndView("redirect:list.do");
 //	}
 //
-//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
-//	public ModelAndView save(@Valid final FollowUp followUp, final BindingResult binding) {
-//		ModelAndView result;
-//		if (binding.hasErrors())
-//			result = newEditModelAndView(followUp);
-//		else
-//			try {
-//				followUpService.save(followUp);
-//				result = new ModelAndView("redirect:list.do");
-//			} catch (Throwable oops) {
-//				result = newEditModelAndView(followUp);
-//				result.addObject("message", "followUp.commitError");
-//			}
-//		return result;
-//	}
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final FollowUp followUp, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = newEditModelAndView(followUp);
+		else
+			try {
+				followUpService.save(followUp);
+				result = new ModelAndView("redirect:../../newspaper/display.do?newspaperId="+followUp.getArticle().getNewspaper().getId());
+			} catch (Throwable oops) {
+				result = newEditModelAndView(followUp);
+				result.addObject("message", "followUp.commitError");
+			}
+		return result;
+	}
 //
 //	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
 //	public ModelAndView delete(@Valid final FollowUp followUp, final BindingResult binding) {
@@ -98,11 +101,11 @@ public class UserFollowUpController extends AbstractController {
 //			}
 //		return result;
 //	}
-//	protected ModelAndView newEditModelAndView(final FollowUp followUp) {
-//		ModelAndView result;
-//		result = new ModelAndView("followUp/edit");
-//		result.addObject("followUp", followUp);
-//		result.addObject("actionUri", "user/followUp/save.do");
-//		return result;
-//	}
+	protected ModelAndView newEditModelAndView(final FollowUp followUp) {
+		ModelAndView result;
+		result = new ModelAndView("followUp/edit");
+		result.addObject("followUp", followUp);
+		result.addObject("actionUri", "user/followUp/save.do");
+		return result;
+	}
 }

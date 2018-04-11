@@ -12,10 +12,10 @@
 	<jstl:set var='model' value='article' scope='request'/>
 	
 		<!-- Hidden Attributes -->
-		<lib:input name="publicationMoment" type="hidden" />
-		<lib:input name="inappropriate" type="hidden" />
-		<lib:input name="followUps" type="hidden" />
-		
+		<lib:input name="id,version,publicationMoment,inappropriate,followUps" type="hidden" />
+		<jstl:if test="${article.id ne 0}">
+		<lib:input name="newspaper" type="hidden"/>
+		</jstl:if>
 		
 		<!-- Hidden Attributes -->
 		<lib:input type="text" name='title'/>		
@@ -24,8 +24,9 @@
 		<spring:message code="article.pictures.placeholder" var="picturesPlaceholder" />
 		<lib:input type="text" placeholder="${picturesPlaceholder}" name='picturess'/>
 		
-		
+		<jstl:if test="${article.id eq 0}">
 		<div class="form-group row">
+		<spring:message code="article.newspaper"/>
 			<select id="newspaper" name="newspaper" class="selectpicker col-xs-12">
 				<option>----</option>
 				<jstl:forEach items="${nonPublishedNewspapers}" var="news">
@@ -35,6 +36,7 @@
 			<form:errors cssClass="error" path="newspaper" />
 		</div>
 		<p><spring:message code="article.explanation"/></p>
+		</jstl:if>
 		
 		
 		<lib:input type="checkBox" name='finalMode'/>

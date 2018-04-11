@@ -77,8 +77,7 @@ public class ArticleService {
 		}
 
 		Article saved = this.articleRepository.save(article);
-
-		article.getNewspaper().getArticless().add(saved);
+		if(article.getId() == 0) article.getNewspaper().getArticless().add(saved);
 
 		return saved;
 	}
@@ -115,14 +114,6 @@ public class ArticleService {
 		this.articleRepository.markInappropriateArticlesOfNewspaper(n);
 	}
 
-	public Article reconstruct(final Article article, final BindingResult binding) {
-		Article res = article;
-		res.setPublicationMoment(article.getNewspaper().getPublicationDate());
-		this.validator.validate(res, binding);
-		return res;
-	}
-
-
 	public Collection<Article> findAllTaboo() {
 		return articleRepository.findAllTaboo();
 	}
@@ -142,5 +133,9 @@ public class ArticleService {
 
 	public Double getFollowUpsPerArticleAvgAfterTwoWeeks(){
 		return articleRepository.getFollowUpsPerArticleAvgAfterTwoWeeks();
+	}
+
+	public Collection<Article> findMyArticles() {
+		return articleRepository.findMyArticles(userService.findByPrincipal());
 	}
 }
