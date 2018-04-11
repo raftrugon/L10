@@ -53,19 +53,24 @@ public class UserNewspaperController extends AbstractController {
 			Newspaper newspaper = newspaperService.create();
 			result = newEditModelAndView(newspaper);
 		} catch (Throwable oops) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:../../newspaper/list.do");
 		}
 		return result;
 	}
-//
-//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-//	public ModelAndView edit(@RequestParam(required = true) final int newspaperId) {
-//		Newspaper newspaper = newspaperService.findOne(newspaperId);
-//		if (newspaper.getUser().equals(userService.findByPrincipal()))
-//			return newEditModelAndView(newspaper);
-//		else
-//			return new ModelAndView("redirect:list.do");
-//	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam(required = true) final int newspaperId) {
+		Newspaper newspaper;
+		try{
+			newspaper = newspaperService.findOne(newspaperId);
+		}catch(Throwable oops){
+			return new ModelAndView("redirect:../../newspaper/list.do");
+		}
+		if (newspaper.getUser().equals(userService.findByPrincipal()))
+			return newEditModelAndView(newspaper);
+		else
+			return new ModelAndView("redirect:../../newspaper/list.do");
+	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(final Newspaper newspaper, final BindingResult binding) {
@@ -85,22 +90,7 @@ public class UserNewspaperController extends AbstractController {
 			}
 		return result;
 	}
-//
-//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
-//	public ModelAndView delete(@Valid final Newspaper newspaper, final BindingResult binding) {
-//		ModelAndView result;
-//		if (binding.hasErrors())
-//			result = newEditModelAndView(newspaper);
-//		else
-//			try {
-//				newspaperService.delete(newspaper);
-//				result = new ModelAndView("redirect:list.do");
-//			} catch (Throwable oops) {
-//				result = newEditModelAndView(newspaper);
-//				result.addObject("message", "newspaper.commitError");
-//			}
-//		return result;
-//	}
+	
 	protected ModelAndView newEditModelAndView(final Newspaper newspaper) {
 		ModelAndView result;
 		result = new ModelAndView("newspaper/edit");
