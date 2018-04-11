@@ -93,9 +93,24 @@ public class NewspaperService {
 	}
 	
 	public Newspaper reconstruct(Newspaper newspaper, BindingResult binding) {
-		newspaper.setId(0);
-		newspaper.setUser(userService.findByPrincipal());
-		validator.validate(newspaper, binding);
+		if(newspaper.getId() == 0){
+			newspaper.setId(0);
+			newspaper.setUser(userService.findByPrincipal());
+			validator.validate(newspaper, binding);
+		}else{
+			Newspaper db = findOne(newspaper.getId());
+			newspaper.setVersion(db.getVersion());
+			newspaper.setArticless(db.getArticless());
+			newspaper.setDescription(db.getDescription());
+			newspaper.setInappropriate(db.getInappropriate());
+			newspaper.setPicture(db.getPicture());
+			newspaper.setIsPrivate(db.getIsPrivate());
+			newspaper.setPrice(db.getPrice());
+			newspaper.setSubscriptionss(db.getSubscriptionss());
+			newspaper.setTitle(db.getTitle());
+			newspaper.setUser(db.getUser());
+			validator.validate(newspaper, binding);			
+		}
 		return newspaper;
 	}
 
