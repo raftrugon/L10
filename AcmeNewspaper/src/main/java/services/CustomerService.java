@@ -18,7 +18,6 @@ import security.UserAccountService;
 import domain.Customer;
 import domain.Newspaper;
 import domain.Subscription;
-import domain.User;
 
 @Service
 @Transactional
@@ -43,7 +42,7 @@ public class CustomerService {
 		Collection<Authority> authorities = userAccount.getAuthorities();
 		Authority authority = new Authority();
 
-		authority.setAuthority(Authority.USER);
+		authority.setAuthority(Authority.CUSTOMER);
 		authorities.add(authority);
 		userAccount.setAuthorities(authorities);
 
@@ -53,25 +52,25 @@ public class CustomerService {
 	}
 
 	public void flush() {
-		customerRepository.flush();
+		this.customerRepository.flush();
 	}
 
 	public Customer findOne(final int customerId) {
 		Assert.isTrue(customerId != 0);
-		Customer res = customerRepository.findOne(customerId);
+		Customer res = this.customerRepository.findOne(customerId);
 		Assert.notNull(res);
 		return res;
 	}
 
 	public Collection<Customer> findAll() {
-		Collection<Customer> res = customerRepository.findAll();
+		Collection<Customer> res = this.customerRepository.findAll();
 		Assert.notNull(res);
 		return res;
 	}
 
 	public Customer save(final Customer customer) {
 		Assert.notNull(customer);
-		
+
 		if (customer.getId() == 0) {
 			Md5PasswordEncoder password = new Md5PasswordEncoder();
 			String encodedPassword = password.encodePassword(customer.getUserAccount().getPassword(), null);
@@ -79,13 +78,13 @@ public class CustomerService {
 			customer.setUserAccount(this.userAccountService.save(customer.getUserAccount()));
 		}
 
-		return customerRepository.save(customer);
+		return this.customerRepository.save(customer);
 	}
 
 	public Customer findByUserAccount(final UserAccount userAccount) {
 		Assert.notNull(userAccount);
 		Customer res;
-		res = customerRepository.findByUserAccount(userAccount.getId());
+		res = this.customerRepository.findByUserAccount(userAccount.getId());
 		return res;
 	}
 
@@ -94,12 +93,12 @@ public class CustomerService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		res = findByUserAccount(userAccount);
+		res = this.findByUserAccount(userAccount);
 		return res;
 	}
 
-	public boolean isSubscribed(Newspaper newspaper) {
-		return customerRepository.isSubscribed(newspaper,findByPrincipal()) > 0 ? true : false;
+	public boolean isSubscribed(final Newspaper newspaper) {
+		return this.customerRepository.isSubscribed(newspaper,this.findByPrincipal()) > 0 ? true : false;
 	}
 
 }

@@ -75,7 +75,7 @@ public class SubscriptionServiceTest extends AbstractTest {
 		else
 			System.out.println("---------------------------- NEGATIVO ---------------------------");
 		System.out.println("Explicación: " + explanation);
-		System.out.println("NewpspaperId: " + subscriptionId);
+		System.out.println("Subscription: " + subscriptionId);
 		System.out.println("\r¿Correcto? " + (expected == caught));
 		System.out.println("-----------------------------------------------------------------\r");
 
@@ -211,7 +211,7 @@ public class SubscriptionServiceTest extends AbstractTest {
 		else
 			System.out.println("---------------------------- NEGATIVO ---------------------------");
 		System.out.println("Explicación: " + explanation);
-		System.out.println("ActorId: " + subscriptionId);
+		System.out.println("Subscription: " + subscriptionId);
 		System.out.println("\r¿Correcto? " + (expected == caught));
 		System.out.println("-----------------------------------------------------------------\r");
 

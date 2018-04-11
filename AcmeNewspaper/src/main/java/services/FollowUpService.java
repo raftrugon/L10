@@ -15,13 +15,14 @@ public class FollowUpService {
 	private FollowUpRepository		followUpRepository;
 
 	//Supporting Services -------------------
-
+	@Autowired
+	private	UserService				userService;
 
 	//CRUD Methods -------------------------
 
 	public FollowUp create() {
 		FollowUp res = new FollowUp();
-		
+		Assert.isTrue(userService.findByPrincipal() instanceof domain.User);		
 		return res;
 	}
 	
@@ -46,6 +47,10 @@ public class FollowUpService {
 	public void delete(final int followUpId) {
 		Assert.isTrue(followUpId != 0);
 		followUpRepository.delete(followUpId);
+	}
+	
+	public void flush(){
+		followUpRepository.flush();
 	}
 	
 	
