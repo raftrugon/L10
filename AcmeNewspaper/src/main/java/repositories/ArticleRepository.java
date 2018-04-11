@@ -55,8 +55,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	//The average number of follow-ups per article up to
 	//one week after the corresponding newspaper's been published.
 	@Query(value="select coalesce(avg(count),0) from (select count(followUp.id) as count from acmenewspaper.article as a"+
-		" join acmenewspaper.followUp on followUp.article_id = a.id"+
-		" where followUp.publicationMoment > (select publicationDate from acmenewspaper.newspaper where id=a.newspaper_id)"+
+		" join acmenewspaper.followUp on followUp.article_id = a.id where followUp.publicationMoment > (select publicationDate from acmenewspaper.newspaper where id=a.newspaper_id)"+
 		" and followUp.publicationMoment < (select ADDDATE((select publicationDate from acmenewspaper.newspaper where id=a.newspaper_id), INTERVAL 7 DAY) as oneWeekDate)"+
 		" group by a.id) acmenewspaper", nativeQuery=true)
 	Double getFollowUpsPerArticleAvgAfterOneWeek();
@@ -64,8 +63,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	//The average number of follow-ups per article up to
 	//two weeks after the corresponding newspaper's been published.
 	@Query(value="select coalesce(avg(count),0) from (select count(followUp.id) as count from acmenewspaper.article as a"+
-		" join acmenewspaper.followUp on followUp.article_id = a.id"+
-		" where followUp.publicationMoment > (select publicationDate from acmenewspaper.newspaper where id=a.newspaper_id)"+
+		" join acmenewspaper.followUp on followUp.article_id = a.id where followUp.publicationMoment > (select publicationDate from acmenewspaper.newspaper where id=a.newspaper_id)"+
 		" and followUp.publicationMoment < (select ADDDATE((select publicationDate from acmenewspaper.newspaper where id=a.newspaper_id), INTERVAL 14 DAY) as oneWeekDate)"+
 		" group by a.id) acmenewspaper", nativeQuery=true)
 	Double getFollowUpsPerArticleAvgAfterTwoWeeks();
