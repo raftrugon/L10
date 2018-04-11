@@ -28,17 +28,7 @@ public class UserNewspaperController extends AbstractController {
 	public UserNewspaperController() {
 		super();
 	}
-	//
-	//	@RequestMapping("/list")
-	//	public ModelAndView list() {
-	//		ModelAndView result;
-	//		final List<Newspaper> newspapers = new ArrayList<Newspaper>(userService.findByPrincipal().getNewspapers());
-	//		result = new ModelAndView("newspaper/list");
-	//		result.addObject("newspapers", newspapers);
-	//		result.addObject("requestUri", "user/newspaper/list.do");
-	//		return result;
-	//	}
-	//
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -78,7 +68,6 @@ public class UserNewspaperController extends AbstractController {
 			} catch (Throwable oops) {
 				result = newEditModelAndView(newspaper);
 				result.addObject("message", "newspaper.commitError");
-				System.out.println(oops.getMessage());
 			}
 		return result;
 	}

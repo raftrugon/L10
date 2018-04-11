@@ -3,7 +3,6 @@ package controllers.User;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ChirpService;
-import services.UserService;
 import controllers.AbstractController;
 import domain.Chirp;
 
@@ -22,8 +20,6 @@ public class UserChirpController extends AbstractController {
 
 	@Autowired
 	private ChirpService	chirpService;
-	@Autowired
-	private UserService	userService;
 
 
 	//Constructor
@@ -55,20 +51,10 @@ public class UserChirpController extends AbstractController {
 			result = newEditModelAndView(chirp);
 		} catch (Throwable oops) {
 			result = new ModelAndView("redirect:list.do");
-			System.out.println(oops.getMessage());
 		}
 		return result;
 	}
-	//
-	//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	//	public ModelAndView edit(@RequestParam(required = true) final int chirpId) {
-	//		Chirp chirp = chirpService.findOne(chirpId);
-	//		if (chirp.getUser().equals(userService.findByPrincipal()))
-	//			return newEditModelAndView(chirp);
-	//		else
-	//			return new ModelAndView("redirect:list.do");
-	//	}
-	//
+
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(final Chirp chirp, final BindingResult binding) {
 		ModelAndView result;
@@ -85,22 +71,7 @@ public class UserChirpController extends AbstractController {
 			}
 		return result;
 	}
-	//
-	//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
-	//	public ModelAndView delete(@Valid final Chirp chirp, final BindingResult binding) {
-	//		ModelAndView result;
-	//		if (binding.hasErrors())
-	//			result = newEditModelAndView(chirp);
-	//		else
-	//			try {
-	//				chirpService.delete(chirp);
-	//				result = new ModelAndView("redirect:list.do");
-	//			} catch (Throwable oops) {
-	//				result = newEditModelAndView(chirp);
-	//				result.addObject("message", "chirp.commitError");
-	//			}
-	//		return result;
-	//	}
+
 	protected ModelAndView newEditModelAndView(final Chirp chirp) {
 		ModelAndView result;
 		result = new ModelAndView("chirp/edit");

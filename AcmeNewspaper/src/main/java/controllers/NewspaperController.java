@@ -2,13 +2,7 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ArticleService;
 import services.CustomerService;
 import services.NewspaperService;
-import domain.Article;
 import domain.Newspaper;
 
 @Controller
@@ -65,14 +58,13 @@ public class NewspaperController extends AbstractController {
 		}
 		try {
 			res.addObject("isSubscribed", customerService.isSubscribed(newspaper));
-			System.out.println(customerService.isSubscribed(newspaper));
 		} catch (Throwable oops) {
 		}
 		if(newspaper.getInappropriate()==false){
 			res.addObject("newspaper", newspaper);
 			res.addObject("articles",articleService.findAllPublishedForNewspaper(newspaper));
 			res.addObject("requestUri", "newspaper/display.do");
-		return res;
+			return res;
 		} else
 			return new ModelAndView("redirect:list.do");
 	}

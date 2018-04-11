@@ -36,16 +36,6 @@ public class UserFollowUpController extends AbstractController {
 		super();
 	}
 
-//	@RequestMapping("/list")
-//	public ModelAndView list() {
-//		ModelAndView result;
-//		final List<FollowUp> followUps = new ArrayList<FollowUp>(userService.findByPrincipal().getFollowUps());
-//		result = new ModelAndView("followUp/list");
-//		result.addObject("followUps", followUps);
-//		result.addObject("requestUri", "user/followUp/list.do");
-//		return result;
-//	}
-//	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam(required = true)int articleId) {
 		ModelAndView result;
@@ -60,16 +50,7 @@ public class UserFollowUpController extends AbstractController {
 		}
 		return result;
 	}
-//
-//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-//	public ModelAndView edit(@RequestParam(required = true) final int followUpId) {
-//		FollowUp followUp = followUpService.findOne(followUpId);
-//		if (followUp.getUser().equals(userService.findByPrincipal()))
-//			return newEditModelAndView(followUp);
-//		else
-//			return new ModelAndView("redirect:list.do");
-//	}
-//
+
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final FollowUp followUp, final BindingResult binding) {
 		ModelAndView result;
@@ -85,22 +66,7 @@ public class UserFollowUpController extends AbstractController {
 			}
 		return result;
 	}
-//
-//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "delete")
-//	public ModelAndView delete(@Valid final FollowUp followUp, final BindingResult binding) {
-//		ModelAndView result;
-//		if (binding.hasErrors())
-//			result = newEditModelAndView(followUp);
-//		else
-//			try {
-//				followUpService.delete(followUp);
-//				result = new ModelAndView("redirect:list.do");
-//			} catch (Throwable oops) {
-//				result = newEditModelAndView(followUp);
-//				result.addObject("message", "followUp.commitError");
-//			}
-//		return result;
-//	}
+
 	protected ModelAndView newEditModelAndView(final FollowUp followUp) {
 		ModelAndView result;
 		result = new ModelAndView("followUp/edit");

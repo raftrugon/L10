@@ -1,11 +1,7 @@
 
 package controllers.User;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -41,7 +37,7 @@ public class UserArticleController extends AbstractController {
 	public UserArticleController() {
 		super();
 	}
-	
+
 	@RequestMapping(value="/list",method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -55,7 +51,7 @@ public class UserArticleController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		try {
-			Article article = this.articleService.create();
+			Article article = articleService.create();
 			result = this.newEditModelAndView(article);
 		} catch (Throwable oops) {
 			result = new ModelAndView("redirect:list.do");
@@ -68,8 +64,8 @@ public class UserArticleController extends AbstractController {
 		ModelAndView result;
 
 		try {
-			Article article = this.articleService.findOne(articleId);
-			Assert.isTrue(article.getNewspaper().getUser() == (this.userService.findByPrincipal()));
+			Article article = articleService.findOne(articleId);
+			Assert.isTrue(article.getNewspaper().getUser() == (userService.findByPrincipal()));
 			Assert.isTrue(!article.getFinalMode());
 			result = this.newEditModelAndView(article);
 
@@ -87,7 +83,7 @@ public class UserArticleController extends AbstractController {
 			result = this.newEditModelAndView(article);
 		else
 			try {
-				this.articleService.save(article);
+				articleService.save(article);
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				result = this.newEditModelAndView(article, "article.commitError");
@@ -104,7 +100,7 @@ public class UserArticleController extends AbstractController {
 
 	protected ModelAndView newEditModelAndView(final Article article, final String message) {
 		ModelAndView result;
-		Collection<Newspaper> nonPublishedNewspapers = this.newspaperService.findMyNonPublished();
+		Collection<Newspaper> nonPublishedNewspapers = newspaperService.findMyNonPublished();
 		result = new ModelAndView("article/edit");
 		result.addObject("nonPublishedNewspapers", nonPublishedNewspapers);
 		result.addObject("article", article);

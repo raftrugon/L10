@@ -55,7 +55,7 @@
 	</div>
 </div>
 
-<div class="col-sm-10 col-sm-offset-1 well">
+<div class="col-sm-8 col-sm-offset-2 well">
 	<display:table pagesize="6" class="displaytag" keepStatus="true" name="followUps" requestURI="${requestUri}" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
@@ -101,7 +101,7 @@
 	</div>
 		
 </display:table>
-</br>
+<br>
 <jstl:if test="${pageContext.request.userPrincipal.name eq article.newspaper.user.userAccount.username }">
 	<a href="user/followUp/create.do?articleId=${article.id}">
 		<spring:message code="followUp.new"/>

@@ -75,7 +75,6 @@ public class RegisterController extends AbstractController {
 	@RequestMapping(value = "customer", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveCustomer(@Valid final Customer customer, final BindingResult binding) {
 		ModelAndView result;
-		System.out.println(binding);
 		if (binding.hasErrors())
 			result = this.newEditModelAndViewCustomer(customer);
 		else
