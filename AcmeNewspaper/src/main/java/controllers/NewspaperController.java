@@ -60,9 +60,13 @@ public class NewspaperController extends AbstractController {
 			res.addObject("isSubscribed", this.customerService.isSubscribed(newspaper));
 		} catch (Throwable oops) {
 		}
+		if(newspaper.getInappropriate()==false){
 		res.addObject("newspaper", newspaper);
 		res.addObject("articles", this.articleService.findAllPublishedForNewspaper(newspaper));
 		res.addObject("requestUri", "newspaper/display.do");
 		return res;
+		} else {
+			return new ModelAndView("redirect:list.do");
+		}
 	}
 }
