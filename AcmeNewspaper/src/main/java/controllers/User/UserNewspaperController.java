@@ -1,13 +1,7 @@
 
 package controllers.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +13,6 @@ import services.NewspaperService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Newspaper;
-import domain.User;
 
 @Controller
 @RequestMapping("user/newspaper")
@@ -35,17 +28,17 @@ public class UserNewspaperController extends AbstractController {
 	public UserNewspaperController() {
 		super();
 	}
-//
-//	@RequestMapping("/list")
-//	public ModelAndView list() {
-//		ModelAndView result;
-//		final List<Newspaper> newspapers = new ArrayList<Newspaper>(userService.findByPrincipal().getNewspapers());
-//		result = new ModelAndView("newspaper/list");
-//		result.addObject("newspapers", newspapers);
-//		result.addObject("requestUri", "user/newspaper/list.do");
-//		return result;
-//	}
-//	
+	//
+	//	@RequestMapping("/list")
+	//	public ModelAndView list() {
+	//		ModelAndView result;
+	//		final List<Newspaper> newspapers = new ArrayList<Newspaper>(userService.findByPrincipal().getNewspapers());
+	//		result = new ModelAndView("newspaper/list");
+	//		result.addObject("newspapers", newspapers);
+	//		result.addObject("requestUri", "user/newspaper/list.do");
+	//		return result;
+	//	}
+	//
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -53,7 +46,7 @@ public class UserNewspaperController extends AbstractController {
 			Newspaper newspaper = newspaperService.create();
 			result = newEditModelAndView(newspaper);
 		} catch (Throwable oops) {
-			result = new ModelAndView("redirect:../../newspaper/list.do");
+			result = new ModelAndView("redirect:/newspaper/list.do");
 		}
 		return result;
 	}
@@ -64,25 +57,24 @@ public class UserNewspaperController extends AbstractController {
 		try{
 			newspaper = newspaperService.findOne(newspaperId);
 		}catch(Throwable oops){
-			return new ModelAndView("redirect:../../newspaper/list.do");
+			return new ModelAndView("redirect:/newspaper/list.do");
 		}
 		if (newspaper.getUser().equals(userService.findByPrincipal()))
 			return newEditModelAndView(newspaper);
 		else
-			return new ModelAndView("redirect:../../newspaper/list.do");
+			return new ModelAndView("redirect:/newspaper/list.do");
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(final Newspaper newspaper, final BindingResult binding) {
 		ModelAndView result;
 		Newspaper validated = newspaperService.reconstruct(newspaper, binding);
-		if (binding.hasErrors()) {
+		if (binding.hasErrors())
 			result = newEditModelAndView(newspaper);
-		}
 		else
 			try {
 				newspaperService.save(validated);
-				result = new ModelAndView("redirect:../../newspaper/list.do");
+				result = new ModelAndView("redirect:/newspaper/list.do");
 			} catch (Throwable oops) {
 				result = newEditModelAndView(newspaper);
 				result.addObject("message", "newspaper.commitError");
@@ -90,7 +82,7 @@ public class UserNewspaperController extends AbstractController {
 			}
 		return result;
 	}
-	
+
 	protected ModelAndView newEditModelAndView(final Newspaper newspaper) {
 		ModelAndView result;
 		result = new ModelAndView("newspaper/edit");

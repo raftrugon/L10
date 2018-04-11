@@ -1,7 +1,11 @@
 
 package services;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +56,21 @@ public class SubscriptionService {
 
 	public Subscription save(final Subscription subscription) {
 		Assert.notNull(subscription);
+		Assert.isTrue(!customerService.isSubscribed(subscription.getNewspaper()));
+
+		//Comprobación fecha
+		Date cardDate = new Date();
+		String date =subscription.getCreditCard().getExpirationYear() + "/"+ subscription.getCreditCard().getExpirationMonth() + "/00";
+		try {
+			cardDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+		} catch (ParseException e) {
+
+		}
+
+		Assert.isTrue(cardDate.after(new Date()));
+
+
+
 
 		return subscriptionRepository.save(subscription);
 	}

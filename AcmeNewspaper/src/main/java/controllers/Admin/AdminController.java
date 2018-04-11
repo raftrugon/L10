@@ -40,7 +40,7 @@ public class AdminController extends AbstractController {
 
 	@RequestMapping("/article/inappropriate")
 	public ModelAndView setArticleInappropriate(@RequestParam(required=true) final int articleId){
-		this.articleService.markAsInappropriate(articleId);
+		articleService.markAsInappropriate(articleId);
 		return new ModelAndView("redirect: ../../../../article/list.do");
 	}
 
@@ -50,7 +50,7 @@ public class AdminController extends AbstractController {
 		try{
 
 			res = new ModelAndView("article/list");
-			res.addObject("articles",this.articleService.findAllTaboo());
+			res.addObject("articles",articleService.findAllTaboo());
 			res.addObject("requestUri", "admin/article/taboo-list.do");
 		} catch(Throwable oops) {
 			res = new ModelAndView("redirect:/");
@@ -60,7 +60,7 @@ public class AdminController extends AbstractController {
 
 	@RequestMapping("/newspaper/inappropriate")
 	public ModelAndView setNewspaperInappropriate(@RequestParam(required=true) final int newspaperId){
-		this.newspaperService.markAsInappropriate(newspaperId);
+		newspaperService.markAsInappropriate(newspaperId);
 		return new ModelAndView("redirect: ../../../../newspaper/list.do");
 	}
 
@@ -69,7 +69,7 @@ public class AdminController extends AbstractController {
 		ModelAndView res ;
 		try{
 			res = new ModelAndView("newspaper/list");
-			res.addObject("newspapers",this.newspaperService.findAllTaboo());
+			res.addObject("newspapers",newspaperService.findAllTaboo());
 			res.addObject("requestUri", "admin/newspaper/taboo-list.do");
 		} catch(Throwable oops) {
 			res = new ModelAndView("redirect:/");
@@ -79,7 +79,7 @@ public class AdminController extends AbstractController {
 
 	@RequestMapping("/chirp/inappropriate")
 	public ModelAndView setChirpInappropriate(@RequestParam(required=true) final int chirpId){
-		this.chirpService.markAsInappropriate(chirpId);
+		chirpService.markAsInappropriate(chirpId);
 		return new ModelAndView("redirect:taboo-list.do");
 	}
 
@@ -89,7 +89,7 @@ public class AdminController extends AbstractController {
 		ModelAndView res ;
 		try{
 			res = new ModelAndView("chirp/list");
-			res.addObject("chirps",this.chirpService.findAllTaboo());
+			res.addObject("chirps",chirpService.findAllTaboo());
 			res.addObject("requestUri", "admin/chirp/taboo-list.do");
 		} catch(Throwable oops) {
 			res = new ModelAndView("redirect:/");
@@ -102,7 +102,7 @@ public class AdminController extends AbstractController {
 		ModelAndView res;
 		try{
 			res = new ModelAndView("chirp/list");
-			res.addObject("chirps",this.chirpService.findAll());
+			res.addObject("chirps",chirpService.findAll());
 			res.addObject("requestUri", "admin/chirp/list.do");
 		} catch(Throwable oops) {
 			res = new ModelAndView("redirect:/");
@@ -113,7 +113,8 @@ public class AdminController extends AbstractController {
 	@RequestMapping("/dashboard")
 	public ModelAndView dashboard() {
 		ModelAndView result;
-		//try{
+
+		try{
 		result = new ModelAndView("admin/dashboard");
 
 		List<Double> avgs = new ArrayList<Double>();
@@ -147,9 +148,9 @@ public class AdminController extends AbstractController {
 		result.addObject("newspapersOverAvg",newspapersOverAvg);
 		List<Newspaper> newspapersUnderAvg = new ArrayList<Newspaper>(this.newspaperService.getNewspapersUnderAvg());
 		result.addObject("newspapersUnderAvg",newspapersUnderAvg);
-		/*} catch(Throwable oops) {
+		} catch(Throwable oops) {
 			result = new ModelAndView("redirect:/");
-		}*/
+		}
 
 		return result;
 	}

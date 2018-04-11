@@ -36,7 +36,7 @@ public class NewspaperController extends AbstractController {
 	public ModelAndView list(@RequestParam(required = false, defaultValue = "") final String keyword) {
 		ModelAndView result;
 		try{
-			final List<Newspaper> newspapers = new ArrayList<Newspaper>(this.newspaperService.findByKeyword(keyword));
+			final List<Newspaper> newspapers = new ArrayList<Newspaper>(newspaperService.findByKeyword(keyword));
 			result = new ModelAndView("newspaper/list");
 			result.addObject("newspapers", newspapers);
 			result.addObject("requestUri", "newspaper/list.do");
@@ -52,21 +52,21 @@ public class NewspaperController extends AbstractController {
 		ModelAndView res = new ModelAndView("newspaper/display");
 		Newspaper newspaper = null;
 		try {
-			newspaper = this.newspaperService.findOne(newspaperId);
+			newspaper = newspaperService.findOne(newspaperId);
 		} catch (Throwable oops) {
 			return new ModelAndView("redirect:list.do");
 		}
 		try {
-			res.addObject("isSubscribed", this.customerService.isSubscribed(newspaper));
+			res.addObject("isSubscribed", customerService.isSubscribed(newspaper));
+			System.out.println(customerService.isSubscribed(newspaper));
 		} catch (Throwable oops) {
 		}
 		if(newspaper.getInappropriate()==false){
-		res.addObject("newspaper", newspaper);
-		res.addObject("articles", this.articleService.findAllPublishedForNewspaper(newspaper));
-		res.addObject("requestUri", "newspaper/display.do");
-		return res;
-		} else {
+			res.addObject("newspaper", newspaper);
+			res.addObject("articles", articleService.findAllPublishedForNewspaper(newspaper));
+			res.addObject("requestUri", "newspaper/display.do");
+			return res;
+		} else
 			return new ModelAndView("redirect:list.do");
-		}
 	}
 }

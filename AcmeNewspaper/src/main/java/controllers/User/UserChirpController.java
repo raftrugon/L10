@@ -37,11 +37,12 @@ public class UserChirpController extends AbstractController {
 	public ModelAndView timeline() {
 		ModelAndView result;
 		try{
-			final List<Chirp> chirps = new ArrayList<Chirp>(this.chirpService.getTimeline());
+			final List<Chirp> chirps = new ArrayList<Chirp>(chirpService.getTimeline());
 			result = new ModelAndView("chirp/list");
 			result.addObject("chirps", chirps);
 			result.addObject("requestUri", "user/chirp/timeline.do");
 		} catch(Throwable oops) {
+			oops.printStackTrace();
 			result = new ModelAndView("redirect:/");
 		}
 		return result;
@@ -51,8 +52,8 @@ public class UserChirpController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		try {
-			Chirp chirp = this.chirpService.create();
-			result = this.newEditModelAndView(chirp);
+			Chirp chirp = chirpService.create();
+			result = newEditModelAndView(chirp);
 		} catch (Throwable oops) {
 			result = new ModelAndView("redirect:list.do");
 			System.out.println(oops.getMessage());
@@ -72,15 +73,15 @@ public class UserChirpController extends AbstractController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Chirp chirp, final BindingResult binding) {
 		ModelAndView result;
-		Chirp validated = this.chirpService.reconstruct(chirp, binding);
+		Chirp validated = chirpService.reconstruct(chirp, binding);
 		if (binding.hasErrors())
-			result = this.newEditModelAndView(chirp);
+			result = newEditModelAndView(chirp);
 		else
 			try {
-				this.chirpService.save(validated);
+				chirpService.save(validated);
 				result = new ModelAndView("redirect:../../");
 			} catch (Throwable oops) {
-				result = this.newEditModelAndView(chirp);
+				result = newEditModelAndView(chirp);
 				result.addObject("message", "chirp.commitError");
 			}
 		return result;
