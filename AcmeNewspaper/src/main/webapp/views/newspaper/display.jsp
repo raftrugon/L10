@@ -9,6 +9,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="col-sm-10 col-sm-offset-1 well">
+
+	<security:authorize access="hasRole('USER')">
+		<jstl:if test="${pageContext.request.userPrincipal.name eq newspaper.user.userAccount.username}">
+			<a href="user/newspaper/edit.do?newspaperId=${newspaper.id}" class="btn btn-block btn-warning"><spring:message code="newspaper.edit"/></a>
+		</jstl:if>
+	</security:authorize>
 	<security:authorize access="hasRole('CUSTOMER')">
 		<jstl:if test="${!isSuscribed && newspaper.isPrivate}">
 			<a class="btn btn-primary btn-block" href="customer/subscription/create.do?newspaperId=${newspaper.id}"><spring:message code="newspaper.suscribe"/></a>					

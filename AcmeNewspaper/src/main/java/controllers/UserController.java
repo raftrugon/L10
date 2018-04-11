@@ -67,6 +67,7 @@ public class UserController extends AbstractController {
 				follows = user.getFollowedBy().contains(principal) ;
 				result.addObject("logged", principal);
 				result.addObject("follows",follows);
+				result.addObject("chirps", user.getChirps());
 			}catch(Throwable oops){
 				if(userId != null)
 					user = this.userService.findOne(userId);

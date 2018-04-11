@@ -35,6 +35,7 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/systemConfig/**" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/user/**" access="hasRole('USER')"/>
 		<security:intercept-url pattern="/customer/**" access="hasRole('CUSTOMER')"/>
 

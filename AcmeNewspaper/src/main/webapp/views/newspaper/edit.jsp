@@ -9,18 +9,25 @@
 
 <div class="well col-md-6 col-md-offset-3">
 	<form:form action="user/newspaper/save.do" modelAttribute="newspaper">
-	
-		<lib:input name="id,version,subscriptionss,user,inappropriate,articless" type="hidden" />
-		
-		
 		<jstl:set var='model' value='newspaper' scope='request'/>
-		<lib:input type="text" name='title'/>
+
+		<jstl:if test="${newspaper.id eq 0 or empty newspaper.id }">
+			<lib:input name="version,subscriptionss,user,inappropriate,articless" type="hidden" />
+
+			<lib:input type="text" name='title'/>
+		</jstl:if>
+
+		<lib:input type="hidden" name="id"/>
 		<lib:input type="date" name='publicationDate'/>
-		<lib:input type="text" name='description'/>
-		<lib:input type="text" name='picture'/>
-		<lib:input type="number" name='price'  step="0.01"/>
-		<lib:input type="checkBox" name='isPrivate'/>
-		
+		<p><spring:message code="newspaper.explanation"/></p>
+
+		<jstl:if test="${newspaper.id eq 0 or empty newspaper.id }">
+			<lib:input type="text" name='description'/>
+			<lib:input type="text" name='picture'/>
+			<lib:input type="number" name='price' min="0" step="0.01"/>
+			<lib:input type="checkBox" name='isPrivate'/>
+		</jstl:if>
+
 		<lib:button model='newspaper' noDelete='true' id='${newspaper.id}' cancelUri='newspaper/list.do'/>
 </form:form>
 </div>
