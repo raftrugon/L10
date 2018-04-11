@@ -78,6 +78,13 @@ public class AdminController extends AbstractController {
 		return res;
 	}
 	
+	@RequestMapping("/chirp/list")
+	public ModelAndView listChirpsAdmin() {
+		ModelAndView res = new ModelAndView("chirp/list");
+		res.addObject("chirps",chirpService.findAll());
+		return res;
+	}
+	
 	@RequestMapping("/dashboard")
 	public ModelAndView dashboard() {
 		ModelAndView result;

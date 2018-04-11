@@ -25,7 +25,7 @@
 		<lib:column name='title'/>
 		<lib:column name='publicationDate'/>
 		<lib:column name='description'/>
-		<lib:column name='picture'/>
+		<lib:column name='picture' photoUrl="${row.picture}"/>
 		<lib:column name='isPrivate'/>
 	</display:table>
 </div>

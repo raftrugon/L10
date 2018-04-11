@@ -64,9 +64,16 @@
 			<li><a href="article/list.do"><spring:message code="master.page.article.list" /></a></li>
 			<li><a href="user-list.do"><spring:message code="master.page.actor.list" /></a></li>
 			<security:authorize access="hasRole('USER')">
-								<li><a href="user/chirp/timeline.do"><spring:message code="master.page.chirp.list" /></a></li>
-					
-				</security:authorize>
+				<li><a href="user/chirp/timeline.do"><spring:message code="master.page.chirp.list" /></a></li>
+				<button onClick="javascript:window.location.href = 'user/newspaper/create.do'" class="btn btn-success navbar-btn"><spring:message code="master.page.newspaper.new" /></button>
+									
+			</security:authorize>
+			<security:authorize access="hasRole('ADMIN')">
+				<li><a href="admin/chirp/list.do"><spring:message code="master.page.chirp.list" /></a></li>
+				<li><a href="admin/article/taboo-list.do"><spring:message code="master.page.newspaper.list.taboo" /></a></li>
+				<li><a href="admin/newspaper/taboo-list.do"><spring:message code="master.page.newspaper.list.taboo" /></a></li>
+				<li><a href="admin/chirp/taboo-list.do"><spring:message code="master.page.newspaper.list.taboo" /></a></li>
+			</security:authorize>
 		</ul>
 	
 		<!-- Right-side content -->	
@@ -91,8 +98,6 @@
 				</security:authorize>
 								<security:authorize access="hasRole('ADMIN')">
 					<li><a href="user-display.do"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
-					<li><a href="user/chirp/timeline.do"><spring:message code="master.page.chirp.list" /></a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username"/></a></li>
 				</security:authorize>
 				
 					

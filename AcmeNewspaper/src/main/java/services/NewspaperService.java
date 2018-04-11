@@ -63,6 +63,8 @@ public class NewspaperService {
 		Assert.isTrue(newspaper.getUser().equals(userService.findByPrincipal()));
 		Assert.notNull(this.userService.findByPrincipal());
 		Assert.isTrue(newspaper.getPublicationDate().after(new Date()));
+		if(newspaper.getIsPrivate()) Assert.notNull(newspaper.getPrice());
+		else newspaper.setPrice(null);
 		return this.newspaperRepository.save(newspaper);
 	}
 

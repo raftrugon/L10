@@ -74,7 +74,6 @@ public class Newspaper extends DomainEntity {
 	}
 
 	@Min(0)
-	@NotNull
 	public Double getPrice() {
 		return this.price;
 	}

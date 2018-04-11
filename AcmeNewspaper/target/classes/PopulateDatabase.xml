@@ -929,7 +929,8 @@
 		<property name="newspaper" ref="newspaper2" />
 		<property name="picturess">
 			<list>
-			
+				<value>http://www.spain.info/export/sites/spaininfo/comun/carrusel-recursos/andalucia/malaga-26926024-istock.jpg_369272544.jpg</value>
+				<value>https://www.recordrentacar.com/images/beforefooter/destinos/alquiler-coches-malaga.jpg</value>			
 			</list>
 		</property>
 		<property name="followUps">
