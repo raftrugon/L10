@@ -74,6 +74,7 @@
 				<li><a href="admin/newspaper/taboo-list.do"><spring:message code="master.page.newspaper.list.taboo" /></a></li>
 				<li><a href="admin/chirp/taboo-list.do"><spring:message code="master.page.chirp.list.taboo" /></a></li>
 				<li><a href="systemConfig/edit.do"><spring:message code="master.page.systemConfig" /></a></li>
+				<li><a href="admin/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
 			</security:authorize>
 		</ul>
 	
