@@ -8,12 +8,16 @@
 <%@taglib prefix="lib" tagdir="/WEB-INF/tags/myTagLib" %>
 
 <div class="well col-md-6 col-md-offset-3">
-	<form:form action="followUp/edit.do" modelAttribute="followUp">
+	<form:form action="followUp/save.do" modelAttribute="followUp">
 	<jstl:set var='model' value='followUp' scope='request'/>
-		<lib:input type="text" name='publicationMoment'/>
+	
+		<lib:input name="id,version,article,publicationMoment" type="hidden" />
+	
 		<lib:input type="text" name='title'/>
 		<lib:input type="text" name='summary'/>
 		<lib:input type="text" name='body'/>
-		<lib:input type="text" name='pictures'/>
+		<lib:input type="text" name='picturess'/>
+		
+		<lib:button model='chirp' noDelete='true' id='${chirp.id}' cancelUri='#'/>
 </form:form>
 </div>
