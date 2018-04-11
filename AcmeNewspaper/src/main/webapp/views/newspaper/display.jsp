@@ -17,7 +17,7 @@
 	</security:authorize>
 	<security:authorize access="hasRole('CUSTOMER')">
 		<jstl:if test="${!isSuscribed && newspaper.isPrivate}">
-			<a class="btn btn-primary btn-block" href="customer/subscription/create.do?newspaperId=${newspaper.id}"><spring:message code="newspaper.suscribe"/></a>					
+			<a class="btn btn-primary btn-block" href="customer/subscription/create.do?newspaperId=${newspaper.id}"><spring:message code="newspaper.suscribe"/></a>
 		</jstl:if>
 	</security:authorize>
 	<display:table pagesize="1" class="displaytag" keepStatus="true" name="newspaper" id="row">
@@ -64,5 +64,21 @@
 	</display:column>
 
 
+	<security:authorize access="hasRole('USER')">
+		<spring:message code="article.edit" var="article_edit"/>
+	<display:column title="${article_edit}">
+	<jstl:if test="${row2.newspaper.user.userAccount.username eq pageContext.request.userPrincipal.name}">
+		<a href="user/article/edit.do?articleId=${row2.id}">
+		<jstl:out value="${article_edit}"/></a>
+		</jstl:if>
+	</display:column>
+
+		</security:authorize>
+
 </display:table>
+<security:authorize access="hasRole('USER')">
+ <div>
+	<a href="user/article/create.do"><spring:message code="article.create" /></a>
+ </div>
+</security:authorize>
 </div>
