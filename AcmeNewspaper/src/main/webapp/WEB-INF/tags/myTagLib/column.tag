@@ -18,6 +18,7 @@
 <%@ attribute name="value"  rtexprvalue="true"  required="false" type="java.lang.String"  description="value to display" %>
 <%@ attribute name="map"  rtexprvalue="true"  required="false" type="java.lang.String"  description="True if attribute is a map" %>
 <%@ attribute name="nopic"  rtexprvalue="true"  required="false" type="java.lang.String"  description="True if there is no image" %>
+<%@ attribute name="group"  rtexprvalue="true"  required="false" type="java.lang.String"  description="Group" %>
 
 <jstl:choose>
 <jstl:when test="${photoUrl ne null }">
@@ -61,7 +62,7 @@
 </jstl:when>
 <jstl:otherwise>
 	<spring:message code="${model}.${name}" var="Header" />
-	<display:column property="${name}" title="${Header}" sortable="${sortable}" style="${style}" format="${format}"/>
+	<display:column property="${name}" title="${Header}" sortable="${sortable}" style="${style}" format="${format}" group="${group}"/>
 </jstl:otherwise>
 
 </jstl:choose>

@@ -113,40 +113,41 @@ public class AdminController extends AbstractController {
 	@RequestMapping("/dashboard")
 	public ModelAndView dashboard() {
 		ModelAndView result;
+
 		try{
-			result = new ModelAndView("admin/dashboard");
+		result = new ModelAndView("admin/dashboard");
 
-			List<Double> avgs = new ArrayList<Double>();
-			avgs.add(userService.getStatsOfNewspapersPerUser()[0]);
-			avgs.add(userService.getStatsOfArticlesPerUser()[0]);
-			avgs.add(newspaperService.getStatsOfArticlesPerNewspaper()[0]);
-			avgs.add(articleService.getFollowUpsPerArticleAvg());
-			avgs.add(articleService.getFollowUpsPerArticleAvgAfterOneWeek());
-			avgs.add(articleService.getFollowUpsPerArticleAvgAfterTwoWeeks());
-			avgs.add(userService.getStatsOfChirpsPerUser()[0]);
-			avgs.add(newspaperService.getArticleAvgForPrivateNewspapers());
-			avgs.add(newspaperService.getArticleAvgForPublicNewspapers());
-			result.addObject("avgs",avgs);
+		List<Double> avgs = new ArrayList<Double>();
+		avgs.add(userService.getStatsOfNewspapersPerUser()[0]);
+		avgs.add(userService.getStatsOfArticlesPerUser()[0]);
+		avgs.add(newspaperService.getStatsOfArticlesPerNewspaper()[0]);
+		avgs.add(articleService.getFollowUpsPerArticleAvg());
+		avgs.add(articleService.getFollowUpsPerArticleAvgAfterOneWeek());
+		avgs.add(articleService.getFollowUpsPerArticleAvgAfterTwoWeeks());
+		avgs.add(userService.getStatsOfChirpsPerUser()[0]);
+		avgs.add(newspaperService.getArticleAvgForPrivateNewspapers());
+		avgs.add(newspaperService.getArticleAvgForPublicNewspapers());
+		result.addObject("avgs",avgs);
 
-			List<Double> stddevs = new ArrayList<Double>();
-			stddevs.add(userService.getStatsOfNewspapersPerUser()[1]);
-			stddevs.add(userService.getStatsOfArticlesPerUser()[1]);
-			stddevs.add(newspaperService.getStatsOfArticlesPerNewspaper()[1]);
-			stddevs.add(userService.getStatsOfChirpsPerUser()[1]);
-			result.addObject("stddevs",stddevs);
+		List<Double> stddevs = new ArrayList<Double>();
+		stddevs.add(userService.getStatsOfNewspapersPerUser()[1]);
+		stddevs.add(userService.getStatsOfArticlesPerUser()[1]);
+		stddevs.add(newspaperService.getStatsOfArticlesPerNewspaper()[1]);
+		stddevs.add(userService.getStatsOfChirpsPerUser()[1]);
+		result.addObject("stddevs",stddevs);
 
-			List<Double> ratios = new ArrayList<Double>();
-			ratios.add(userService.getRatioOfUsersWhoHaveCreatedNewspapers());
-			ratios.add(userService.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg());
-			ratios.add(newspaperService.getRatioOfPublicOverPrivateNewspapers());
-			ratios.add(newspaperService.getRatioOfSubscribersVersusCustomersTotal());
-			result.addObject("ratios",ratios);
-			//Añadir metodo que falta
+		List<Double> ratios = new ArrayList<Double>();
+		ratios.add(userService.getRatioOfUsersWhoHaveCreatedNewspapers());
+		ratios.add(userService.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg());
+		ratios.add(newspaperService.getRatioOfPublicOverPrivateNewspapers());
+		ratios.add(newspaperService.getRatioOfSubscribersVersusCustomersTotal());
+		ratios.add(userService.getAvgRatioOfNewspapersPerPublisher());
+		result.addObject("ratios",ratios);
 
-			List<Newspaper> newspapersOverAvg = new ArrayList<Newspaper>(newspaperService.getNewspapersOverAvg());
-			result.addObject("newspapersOverAvg",newspapersOverAvg);
-			List<Newspaper> newspapersUnderAvg = new ArrayList<Newspaper>(newspaperService.getNewspapersUnderAvg());
-			result.addObject("newspapersUnderAvg",newspapersUnderAvg);
+		List<Newspaper> newspapersOverAvg = new ArrayList<Newspaper>(this.newspaperService.getNewspapersOverAvg());
+		result.addObject("newspapersOverAvg",newspapersOverAvg);
+		List<Newspaper> newspapersUnderAvg = new ArrayList<Newspaper>(this.newspaperService.getNewspapersUnderAvg());
+		result.addObject("newspapersUnderAvg",newspapersUnderAvg);
 		} catch(Throwable oops) {
 			result = new ModelAndView("redirect:/");
 		}

@@ -3,7 +3,6 @@ package controllers.User;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,7 +70,7 @@ public class UserChirpController extends AbstractController {
 	//	}
 	//
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Chirp chirp, final BindingResult binding) {
+	public ModelAndView save(final Chirp chirp, final BindingResult binding) {
 		ModelAndView result;
 		Chirp validated = chirpService.reconstruct(chirp, binding);
 		if (binding.hasErrors())
