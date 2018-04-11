@@ -1,7 +1,6 @@
 
 package controllers.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -37,9 +36,10 @@ public class UserChirpController extends AbstractController {
 	public ModelAndView timeline() {
 		ModelAndView result;
 		try{
-			final List<Chirp> chirps = new ArrayList<Chirp>(chirpService.getTimeline());
+			final List<Chirp> chirps = (List<Chirp>) chirpService.getTimeline();
 			result = new ModelAndView("chirp/list");
-			result.addObject("chirps", chirps);
+			if(chirps != null)
+				result.addObject("chirps", chirps);
 			result.addObject("requestUri", "user/chirp/timeline.do");
 		} catch(Throwable oops) {
 			oops.printStackTrace();
