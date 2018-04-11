@@ -96,4 +96,32 @@ public class NewspaperService {
 		validator.validate(newspaper, binding);
 		return newspaper;
 	}
+
+	public Double[] getStatsOfArticlesPerNewspaper(){
+		return newspaperRepository.getStatsOfArticlesPerNewspaper();
+	}
+
+	public Collection<Newspaper> getNewspapersOverAvg(){
+		return newspaperRepository.getNewspapersOverAvg();
+	}
+
+	public Collection<Newspaper> getNewspapersUnderAvg(){
+		return newspaperRepository.getNewspapersUnderAvg();
+	}
+
+	public Double getRatioOfPublicOverPrivateNewspapers(){
+		return newspaperRepository.getRatioOfPublicOverPrivateNewspapers();
+	}
+
+	public Double getArticleAvgForPrivateNewspapers(){
+		return newspaperRepository.getArticleAvgForPrivateNewspapers();
+	}
+
+	public Double getArticleAvgForPublicNewspapers(){
+		return newspaperRepository.getArticleAvgForPublicNewspapers();
+	}
+
+	public Double getRatioOfSubscribersVersusCustomersTotal(){
+		return newspaperRepository.getRatioOfSubscribersVersusCustomersTotal();
+	}
 }

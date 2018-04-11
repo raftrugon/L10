@@ -141,4 +141,28 @@ public class UserService {
 		this.userRepository.save(u);
 		this.userRepository.save(principal);
 	}
+	
+	public	Double[] getStatsOfNewspapersPerUser(){
+		return userRepository.getStatsOfNewspapersPerUser();
+	}
+
+	public Double[] getStatsOfArticlesPerUser(){
+		return userRepository.getStatsOfArticlesPerUser();
+	}
+
+	public Double getRatioOfUsersWhoHaveCreatedNewspapers(){
+		return userRepository.getRatioOfUsersWhoHaveCreatedNewspapers();
+	}
+
+	public Double[] getStatsOfChirpsPerUser(){
+		return userRepository.getStatsOfChirpsPerUser();
+	}
+
+	public Double getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg(){
+		return userRepository.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg();
+	}
+
+//	public Double getAvgRatioOfNewspapersPerPublisher(){
+//		return userRepository.getAvgRatioOfNewspapersPerPublisher();
+//	}
 }

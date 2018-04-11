@@ -132,4 +132,15 @@ public class ArticleService {
 		return articleRepository.isPublished(a.getId()) > 0 ? true : false;
 	}
 	
+	public Double getFollowUpsPerArticleAvg() {
+		return articleRepository.getFollowUpsPerArticleAvg();
+	}
+
+	public Double getFollowUpsPerArticleAvgAfterOneWeek(){
+		return articleRepository.getFollowUpsPerArticleAvgAfterOneWeek();
+	}
+
+	public Double getFollowUpsPerArticleAvgAfterTwoWeeks(){
+		return articleRepository.getFollowUpsPerArticleAvgAfterTwoWeeks();
+	}
 }
