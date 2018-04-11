@@ -45,7 +45,6 @@ public class UserArticleController extends AbstractController {
 			Article article = this.articleService.create();
 			result = this.newEditModelAndView(article);
 		} catch (Throwable oops) {
-			oops.printStackTrace();
 			result = new ModelAndView("redirect:/article/list.do");
 		}
 		return result;
@@ -61,7 +60,6 @@ public class UserArticleController extends AbstractController {
 			result = this.newEditModelAndView(article);
 
 		} catch (Throwable oops) {
-			oops.printStackTrace();
 			result = new ModelAndView("redirect:/article/list.do");
 		}
 

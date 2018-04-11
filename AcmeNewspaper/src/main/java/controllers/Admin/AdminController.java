@@ -46,9 +46,15 @@ public class AdminController extends AbstractController {
 
 	@RequestMapping("/article/taboo-list")
 	public ModelAndView listInappropriateArticles(){
-		ModelAndView res = new ModelAndView("article/list");
-		res.addObject("articles",this.articleService.findAllTaboo());
-		res.addObject("requestUri", "admin/article/taboo-list.do");
+		ModelAndView res;
+		try{
+
+			res = new ModelAndView("article/list");
+			res.addObject("articles",this.articleService.findAllTaboo());
+			res.addObject("requestUri", "admin/article/taboo-list.do");
+		} catch(Throwable oops) {
+			res = new ModelAndView("redirect:/");
+		}
 		return res;
 	}
 
@@ -60,9 +66,14 @@ public class AdminController extends AbstractController {
 
 	@RequestMapping("/newspaper/taboo-list")
 	public ModelAndView listInappropriateNewspaper(){
-		ModelAndView res = new ModelAndView("newspaper/list");
-		res.addObject("newspapers",this.newspaperService.findAllTaboo());
-		res.addObject("requestUri", "admin/newspaper/taboo-list.do");
+		ModelAndView res ;
+		try{
+			res = new ModelAndView("newspaper/list");
+			res.addObject("newspapers",this.newspaperService.findAllTaboo());
+			res.addObject("requestUri", "admin/newspaper/taboo-list.do");
+		} catch(Throwable oops) {
+			res = new ModelAndView("redirect:/");
+		}
 		return res;
 	}
 
@@ -75,23 +86,34 @@ public class AdminController extends AbstractController {
 
 	@RequestMapping("/chirp/taboo-list")
 	public ModelAndView listInappropriateChirps(){
-		ModelAndView res = new ModelAndView("chirp/list");
-		res.addObject("chirps",this.chirpService.findAllTaboo());
-		res.addObject("requestUri", "admin/chirp/taboo-list.do");
+		ModelAndView res ;
+		try{
+			res = new ModelAndView("chirp/list");
+			res.addObject("chirps",this.chirpService.findAllTaboo());
+			res.addObject("requestUri", "admin/chirp/taboo-list.do");
+		} catch(Throwable oops) {
+			res = new ModelAndView("redirect:/");
+		}
 		return res;
 	}
 
 	@RequestMapping("/chirp/list")
 	public ModelAndView listChirpsAdmin() {
-		ModelAndView res = new ModelAndView("chirp/list");
-		res.addObject("chirps",this.chirpService.findAll());
-		res.addObject("requestUri", "admin/chirp/list.do");
+		ModelAndView res;
+		try{
+			res = new ModelAndView("chirp/list");
+			res.addObject("chirps",this.chirpService.findAll());
+			res.addObject("requestUri", "admin/chirp/list.do");
+		} catch(Throwable oops) {
+			res = new ModelAndView("redirect:/");
+		}
 		return res;
 	}
 
 	@RequestMapping("/dashboard")
 	public ModelAndView dashboard() {
 		ModelAndView result;
+		//try{
 		result = new ModelAndView("admin/dashboard");
 
 		List<Double> avgs = new ArrayList<Double>();
@@ -124,6 +146,9 @@ public class AdminController extends AbstractController {
 		result.addObject("newspapersOverAvg",newspapersOverAvg);
 		List<Newspaper> newspapersUnderAvg = new ArrayList<Newspaper>(this.newspaperService.getNewspapersUnderAvg());
 		result.addObject("newspapersUnderAvg",newspapersUnderAvg);
+		/*} catch(Throwable oops) {
+			result = new ModelAndView("redirect:/");
+		}*/
 
 		return result;
 	}
