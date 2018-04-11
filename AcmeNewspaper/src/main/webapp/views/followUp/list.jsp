@@ -9,7 +9,7 @@
 <%@taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="col-sm-10">
-	<display:table pagesize="10" class="displaytag" keepStatus="true" name="list" id="row">
+	<display:table pagesize="10" class="displaytag" keepStatus="true" name="list" requestURI="${requestUri}" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
 	    <display:setProperty name="paging.banner.all_items_found" value=""/>

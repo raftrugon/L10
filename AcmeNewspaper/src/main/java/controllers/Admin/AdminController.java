@@ -39,57 +39,83 @@ public class AdminController extends AbstractController {
 	}
 
 	@RequestMapping("/article/inappropriate")
-	public ModelAndView setArticleInappropriate(@RequestParam(required=true)int articleId){
-		articleService.markAsInappropriate(articleId);
+	public ModelAndView setArticleInappropriate(@RequestParam(required=true) final int articleId){
+		this.articleService.markAsInappropriate(articleId);
 		return new ModelAndView("redirect: ../../../../article/list.do");
 	}
-	
+
 	@RequestMapping("/article/taboo-list")
 	public ModelAndView listInappropriateArticles(){
-		ModelAndView res = new ModelAndView("article/list");
-		res.addObject("articles",articleService.findAllTaboo());
+		ModelAndView res;
+		try{
+
+			res = new ModelAndView("article/list");
+			res.addObject("articles",this.articleService.findAllTaboo());
+			res.addObject("requestUri", "admin/article/taboo-list.do");
+		} catch(Throwable oops) {
+			res = new ModelAndView("redirect:/");
+		}
 		return res;
 	}
-	
+
 	@RequestMapping("/newspaper/inappropriate")
-	public ModelAndView setNewspaperInappropriate(@RequestParam(required=true)int newspaperId){
-		newspaperService.markAsInappropriate(newspaperId);
+	public ModelAndView setNewspaperInappropriate(@RequestParam(required=true) final int newspaperId){
+		this.newspaperService.markAsInappropriate(newspaperId);
 		return new ModelAndView("redirect: ../../../../newspaper/list.do");
 	}
-	
+
 	@RequestMapping("/newspaper/taboo-list")
 	public ModelAndView listInappropriateNewspaper(){
-		ModelAndView res = new ModelAndView("newspaper/list");
-		res.addObject("newspapers",newspaperService.findAllTaboo());
+		ModelAndView res ;
+		try{
+			res = new ModelAndView("newspaper/list");
+			res.addObject("newspapers",this.newspaperService.findAllTaboo());
+			res.addObject("requestUri", "admin/newspaper/taboo-list.do");
+		} catch(Throwable oops) {
+			res = new ModelAndView("redirect:/");
+		}
 		return res;
 	}
-	
+
 	@RequestMapping("/chirp/inappropriate")
-	public ModelAndView setChirpInappropriate(@RequestParam(required=true)int chirpId){
-		chirpService.markAsInappropriate(chirpId);
+	public ModelAndView setChirpInappropriate(@RequestParam(required=true) final int chirpId){
+		this.chirpService.markAsInappropriate(chirpId);
 		return new ModelAndView("redirect:taboo-list.do");
 	}
-	
-	
+
+
 	@RequestMapping("/chirp/taboo-list")
 	public ModelAndView listInappropriateChirps(){
-		ModelAndView res = new ModelAndView("chirp/list");
-		res.addObject("chirps",chirpService.findAllTaboo());
+		ModelAndView res ;
+		try{
+			res = new ModelAndView("chirp/list");
+			res.addObject("chirps",this.chirpService.findAllTaboo());
+			res.addObject("requestUri", "admin/chirp/taboo-list.do");
+		} catch(Throwable oops) {
+			res = new ModelAndView("redirect:/");
+		}
 		return res;
 	}
-	
+
 	@RequestMapping("/chirp/list")
 	public ModelAndView listChirpsAdmin() {
-		ModelAndView res = new ModelAndView("chirp/list");
-		res.addObject("chirps",chirpService.findAll());
+		ModelAndView res;
+		try{
+			res = new ModelAndView("chirp/list");
+			res.addObject("chirps",this.chirpService.findAll());
+			res.addObject("requestUri", "admin/chirp/list.do");
+		} catch(Throwable oops) {
+			res = new ModelAndView("redirect:/");
+		}
 		return res;
 	}
-	
+
 	@RequestMapping("/dashboard")
 	public ModelAndView dashboard() {
 		ModelAndView result;
+		//try{
 		result = new ModelAndView("admin/dashboard");
-		
+
 		List<Double> avgs = new ArrayList<Double>();
 		avgs.add(userService.getStatsOfNewspapersPerUser()[0]);
 		avgs.add(userService.getStatsOfArticlesPerUser()[0]);
@@ -101,14 +127,14 @@ public class AdminController extends AbstractController {
 		avgs.add(newspaperService.getArticleAvgForPrivateNewspapers());
 		avgs.add(newspaperService.getArticleAvgForPublicNewspapers());
 		result.addObject("avgs",avgs);
-		
+
 		List<Double> stddevs = new ArrayList<Double>();
 		stddevs.add(userService.getStatsOfNewspapersPerUser()[1]);
 		stddevs.add(userService.getStatsOfArticlesPerUser()[1]);
 		stddevs.add(newspaperService.getStatsOfArticlesPerNewspaper()[1]);
 		stddevs.add(userService.getStatsOfChirpsPerUser()[1]);
 		result.addObject("stddevs",stddevs);
-		
+
 		List<Double> ratios = new ArrayList<Double>();
 		ratios.add(userService.getRatioOfUsersWhoHaveCreatedNewspapers());
 		ratios.add(userService.getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg());
@@ -116,12 +142,15 @@ public class AdminController extends AbstractController {
 		ratios.add(newspaperService.getRatioOfSubscribersVersusCustomersTotal());
 		result.addObject("ratios",ratios);
 		//Añadir metodo que falta
-		
-		List<Newspaper> newspapersOverAvg = new ArrayList<Newspaper>(newspaperService.getNewspapersOverAvg());
+
+		List<Newspaper> newspapersOverAvg = new ArrayList<Newspaper>(this.newspaperService.getNewspapersOverAvg());
 		result.addObject("newspapersOverAvg",newspapersOverAvg);
-		List<Newspaper> newspapersUnderAvg = new ArrayList<Newspaper>(newspaperService.getNewspapersUnderAvg());
+		List<Newspaper> newspapersUnderAvg = new ArrayList<Newspaper>(this.newspaperService.getNewspapersUnderAvg());
 		result.addObject("newspapersUnderAvg",newspapersUnderAvg);
-		
+		/*} catch(Throwable oops) {
+			result = new ModelAndView("redirect:/");
+		}*/
+
 		return result;
 	}
 }

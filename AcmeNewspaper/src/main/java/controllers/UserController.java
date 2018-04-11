@@ -42,7 +42,7 @@ public class UserController extends AbstractController {
 			final List<User> users = new ArrayList<User>(this.userService.findAll());
 			result = new ModelAndView("user/list");
 			result.addObject("users", users);
-			result.addObject("requestUri", "user/list.do");
+			result.addObject("requestUri", "user-list.do");
 		} catch(Throwable oops) {
 			result = new ModelAndView("welcome/index");
 		}
@@ -61,7 +61,7 @@ public class UserController extends AbstractController {
 				user = this.userService.findOne(userId);
 			else
 				user = this.userService.findByPrincipal();
-			
+
 			try{
 				User principal = this.userService.findByPrincipal();
 				follows = user.getFollowedBy().contains(principal) ;
@@ -74,14 +74,13 @@ public class UserController extends AbstractController {
 				else
 					user = this.userService.findByPrincipal();
 			}
-			
+
 			List<Article> articles = new ArrayList<Article>(this.articleService.findAllPublishedForUser(user));
 			Map<Article,Boolean> articlesMap = new HashMap<Article,Boolean>();
 			try{
-				
-				for (Article a: articles){
-					articlesMap.put(a, customerService.isSubscribed(a.getNewspaper()));
-				}
+
+				for (Article a: articles)
+					articlesMap.put(a, this.customerService.isSubscribed(a.getNewspaper()));
 			}catch(Throwable oops){
 				//Volvemos a coger los artículos y el usuario ya que al petar el customerService se pierden (BUG de hibernate)
 				if(userId != null)
@@ -89,12 +88,11 @@ public class UserController extends AbstractController {
 				else
 					user = this.userService.findByPrincipal();
 				articles = new ArrayList<Article>(this.articleService.findAllPublishedForUser(user));
-				for (Article a: articles){
+				for (Article a: articles)
 					articlesMap.put(a, false);
-				}
 			}
-			
-			
+
+
 			result.addObject("user", user);
 			result.addObject("articles",articles);
 			result.addObject("articlesMap",articlesMap);
@@ -103,7 +101,7 @@ public class UserController extends AbstractController {
 			return new ModelAndView("redirect:user-list.do");
 		}
 
-		
+
 
 		return result;
 	}

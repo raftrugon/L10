@@ -18,6 +18,7 @@
     
 
 
-	<jstl:set var='model' value='customer' scope='request'/>
+	<jstl:set var='model' value='subscription' scope='request'/>
+		<lib:column name='creditCard'/>
 </display:table>
 </div>

@@ -22,14 +22,14 @@
 </jstl:if>
 
 <div class="col-sm-10 col-sm-offset-1 well">
-	<display:table pagesize="10" class="displaytag" keepStatus="true" name="newspapers" id="row">
+	<display:table pagesize="6" class="displaytag" keepStatus="true" name="newspapers" requestURI="${requestUri}" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
 	    <display:setProperty name="paging.banner.all_items_found" value=""/>
 	    <display:setProperty name="paging.banner.one_item_found" value=""/>
 	    <display:setProperty name="paging.banner.no_items_found" value=""/>
 
-	<jstl:set var='model' value='newspaper' scope='request'/>
+		<jstl:set var='model' value='newspaper' scope='request'/>
 		<lib:column name='title'/>
 		<lib:column name='publicationDate'/>
 		<lib:column name='description'/>

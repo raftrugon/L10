@@ -19,6 +19,7 @@
 
 		<lib:input type="hidden" name="id"/>
 		<lib:input type="date" name='publicationDate'/>
+		<p><spring:message code="newspaper.explanation"/></p>
 
 		<jstl:if test="${newspaper.id eq 0 or empty newspaper.id }">
 			<lib:input type="text" name='description'/>

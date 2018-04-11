@@ -9,17 +9,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="col-sm-10 col-sm-offset-1 well">
-
-	<security:authorize access="hasRole('USER')">
-		<jstl:if test="${pageContext.request.userPrincipal.name eq newspaper.user.userAccount.username}">
-			<a href="user/newspaper/edit.do?newspaperId=${newspaper.id}" class="btn btn-block btn-warning"><spring:message code="newspaper.edit"/></a>
-		</jstl:if>
-	</security:authorize>
-	<security:authorize access="hasRole('CUSTOMER')">
-		<jstl:if test="${!isSuscribed && newspaper.isPrivate}">
-			<a class="btn btn-primary btn-block" href="customer/subscription/create.do?newspaperId=${newspaper.id}"><spring:message code="newspaper.suscribe"/></a>
-		</jstl:if>
-	</security:authorize>
 	<display:table pagesize="1" class="displaytag" keepStatus="true" name="newspaper" id="row">
 		<display:setProperty name="paging.banner.onepage" value=""/>
 	    <display:setProperty name="paging.banner.placement" value="bottom"/>
@@ -31,7 +20,7 @@
 		<lib:column name='title'/>
 		<lib:column name='publicationDate'/>
 		<lib:column name='description'/>
-		<lib:column name='picture' photoUrl="${row.picture}"/>
+		<lib:column name='picture'/>
 		<lib:column name='isPrivate'/>
 	</display:table>
 </div>
@@ -43,7 +32,7 @@
 	    <display:setProperty name="paging.banner.all_items_found" value=""/>
 	    <display:setProperty name="paging.banner.one_item_found" value=""/>
 	    <display:setProperty name="paging.banner.no_items_found" value=""/>
-
+    
 	<jstl:set var='model' value='article' scope='request'/>
 	<jstl:choose>
 		<jstl:when test="${not row2.newspaper.isPrivate or isSubscribed}">
@@ -53,32 +42,16 @@
 			<lib:column name="title"></lib:column>
 		</jstl:otherwise>
 	</jstl:choose>
-
+	
 	<lib:column name="publicationMoment" format="{0,date,dd/MM/yyyy}"></lib:column>
 	<lib:column name="summary" value="${fn:substring(row2.summary,0,30)}..."/>
-
+	
 	<spring:message code="article.writer" var="writer_header"/>
 	<display:column title="${writer_header}">
-		<a href="user-display.do?userId=${row2.newspaper.user.id}">
+		<a href="/user-display.do?userId=${row2.newspaper.user.id}">
 		<jstl:out value="${row2.newspaper.user.surnames}, ${row2.newspaper.user.name}"/></a>
 	</display:column>
-
-
-	<security:authorize access="hasRole('USER')">
-		<spring:message code="article.edit" var="article_edit"/>
-	<display:column title="${article_edit}">
-	<jstl:if test="${row2.newspaper.user.userAccount.username eq pageContext.request.userPrincipal.name}">
-		<a href="user/article/edit.do?articleId=${row2.id}">
-		<jstl:out value="${article_edit}"/></a>
-		</jstl:if>
-	</display:column>
-
-		</security:authorize>
-
+	
+	
 </display:table>
-<security:authorize access="hasRole('USER')">
- <div>
-	<a href="user/article/create.do"><spring:message code="article.create" /></a>
- </div>
-</security:authorize>
 </div>
