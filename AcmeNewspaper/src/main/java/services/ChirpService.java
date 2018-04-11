@@ -15,6 +15,7 @@ import repositories.ChirpRepository;
 import repositories.NewspaperRepository;
 import domain.Chirp;
 import domain.Newspaper;
+import domain.User;
 
 @Service
 @Transactional
@@ -95,6 +96,10 @@ public class ChirpService {
 		validator.validate(chirp, binding);
 		
 		return chirp;
+	}
+
+	public Object findForUserNotInappropiate(User user) {
+		return chirpRepository.findForUserNotInappropiate(user);
 	}
 
 }

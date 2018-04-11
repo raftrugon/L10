@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ArticleService;
+import services.ChirpService;
 import services.CustomerService;
 import services.UserService;
 import domain.Article;
@@ -28,6 +29,8 @@ public class UserController extends AbstractController {
 	private ArticleService articleService;
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private ChirpService chirpService;
 
 
 	//Constructor
@@ -67,7 +70,7 @@ public class UserController extends AbstractController {
 				follows = user.getFollowedBy().contains(principal) ;
 				result.addObject("logged", principal);
 				result.addObject("follows",follows);
-				result.addObject("chirps", user.getChirps());
+				result.addObject("chirps", chirpService.findForUserNotInappropiate(user));
 			}catch(Throwable oops){
 				if(userId != null)
 					user = this.userService.findOne(userId);

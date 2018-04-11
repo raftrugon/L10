@@ -147,6 +147,7 @@
 </div>
 
 <!-- CHIRPS -->
+<div class="col-sm-10 col-sm-offset-1 well">
 	<h1><spring:message code="heading.chirps" /></h1>
 	<display:table pagesize="10" class="displaytag" keepStatus="true"
 		name="chirps" id="row3">
@@ -156,24 +157,10 @@
 		<display:setProperty name="paging.banner.one_item_found" value="" />
 		<display:setProperty name="paging.banner.no_items_found" value="" />
 
-		<jstl:set var='model' value='article' scope='request' />
+		<jstl:set var='model' value='chirp' scope='request' />
 
 		<lib:column name="title"></lib:column>
-		<lib:column name="publicationMoment" format="{0,date,dd/MM/yyyy}"></lib:column>
-		<lib:column name="summary"
-			value="${fn:substring(row2.summary,0,30)}..." />
-
-		<lib:column name="newspaper"
-			link="newspaper/display.do?newspaperId=${row2.newspaper.id}"
-			linkName="${row2.newspaper.title}" />
-
-		<spring:message code="article.display" var="display_header" />
-		<display:column title="${display_header}">
-			<jstl:if test="${not row2.newspaper.isPrivate or articlesMap[row2] }">
-				<a href="article/display.do?articleId=${row2.id}">${display_header}</a>
-			</jstl:if>
-		</display:column>
-
-
+		<lib:column name="creationMoment" format="{0,date,dd/MM/yyyy}"></lib:column>
+		<lib:column name="description"/>
 	</display:table>
-
+</div>
