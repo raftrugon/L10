@@ -36,7 +36,7 @@ public class Newspaper extends DomainEntity {
 	@NotBlank
 	@NotNull
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
 	public void setTitle(final String title) {
@@ -47,7 +47,7 @@ public class Newspaper extends DomainEntity {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getPublicationDate() {
-		return this.publicationDate;
+		return publicationDate;
 	}
 
 	public void setPublicationDate(final Date publicationDate) {
@@ -57,7 +57,7 @@ public class Newspaper extends DomainEntity {
 	@NotBlank
 	@NotNull
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
 	public void setDescription(final String description) {
@@ -66,7 +66,7 @@ public class Newspaper extends DomainEntity {
 
 	@URL
 	public String getPicture() {
-		return this.picture;
+		return picture;
 	}
 
 	public void setPicture(final String picture) {
@@ -75,7 +75,7 @@ public class Newspaper extends DomainEntity {
 
 	@Min(0)
 	public Double getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public void setPrice(final Double price) {
@@ -84,7 +84,7 @@ public class Newspaper extends DomainEntity {
 
 	@NotNull
 	public Boolean getIsPrivate() {
-		return this.isPrivate;
+		return isPrivate;
 	}
 
 	public void setIsPrivate(final Boolean isPrivate) {
@@ -92,7 +92,7 @@ public class Newspaper extends DomainEntity {
 	}
 	@NotNull
 	public Boolean getInappropriate() {
-		return this.inappropriate;
+		return inappropriate;
 	}
 
 	public void setInappropriate(final Boolean inappropriate) {
@@ -109,7 +109,7 @@ public class Newspaper extends DomainEntity {
 	@Valid
 	@OneToMany(mappedBy = "newspaper")
 	public Collection<Subscription> getSubscriptionss() {
-		return this.subscriptionss;
+		return subscriptionss;
 	}
 
 	public void setSubscriptionss(final Collection<Subscription> subscriptionss) {
@@ -120,7 +120,7 @@ public class Newspaper extends DomainEntity {
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "newspaper")
 	public Collection<Article> getArticless() {
-		return this.articless;
+		return articless;
 	}
 
 	public void setArticless(final Collection<Article> articless) {
@@ -131,7 +131,7 @@ public class Newspaper extends DomainEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	public User getUser() {
-		return this.user;
+		return user;
 	}
 
 	public void setUser(final User user) {

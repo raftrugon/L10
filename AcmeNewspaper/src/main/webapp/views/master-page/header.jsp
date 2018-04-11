@@ -65,8 +65,9 @@
 			<li><a href="user-list.do"><spring:message code="master.page.actor.list" /></a></li>
 			<security:authorize access="hasRole('USER')">
 				<li><a href="user/chirp/timeline.do"><spring:message code="master.page.chirp.list" /></a></li>
+				<li><a href="user/article/list.do"><spring:message code="master.page.myArticle.list" /></a></li>
 				<button onClick="javascript:window.location.href = 'user/newspaper/create.do'" class="btn btn-success navbar-btn"><spring:message code="master.page.newspaper.new" /></button>
-									
+				<button onClick="javascript:window.location.href = 'user/chirp/create.do'" class="btn btn-success navbar-btn"><spring:message code="master.page.chirp.new" /></button>						
 			</security:authorize>
 			<security:authorize access="hasRole('ADMIN')">
 				<li><a href="admin/chirp/list.do"><spring:message code="master.page.chirp.list" /></a></li>

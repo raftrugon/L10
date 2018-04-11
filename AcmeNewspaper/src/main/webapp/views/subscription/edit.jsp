@@ -16,12 +16,17 @@
 		
 		
 		<!-- Hidden Attributes -->
-		<lib:input type="text" name='creditCard.holderName'/>		
-		<lib:input type="text" name='creditCard.brandName'/>
-		<lib:input type="text" name='creditCard.number'/>
-		<lib:input type="number" name="creditCard.expirationMonth" />
-		<lib:input type="number" name="creditCard.expirationYear" />
-		<lib:input type="number" name="creditCard.cvvCode" />
+		<lib:input type="text" name='creditCard.holderName'/>	
+		<spring:message code="creditCard.brand.placeholder" var="brandNamePlaceholder" />
+		<lib:input type="text" placeholder="${brandNamePlaceholder}" name='creditCard.brandName'/>
+		<spring:message code="creditCard.number.placeholder" var="numberPlaceholder" />
+		<lib:input type="text" placeholder="${numberPlaceholder}" name='creditCard.number'/>
+		<spring:message code="creditCard.expirationMonth.placeholder" var="expirationMonthPlaceholder" />
+		<lib:input type="number" placeholder="${expirationMonthPlaceholder}" name="creditCard.expirationMonth" />
+		<spring:message code="creditCard.expirationYear.placeholder" var="expirationYearPlaceholder" />
+		<lib:input type="number" placeholder="${expirationYearPlaceholder}" name="creditCard.expirationYear" />
+		<spring:message code="creditCard.cvv.placeholder" var="cvvPlaceholder" />
+		<lib:input type="number" placeholder="${cvvPlaceholder}" name="creditCard.cvvCode" />
 		
 		<lib:button model="subscription" id="${subscription.id}" cancelUri="/AcmeNewspaper" noDelete="true" />
 </form:form>
