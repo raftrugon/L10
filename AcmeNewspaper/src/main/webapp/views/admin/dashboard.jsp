@@ -93,7 +93,7 @@
 		<jstl:when test="${row3_rowNum == 3}">
 			<spring:message code="admin.query12"/>
 		</jstl:when>
-		<jstl:when test="${ro3_rowNum == 4}">
+		<jstl:when test="${row3_rowNum == 4}">
 			<spring:message code="admin.query15"/>
 		</jstl:when>
 		<jstl:when test="${row3_rowNum == 5}">

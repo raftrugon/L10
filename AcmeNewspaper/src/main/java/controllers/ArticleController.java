@@ -74,6 +74,7 @@ public class ArticleController extends AbstractController {
 			}
 			result = new ModelAndView("article/display");
 			result.addObject("article",a);
+			result.addObject("followUps",a.getFollowUps());
 			result.addObject("requestUri", "article/display.do");
 		}catch(Throwable oops){
 			result = new ModelAndView("redirect:list.do");

@@ -32,7 +32,7 @@ public class RegisterController extends AbstractController {
 	public ModelAndView createUser() {
 		ModelAndView result;
 		try {
-			result = this.newEditModelAndViewUser(this.userService.create());
+			result = this.newEditModelAndViewUser(userService.create());
 		} catch (Throwable oops) {
 			result = new ModelAndView("redirect:list.do");
 		}
@@ -47,7 +47,7 @@ public class RegisterController extends AbstractController {
 			result = this.newEditModelAndViewUser(user);
 		else
 			try {
-				User saved = this.userService.save(user);
+				User saved = userService.save(user);
 				result = new ModelAndView("redirect:../user-display.do?userId=" + saved.getId());
 			} catch (Throwable oops) {
 				oops.printStackTrace();
@@ -64,7 +64,7 @@ public class RegisterController extends AbstractController {
 	public ModelAndView createCustomer() {
 		ModelAndView result;
 		try {
-			result = this.newEditModelAndViewCustomer(this.customerService.create());
+			result = this.newEditModelAndViewCustomer(customerService.create());
 		} catch (Throwable oops) {
 			result = new ModelAndView("redirect:list.do");
 		}
@@ -80,8 +80,8 @@ public class RegisterController extends AbstractController {
 			result = this.newEditModelAndViewCustomer(customer);
 		else
 			try {
-				Customer saved = this.customerService.save(customer);
-				result = new ModelAndView("welcome/index");
+				customerService.save(customer);
+				result = new ModelAndView("redirect:/");
 			} catch (Throwable oops) {
 				oops.printStackTrace();
 				result = this.newEditModelAndViewCustomer(customer);

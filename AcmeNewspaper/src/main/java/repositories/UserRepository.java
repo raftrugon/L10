@@ -34,6 +34,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	Double getRatioOfUsersWhoHavePostedMOreChirpsThan75Avg();
 
 	//The average ratio of private versus public newspapers per publisher.
-	//@Query("")
-	//Double getAvgRatioOfNewspapersPerPublisher();
+	@Query(value="select coalesce((select avg(count1) from (select count(n.id) as count1 from acmenewspaper.newspaper as n"+
+	" join acmenewspaper.user on n.user_id = user.id"+
+			" where n.isPrivate=true"+
+			" group by user.id) acmenewspaper)/(select avg(count2) from (select count(n2.id) as count2 from acmenewspaper.newspaper as n2"+
+			" join acmenewspaper.user on n2.user_id = user.id"+
+			" where n2.isPrivate=false"+
+			" group by user.id) acmenewspaper),0);", nativeQuery=true)
+	Double getAvgRatioOfNewspapersPerPublisher();
 }
