@@ -57,6 +57,7 @@ public class UserArticleController extends AbstractController {
 		try {
 			Article article = this.articleService.findOne(articleId);
 			Assert.isTrue(article.getNewspaper().getUser() == (this.userService.findByPrincipal()));
+			Assert.isTrue(!article.getFinalMode());
 			result = this.newEditModelAndView(article);
 
 		} catch (Throwable oops) {
