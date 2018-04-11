@@ -33,31 +33,35 @@ public class NewspaperController extends AbstractController {
 	}
 
 	@RequestMapping("/list")
-	public ModelAndView list(@RequestParam(required = false, defaultValue = "") String keyword) {
+	public ModelAndView list(@RequestParam(required = false, defaultValue = "") final String keyword) {
 		ModelAndView result;
-		final List<Newspaper> newspapers = new ArrayList<Newspaper>(newspaperService.findByKeyword(keyword));
-		result = new ModelAndView("newspaper/list");
-		result.addObject("newspapers", newspapers);
-		result.addObject("requestUri", "newspaper/list.do");
-		result.addObject("keyword", keyword);
+		try{
+			final List<Newspaper> newspapers = new ArrayList<Newspaper>(this.newspaperService.findByKeyword(keyword));
+			result = new ModelAndView("newspaper/list");
+			result.addObject("newspapers", newspapers);
+			result.addObject("requestUri", "newspaper/list.do");
+			result.addObject("keyword", keyword);
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:../");
+		}
 		return result;
 	}
 
 	@RequestMapping("/display")
-	public ModelAndView display(@RequestParam(required = true) int newspaperId) {
+	public ModelAndView display(@RequestParam(required = true) final int newspaperId) {
 		ModelAndView res = new ModelAndView("newspaper/display");
 		Newspaper newspaper = null;
 		try {
-			newspaper = newspaperService.findOne(newspaperId);
+			newspaper = this.newspaperService.findOne(newspaperId);
 		} catch (Throwable oops) {
 			return new ModelAndView("redirect:list.do");
 		}
 		try {
-			res.addObject("isSubscribed", customerService.isSubscribed(newspaper));
+			res.addObject("isSubscribed", this.customerService.isSubscribed(newspaper));
 		} catch (Throwable oops) {
 		}
 		res.addObject("newspaper", newspaper);
-		res.addObject("articles", articleService.findAllPublishedForNewspaper(newspaper));
+		res.addObject("articles", this.articleService.findAllPublishedForNewspaper(newspaper));
 		res.addObject("requestUri", "newspaper/display.do");
 		return res;
 	}

@@ -16,7 +16,7 @@ import controllers.AbstractController;
 import domain.Subscription;
 
 @Controller
-@RequestMapping("/subscription")
+@RequestMapping("/customer/subscription")
 public class CustomerSubscriptionController extends AbstractController {
 
 	@Autowired
@@ -36,12 +36,12 @@ public class CustomerSubscriptionController extends AbstractController {
 	public ModelAndView create(@RequestParam(required = true) final int newspaperId) {
 		ModelAndView result;
 		try {
-			if (customerService.isSubscribed(newspaperService.findOne(newspaperId)))
+			if (this.customerService.isSubscribed(this.newspaperService.findOne(newspaperId)))
 				throw new Exception("Already subscribed");
-			Subscription subscription = subscriptionService.create(newspaperId);
-			result = newEditModelAndView(subscription);
+			Subscription subscription = this.subscriptionService.create(newspaperId);
+			result = this.newEditModelAndView(subscription);
 		} catch (Throwable oops) {
-			result = new ModelAndView("redirect:/");
+			result = new ModelAndView("redirect:../");
 		}
 		return result;
 	}
@@ -49,15 +49,15 @@ public class CustomerSubscriptionController extends AbstractController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(final Subscription subscription, final BindingResult binding) {
 		ModelAndView result;
-		Subscription validated = subscriptionService.reconstruct(subscription, binding);
+		Subscription validated = this.subscriptionService.reconstruct(subscription, binding);
 		if (binding.hasErrors())
-			result = newEditModelAndView(validated);
+			result = this.newEditModelAndView(validated);
 		else
 			try {
-				subscriptionService.save(validated);
+				this.subscriptionService.save(validated);
 				result = new ModelAndView("redirect:/newspaper/display.do?newspaperId=" + validated.getNewspaper().getId());
 			} catch (Throwable oops) {
-				result = newEditModelAndView(validated);
+				result = this.newEditModelAndView(validated);
 				result.addObject("message", "subscription.commitError");
 			}
 		return result;
