@@ -175,6 +175,7 @@
 	<bean id="user1" class="domain.User">
 		<property name="userAccount" ref="userAccount2" />
 		<property name="name" value="Pepe" />
+		<property name="surnames" value="Palotes Gonzalez" />
 		<property name="emailss">
 			<list>
 				<value>ppgg@correo.es</value>
@@ -974,7 +975,7 @@
 			value="esta revista trata sobre los mejores coches del mundo" />
 		<property name="picture"
 			value="http://crucerosensevilla.com/wp-content/uploads/2015/09/Sevilla4.jpg" />
-		<property name="price" value="1.00'" />
+		<property name="price" value="1.00" />
 		<property name="isPrivate" value="true" />
 		<property name="inappropriate" value="true" />
 		<property name="user" ref="user1" />
