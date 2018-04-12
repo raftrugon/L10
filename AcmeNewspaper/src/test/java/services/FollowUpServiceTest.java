@@ -89,27 +89,27 @@ public class FollowUpServiceTest extends AbstractTest {
 		Object testingData[][] = {
 				//Test positivo
 				{
-					"user1", null, "Creación correcta de un followUp"
+					"user1", "article1", null, "Creación correcta de un followUp"
 				},
 				//Intento de crear con un rol que no debe
 				{
-					"customer1", IllegalArgumentException.class, "Se ha intentado crear un followUp con un customer1"
+					"customer1", "article1", IllegalArgumentException.class, "Se ha intentado crear un followUp con un customer1"
 				},
 				//Create sin logearse
 				{
-					null, IllegalArgumentException.class, "Intento de crear un followUp sin estar logeado"
+					null, "article1", IllegalArgumentException.class, "Intento de crear un followUp sin estar logeado"
 				}
 		};
 		
 		for(int i =0; i<testingData.length;i++)
-			templateCreate((String) testingData[i][0], (Class<?>)testingData[i][1], (String) testingData[i][2]);
+			templateCreate((String) testingData[i][0], (String) testingData[i][1], (Class<?>)testingData[i][2], (String) testingData[i][3]);
 	}
-	protected void templateCreate(String rol, Class<?> expected, String explanation){
+	protected void templateCreate(String rol, String article, Class<?> expected, String explanation){
 		Class<?> caught = null;
 		
 		try{
 			super.authenticate(rol);
-			followUpService.create();
+			followUpService.create(getEntityId(article));
 			super.unauthenticate();
 		}catch (Throwable oops){
 			caught = oops.getClass();
