@@ -205,12 +205,17 @@
 		</property>
 		<property name="followedBy">
 			<list>
+				<ref bean="user2"/>
+				<ref bean="user3"/>
 			</list>
 		</property>
 		<property name="chirps">
 			<list>
 				<ref bean="chirp1"/>
 				<ref bean="chirp2"/>
+				<ref bean="chirp9"/>
+				<ref bean="chirp10"/>
+				<ref bean="chirp13"/>
 			</list>
 		</property>
 	</bean>
@@ -243,17 +248,21 @@
 		</property>
 		<property name="follows">
 			<list>
+				<ref bean ="user1"/>
 			</list>
 		</property>
 		<property name="followedBy">
 			<list>
 				<ref bean="user1"/>
+				<ref bean="user3"/>
 			</list>
 		</property>
 		<property name="chirps">
 			<list>
 				<ref bean="chirp3"/>
 				<ref bean="chirp4"/>
+				<ref bean="chirp8"/>
+				<ref bean="chirp12"/>
 			</list>
 		</property>
 	</bean>
@@ -288,6 +297,8 @@
 		</property>
 		<property name="follows">
 			<list>
+				<ref bean ="user1"/>
+				<ref bean="user2"/>
 			</list>
 		</property>
 		<property name="followedBy">
@@ -298,6 +309,7 @@
 			<list>
 				<ref bean="chirp5"/>
 				<ref bean="chirp6"/>
+				<ref bean="chirp11"/>
 			</list>
 		</property>
 	</bean>
@@ -341,7 +353,6 @@
 		<property name="chirps">
 			<list>
 				<ref bean="chirp7"/>
-				<ref bean="chirp8"/>
 			</list>
 		</property>
 	</bean>
@@ -382,8 +393,6 @@
 		</property>
 		<property name="chirps">
 			<list>
-				<ref bean="chirp9"/>
-				<ref bean="chirp10"/>
 			</list>
 		</property>
 	</bean>
@@ -646,7 +655,7 @@
 		<property name="creationMoment" value="12/26/2017 22:22" />
 		<property name="description" value="Los articulos escritos por ti dejan mucho que desear" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user4" />
+		<property name="user" ref="user2" />
 	</bean>
 
 	<bean id="chirp9" class="domain.Chirp">
@@ -655,7 +664,7 @@
 		<property name="description"
 			value="Tremenda la experiencia contada por esos viajeros" />
 		<property name="inappropriate" value="false"/>
-		<property name="user" ref="user5" />
+		<property name="user" ref="user1" />
 	</bean>
 
 	<bean id="chirp10" class="domain.Chirp">
@@ -663,7 +672,31 @@
 		<property name="creationMoment" value="12/26/2017 22:22" />
 		<property name="description" value="El año pasado lei un articulo religioso que hablaban sobre el sexo" />
 		<property name="inappropriate" value="true"/>
-		<property name="user" ref="user5" />
+		<property name="user" ref="user1" />
+	</bean>
+	
+	<bean id="chirp11" class="domain.Chirp">
+		<property name="title" value="Articulo de futbol" />
+		<property name="creationMoment" value="12/21/2017 22:22" />
+		<property name="description" value="El otro día vi como el Madrid ganaba de nuevo" />
+		<property name="inappropriate" value="true"/>
+		<property name="user" ref="user3" />
+	</bean>
+	
+	<bean id="chirp12" class="domain.Chirp">
+		<property name="title" value="NBA" />
+		<property name="creationMoment" value="12/26/2016 22:22" />
+		<property name="description" value="Me encantó la victoria de los Cavs a los Warriors en esta mítica final" />
+		<property name="inappropriate" value="true"/>
+		<property name="user" ref="user2" />
+	</bean>
+	
+	<bean id="chirp13" class="domain.Chirp">
+		<property name="title" value="articulo religioso" />
+		<property name="creationMoment" value="12/26/2017 22:22" />
+		<property name="description" value="El año pasado lei un articulo religioso que hablaban sobre el sexo" />
+		<property name="inappropriate" value="true"/>
+		<property name="user" ref="user1" />
 	</bean>
 
 	<!-- CREDIT CARDS 4 -->
@@ -737,9 +770,9 @@
 	</bean>
 
 	<bean id="followUp2" class="domain.FollowUp">
-		<property name="title" value="Se recomienda llevar comida" />
+		<property name="title" value="Se recomienda llevar paraguas" />
 		<property name="publicationMoment" value="12/26/2017 22:22" />
-		<property name="summary" value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
+		<property name="summary" value="Vamos a estar fuera todo el día, y parece que llueve." />
 		<property name="body" value="false" />
 		<property name="article" ref="article1" />
 		<property name="picturess">
@@ -750,7 +783,7 @@
 	</bean>
 
 	<bean id="followUp3" class="domain.FollowUp">
-		<property name="title" value="Se recomienda llevar comida" />
+		<property name="title" value="Se recomienda llevar bebidas" />
 		<property name="publicationMoment" value="12/26/2017 22:22" />
 		<property name="summary"
 			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
@@ -764,10 +797,10 @@
 	</bean>
 
 	<bean id="followUp4" class="domain.FollowUp">
-		<property name="title" value="Se recomienda llevar comida" />
+		<property name="title" value="Se recomienda llevar ropa abrigada" />
 		<property name="publicationMoment" value="12/26/2017 22:22" />
 		<property name="summary"
-			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
+			value="Vamos a estar fuera todo el día, para evitar problemas con el frio se recomienda." />
 		<property name="body" value="false" />
 		<property name="article" ref="article2" />
 		<property name="picturess">
@@ -779,10 +812,10 @@
 	</bean>
 
 	<bean id="followUp5" class="domain.FollowUp">
-		<property name="title" value="Se recomienda llevar comida" />
+		<property name="title" value="Se recomienda llevar ropa cómoda" />
 		<property name="publicationMoment" value="12/26/2017 22:22" />
 		<property name="summary"
-			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
+			value="Vamos a estar fuera todo el día." />
 		<property name="body" value="false" />
 		<property name="article" ref="article2" />
 		<property name="picturess">
@@ -793,10 +826,10 @@
 	</bean>
 
 	<bean id="followUp6" class="domain.FollowUp">
-		<property name="title" value="Se recomienda llevar comida" />
+		<property name="title" value="Se recomienda llevar dinero" />
 		<property name="publicationMoment" value="12/26/2017 22:22" />
 		<property name="summary"
-			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
+			value="Vamos a estar fuera todo el día, y es posible que queráis comprar algo de souvenir." />
 		<property name="body" value="false" />
 		<property name="article" ref="article3" />
 		<property name="picturess">
@@ -819,6 +852,76 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="followUp8" class="domain.FollowUp">
+		<property name="title" value="Title followUp8" />
+		<property name="publicationMoment" value="12/26/2017 22:22" />
+		<property name="summary"
+			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
+		<property name="body" value="false" />
+		<property name="article" ref="article4" />
+		<property name="picturess">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="followUp9" class="domain.FollowUp">
+		<property name="title" value="Title followUp9" />
+		<property name="publicationMoment" value="12/26/2017 22:22" />
+		<property name="summary"
+			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
+		<property name="body" value="false" />
+		<property name="article" ref="article5" />
+		<property name="picturess">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="followUp10" class="domain.FollowUp">
+		<property name="title" value="Otra vez vamos a tener una final koreana" />
+		<property name="publicationMoment" value="12/26/2017 22:22" />
+		<property name="summary"
+			value="si ya sabemos quien va a ganar..." />
+		<property name="body" value="false" />
+		<property name="article" ref="article7" />
+		<property name="picturess">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="followUp11" class="domain.FollowUp">
+		<property name="title" value="Me encanta este chico" />
+		<property name="publicationMoment" value="12/26/2017 22:22" />
+		<property name="summary"
+			value="La única pega es que es fan de los Celtics, ya podría ser de Toronto" />
+		<property name="body" value="false" />
+		<property name="article" ref="article8" />
+		<property name="picturess">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="followUp12" class="domain.FollowUp">
+		<property name="title" value="Espero que lo cojan" />
+		<property name="publicationMoment" value="12/26/2017 22:22" />
+		<property name="summary"
+			value="Soy fan de sus what ifs, siempre la acaba liando" />
+		<property name="body" value="false" />
+		<property name="article" ref="article8" />
+		<property name="picturess">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
 
 
 
@@ -913,7 +1016,7 @@
 		</property>
 		<property name="followUps">
 			<list>
-			
+				<ref bean="followUp8"/>
 			</list>
 		</property>
 		<property name="inappropriate" value="false"/>
@@ -935,7 +1038,7 @@
 		</property>
 		<property name="followUps">
 			<list>
-			
+				<ref bean= "followUp9"/>
 			</list>
 		</property>
 		<property name="inappropriate" value="false"/>
@@ -962,6 +1065,53 @@
 			</list>
 		</property>
 		<property name="inappropriate" value="true"/>
+	</bean>
+	
+	<bean id="article7" class="domain.Article">
+		<property name="title" value="Estadios de la e-sports" />
+		<property name="publicationMoment" value="04/04/2018 12:22" />
+		<property name="summary"
+			value="Se pueden ver estos inmensos estadios" />
+		<property name="body"
+			value="Aquí pudimos ver como dos grandes equipos se enfrentaban en la final de los Worlds del LoL" />
+		<property name="finalMode" value="true" />
+		<property name="newspaper" ref="newspaper5" />
+		<property name="picturess">
+			<list>
+				<value>http://estaticos03.marca.com/imagenes/2015/03/04/e-sports/1425471526_extras_ladillos_5_0.jpg
+				</value>
+			</list>
+		</property>
+		<property name="followUps">
+			<list>
+				<ref bean="followUp10"/>
+			
+			</list>
+		</property>
+		<property name="inappropriate" value="false"/>
+	</bean>
+	
+	<bean id="article8" class="domain.Article">
+		<property name="title" value="Un español en el draft de la nueva liga de 2k" />
+		<property name="publicationMoment" value="04/04/2018 12:22" />
+		<property name="summary"
+			value="Rafael Tgr el único español" />
+		<property name="body"
+			value="Este jugador se caracteriza por su defensa agresiva, y por su mecánica en los tiros de 3" />
+		<property name="finalMode" value="true" />
+		<property name="newspaper" ref="newspaper1" />
+		<property name="picturess">
+			<list>
+			</list>
+		</property>
+		<property name="followUps">
+			<list>
+				<ref bean="followUp11"/>
+				<ref bean="followUp12"/>
+				
+			</list>
+		</property>
+		<property name="inappropriate" value="false"/>
 	</bean>
 
 
@@ -990,6 +1140,7 @@
 			<list>
 				<ref bean="article1" />
 				<ref bean="article2" />
+				<ref bean="article8"/>
 			</list>
 		</property>
 
@@ -1089,7 +1240,7 @@
 		</property>
 		<property name="articless">
 			<list>
-			
+				<ref bean="article7"/>
 			</list>
 		</property>
 
