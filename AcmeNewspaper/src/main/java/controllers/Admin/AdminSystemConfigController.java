@@ -49,7 +49,7 @@ public class AdminSystemConfigController extends AbstractController {
 		else
 			try {
 				systemConfigService.save(systemConfig);
-				result = new ModelAndView("redirect:");
+				result = new ModelAndView("redirect:/");
 			} catch (Throwable oops) {
 				result = newEditModelAndView(systemConfig);
 				result.addObject("message", "systemConfig.commitError");

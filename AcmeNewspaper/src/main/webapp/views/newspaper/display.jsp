@@ -14,8 +14,9 @@
 	<security:authorize access="hasRole('USER')">
 		<jstl:if test="${pageContext.request.userPrincipal.name eq newspaper.user.userAccount.username}">
 			<a href="user/newspaper/edit.do?newspaperId=${newspaper.id}" class="btn btn-block btn-warning"><spring:message code="newspaper.edit"/></a>
-		</jstl:if>
+		
 		<a class="btn btn-success btn-block" href="user/article/create.do"><spring:message code="article.create" /></a>
+		</jstl:if>
 	</security:authorize>
 	<security:authorize access="hasRole('CUSTOMER')">
 		<jstl:if test="${not isSubscribed and newspaper.isPrivate}">
