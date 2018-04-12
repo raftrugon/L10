@@ -134,7 +134,10 @@ public class NewspaperServiceTest extends AbstractTest {
 		Object testingData[][] = {
 				//Test positivo
 				{
-					"user1", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "http://www.imagen.es", false, false, null, "Guardado correcto de newspaper"
+					"user1", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "http://www.imagen.es", true, false, null, "Guardado correcto de un newspaper siendo periódico privado"
+				},
+				{
+					"user1", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "http://www.imagen.es", false, false, null, "Guardado correcto de newspaper no privado"
 				},
 				{
 					"user2", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "http://www.imagen.es", false, false, IllegalArgumentException.class, "Intento de guardar un newspaper que no es mio"
@@ -149,16 +152,13 @@ public class NewspaperServiceTest extends AbstractTest {
 					"user1", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "www.imagen.es", false, false, ConstraintViolationException.class, "Intento de guardar un newspaper con una imagen erronea"
 				},
 				{
-					"user1", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "http://www.imagen.es", true, false, null, "Guardado correcto de un newspaper siendo periodico privado"
-				},
-				{
 					"admin", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "http://www.imagen.es", true, false, IllegalArgumentException.class, "Intento de guardar un newspaper con un rol incorrecto"
 				},
 				{
 					null, getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "http://www.imagen.es", true, false, IllegalArgumentException.class, "Intento de guardar un newspaper sin estar logeado"
 				},
 				{
-					"user1", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "ftp://www.imagen.es", true, false, null, "Intento de guardar un newspaper con otro formato de imagen"
+					"user1", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()+ TimeUnit.DAYS.toMillis(10)), "description", "ftp://www.imagen.es", true, false, IllegalArgumentException.class, "Intento de guardar un newspaper con otro formato de imagen"
 				},
 				{
 					"user1", getEntityId("newspaper1"), "title", new Date(System.currentTimeMillis()- TimeUnit.DAYS.toMillis(100000)), "description", "ftp://www.imagen.es", true, false, IllegalArgumentException.class, "Intento de guardar un newspaper con una fecha pasada"

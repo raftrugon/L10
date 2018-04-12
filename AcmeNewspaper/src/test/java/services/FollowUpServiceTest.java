@@ -182,6 +182,7 @@ public class FollowUpServiceTest extends AbstractTest {
 		Class<?> caught = null;
 		try {
 			
+			authenticate("user1");
 			FollowUp follup = followUpService.findOne(followUpId);
 			follup.setTitle(title);
 			follup.setSummary(summary);
@@ -196,6 +197,7 @@ public class FollowUpServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 
+		authenticate(null);
 		checkExceptions(expected, caught);
 		if (expected == null)
 			System.out.println("---------------------------- POSITIVO ---------------------------");
