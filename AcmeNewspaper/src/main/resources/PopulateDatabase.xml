@@ -758,7 +758,7 @@
 		<property name="summary"
 			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
 		<property name="body" value="false" />
-		<property name="article" ref="article1" />
+		<property name="article" ref="article2" />
 		<property name="picturess">
 			<list>
 				<value>http://crucerosensevilla.com/wp-content/uploads/2015/09/Sevilla4.jpg</value>
@@ -774,7 +774,7 @@
 		<property name="publicationMoment" value="12/26/2017 22:22" />
 		<property name="summary" value="Vamos a estar fuera todo el día, y parece que llueve." />
 		<property name="body" value="false" />
-		<property name="article" ref="article1" />
+		<property name="article" ref="article3" />
 		<property name="picturess">
 			<list>
 
@@ -788,10 +788,11 @@
 		<property name="summary"
 			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
 		<property name="body" value="false" />
-		<property name="article" ref="article1" />
+		<property name="article" ref="article4" />
 		<property name="picturess">
 			<list>
-				<value>http://apartamentosmadridplaza.es/blog/wp-content/uploads/Plaza-de-sol-aerea.jpg</value>
+				<value>http://www.semovimiento.com/wp-content/uploads/2017/06/madrid-overview-sunsetovermadrid-xlarge.jpeg</value>
+				<value>https://afrodita-production.s3.amazonaws.com/images/bus-madrid.original.jpg</value>
 			</list>
 		</property>
 	</bean>
@@ -854,7 +855,7 @@
 	</bean>
 	
 	<bean id="followUp8" class="domain.FollowUp">
-		<property name="title" value="Title followUp8" />
+		<property name="title" value="Es muy interesante la comida de Este lugar." />
 		<property name="publicationMoment" value="12/26/2017 22:22" />
 		<property name="summary"
 			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
@@ -868,7 +869,7 @@
 	</bean>
 	
 	<bean id="followUp9" class="domain.FollowUp">
-		<property name="title" value="Title followUp9" />
+		<property name="title" value="Se me olvidó decir que la música de estos lares es preciosa." />
 		<property name="publicationMoment" value="12/26/2017 22:22" />
 		<property name="summary"
 			value="Vamos a estar fuera todo el día, para evitar problemas con el calor se recomienda." />
@@ -935,7 +936,7 @@
 		<property name="body"
 			value="Rafa nada dice que no cambiaria su kia por nada pero en realidad tiene dos ferraris y un yate" />
 		<property name="finalMode" value="true" />
-		<property name="newspaper" ref="newspaper1" />
+		<property name="newspaper" ref="newspaper3" />
 		<property name="picturess">
 			<list>
 				<value>https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/3/005/097/225/31df52b.jpg</value>
@@ -945,9 +946,7 @@
 		</property>
 		<property name="followUps">
 			<list>
-				<ref bean="followUp1" />
-				<ref bean="followUp2" />
-				<ref bean="followUp3" />
+				
 			</list>
 		</property>
 		<property name="inappropriate" value="false"/>
@@ -955,12 +954,12 @@
 
 	<bean id="article2" class="domain.Article">
 		<property name="title" value="Pelea de canguros" />
-		<property name="publicationMoment" value="03/11/2018 12:22" />
+		<property name="publicationMoment" value="03/03/2018 12:22" />
 		<property name="summary" value="Polemica en australia" />
 		<property name="body"
 			value="el gobierno australiano acepta una ley donde se permiten las peleas entre canguros y humanos" />
-		<property name="finalMode" value="false" />
-		<property name="newspaper" ref="newspaper1" />
+		<property name="finalMode" value="true" />
+		<property name="newspaper" ref="newspaper3" />
 		<property name="picturess">
 			<list>
 				<value>https://d.otcdn.com/imglib/almacen_fotos/geo_destinos_1920x440/30024_australia/30024_40850_12.jpg
@@ -969,6 +968,7 @@
 		</property>
 		<property name="followUps">
 			<list>
+				<ref bean="followUp1" />
 				<ref bean="followUp4" />
 				<ref bean="followUp5" />
 			</list>
@@ -978,11 +978,11 @@
 
 	<bean id="article3" class="domain.Article">
 		<property name="title" value="Camino de santiago" />
-		<property name="publicationMoment" value="05/11/2018 12:22" />
+		<property name="publicationMoment" value="05/02/2018 12:22" />
 		<property name="summary" value="uno de los mejores planes para este verano" />
 		<property name="body"
 			value="El camino de santiago es la opcion por la que mas se decantan los jovenes debido a su precio" />
-		<property name="finalMode" value="false" />
+		<property name="finalMode" value="true" />
 		<property name="newspaper" ref="newspaper2" />
 		<property name="picturess">
 			<list>
@@ -992,6 +992,7 @@
 		</property>
 		<property name="followUps">
 			<list>
+				<ref bean="followUp2" />
 				<ref bean="followUp6" />
 				<ref bean="followUp7" />
 			</list>
@@ -1001,12 +1002,12 @@
 
 	<bean id="article4" class="domain.Article">
 		<property name="title" value="Madrid en vacaciones" />
-		<property name="publicationMoment" value="03/11/2018 12:22" />
+		<property name="publicationMoment" value="03/01/2018 12:22" />
 		<property name="summary"
 			value="que hacer en invierno por en la cominidad de madrid" />
 		<property name="body"
 			value="podras pasear por la plaza del sol de madrid o quizas buscar un bus que te lleve hasta el escorial" />
-		<property name="finalMode" value="false" />
+		<property name="finalMode" value="true" />
 		<property name="newspaper" ref="newspaper2" />
 		<property name="picturess">
 			<list>
@@ -1016,6 +1017,7 @@
 		</property>
 		<property name="followUps">
 			<list>
+				<ref bean="followUp3" />
 				<ref bean="followUp8"/>
 			</list>
 		</property>
@@ -1064,17 +1066,17 @@
 			
 			</list>
 		</property>
-		<property name="inappropriate" value="true"/>
+		<property name="inappropriate" value="false"/>
 	</bean>
 	
 	<bean id="article7" class="domain.Article">
 		<property name="title" value="Estadios de la e-sports" />
-		<property name="publicationMoment" value="04/04/2018 12:22" />
+		<property name="publicationMoment" value="04/02/2018 12:22" />
 		<property name="summary"
 			value="Se pueden ver estos inmensos estadios" />
 		<property name="body"
 			value="Aquí pudimos ver como dos grandes equipos se enfrentaban en la final de los Worlds del LoL" />
-		<property name="finalMode" value="true" />
+		<property name="finalMode" value="false" />
 		<property name="newspaper" ref="newspaper5" />
 		<property name="picturess">
 			<list>
@@ -1111,7 +1113,7 @@
 				
 			</list>
 		</property>
-		<property name="inappropriate" value="false"/>
+		<property name="inappropriate" value="true"/>
 	</bean>
 
 
@@ -1138,8 +1140,6 @@
 		</property>
 		<property name="articless">
 			<list>
-				<ref bean="article1" />
-				<ref bean="article2" />
 				<ref bean="article8"/>
 			</list>
 		</property>
@@ -1192,7 +1192,8 @@
 		</property>
 		<property name="articless">
 			<list>
-
+				<ref bean="article1" />
+				<ref bean="article2" />
 			</list>
 		</property>
 
