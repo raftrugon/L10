@@ -1,0 +1,1 @@
+Adjuntamos el csv utilizado para realizar el test.

@@ -1,1 +1,0 @@
-Adjuntamos el cdv utilizado para realizar el test
