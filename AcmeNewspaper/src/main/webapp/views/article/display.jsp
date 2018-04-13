@@ -109,4 +109,3 @@
 		<spring:message code="followUp.new"/>
 	</a>
 </jstl:if>
-</div>
